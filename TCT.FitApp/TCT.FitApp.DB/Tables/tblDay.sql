@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[tblDay]
+(
+	[Id] INT NOT NULL PRIMARY KEY
+)

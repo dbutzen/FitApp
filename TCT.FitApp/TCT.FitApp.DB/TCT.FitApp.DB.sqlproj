@@ -56,5 +56,32 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="PreDeploy" />
+    <Folder Include="PostDeploy" />
+    <Folder Include="StoredProcedures" />
+    <Folder Include="Tables" />
+    <Folder Include="PostDeploy\DefaultData" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeploy\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="PreDeploy\Script.PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeploy\DefaultData\Users.sql" />
+    <None Include="PostDeploy\DefaultData\UserItems.sql" />
+    <None Include="PostDeploy\DefaultData\Items.sql" />
+    <None Include="PostDeploy\DefaultData\Days.sql" />
+    <None Include="PostDeploy\DefaultData\Activities.sql" />
+    <None Include="localdb.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="StoredProcedures\spGenerateReport.sql" />
+    <Build Include="Tables\tblUser.sql" />
+    <Build Include="Tables\tblDay.sql" />
+    <Build Include="Tables\tblUserItem.sql" />
+    <Build Include="Tables\tblItem.sql" />
+    <Build Include="Tables\tblActivity.sql" />
   </ItemGroup>
 </Project>
