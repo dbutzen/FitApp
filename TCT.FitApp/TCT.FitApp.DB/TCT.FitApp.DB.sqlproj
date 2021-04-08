@@ -78,7 +78,7 @@
     <None Include="localdb.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="StoredProcedures\spGenerateReport.sql" />
+    <Build Include="StoredProcedures\spWeeklyReport.sql" />
     <Build Include="Tables\tblUser.sql" />
     <Build Include="Tables\tblDay.sql" />
     <Build Include="Tables\tblItem.sql" />
