@@ -1,9 +1,10 @@
 ﻿CREATE TABLE [dbo].[tblUserItem]
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [Type] VARCHAR(20) NOT NULL, 
-    [Name] VARCHAR(50) NOT NULL, 
-    [Calories] INT NOT NULL, 
-    [Protein] INT NOT NULL, 
-    [UserId] UNIQUEIDENTIFIER NOT NULL
+    --[Type] VARCHAR(20) NOT NULL, 
+    --[Name] VARCHAR(50) NOT NULL, 
+    --[Calories] INT NOT NULL, 
+    --[Protein] INT NOT NULL, 
+    [UserId] UNIQUEIDENTIFIER NOT NULL,
+    [ItemId] UNIQUEIDENTIFIER NOT NULL
 )

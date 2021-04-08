@@ -61,6 +61,7 @@
     <Folder Include="StoredProcedures" />
     <Folder Include="Tables" />
     <Folder Include="PostDeploy\DefaultData" />
+    <Folder Include="ForeignKeys" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeploy\Script.PostDeployment.sql" />
@@ -80,8 +81,19 @@
     <Build Include="StoredProcedures\spGenerateReport.sql" />
     <Build Include="Tables\tblUser.sql" />
     <Build Include="Tables\tblDay.sql" />
-    <Build Include="Tables\tblUserItem.sql" />
     <Build Include="Tables\tblItem.sql" />
     <Build Include="Tables\tblActivity.sql" />
+    <Build Include="Tables\tblUserAccessLevel.sql" />
+    <Build Include="ForeignKeys\tblUser_UserAccessLevelId.sql" />
+    <Build Include="ForeignKeys\tblDay_UserId.sql" />
+    <Build Include="Tables\tblDayActivity.sql" />
+    <Build Include="ForeignKeys\tblDayActivity_DayId.sql" />
+    <Build Include="ForeignKeys\tblDayActivity_ActivityId.sql" />
+    <Build Include="Tables\tblDayItem.sql" />
+    <Build Include="ForeignKeys\tblDayItem_DayId.sql" />
+    <Build Include="ForeignKeys\tblDayItem_ItemId.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="TCT.FitApp.DB.refactorlog" />
   </ItemGroup>
 </Project>

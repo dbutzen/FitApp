@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="5600c8b6-25c2-414c-8a92-804d1d3a469d" ChangeDateTime="04/08/2021 23:12:46">
+    <Property Name="ElementName" Value="[dbo].[tblActivity].[CaloriesPerHour]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblActivity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EasyCaloriesPerHour" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="dc0e1c08-f43e-4f95-8272-612445fa2a4f" ChangeDateTime="04/08/2021 23:13:10">
+    <Property Name="ElementName" Value="[dbo].[tblActivity].[Medium]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblActivity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MediumCaloriesPerHour" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="972c3f3e-d6c1-4ac0-bdfa-ab52d63907f0" ChangeDateTime="04/08/2021 23:13:17">
+    <Property Name="ElementName" Value="[dbo].[tblActivity].[Hard]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[tblActivity]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="HardCaloriesPerHour" />
+  </Operation>
+</Operations>

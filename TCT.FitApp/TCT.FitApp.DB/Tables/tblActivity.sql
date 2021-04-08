@@ -2,5 +2,7 @@
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
     [Name] VARCHAR(50) NOT NULL, 
-    [CaloriesPerHour] INT NOT NULL
+    [EasyCaloriesPerHour] INT NOT NULL, 
+    [MediumCaloriesPerHour] INT NOT NULL, 
+    [HardCaloriesPerHour] INT NOT NULL
 )

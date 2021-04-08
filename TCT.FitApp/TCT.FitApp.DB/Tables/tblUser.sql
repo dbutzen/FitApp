@@ -8,5 +8,6 @@
     [ProteinGoal] INT NOT NULL, 
     [DaysInARowSucceeded] INT NOT NULL, 
     [HeightInches] INT NOT NULL, 
-    [WeightPounds] INT NOT NULL
+    [WeightPounds] INT NOT NULL,
+    [UserAccessLevelId] UNIQUEIDENTIFIER NOT NULL
 )

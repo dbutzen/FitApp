@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[tblUserAccessLevel]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY,
+	[Name] VARCHAR(25) NOT NULL,
+	[Description] VARCHAR(100) NOT NULL
+)
