@@ -2,8 +2,9 @@
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
     [Name] VARCHAR(50) NOT NULL, 
-    [Username] VARCHAR(50) NOT NULL, 
-    [Password] VARCHAR(50) NOT NULL, 
+    [Username] VARCHAR(50) NOT NULL,
+    [Password] NVARCHAR(64) NOT NULL,
+    [UniqueKey] UNIQUEIDENTIFIER NOT NULL,
     [CalorieGoal] INT NOT NULL, 
     [ProteinGoal] INT NOT NULL, 
     [DaysInARowSucceeded] INT NOT NULL, 
