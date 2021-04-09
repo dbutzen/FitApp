@@ -9,3 +9,11 @@
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+DROP TABLE IF EXISTS dbo.DayActivies
+DROP TABLE IF EXISTS dbo.DayItems
+DROP TABLE IF EXISTS dbo.Days
+DROP TABLE IF EXISTS dbo.Users
+DROP TABLE IF EXISTS dbo.Activities
+DROP TABLE IF EXISTS dbo.UserAccessLevels
+DROP TABLE IF EXISTS dbo.Items
+DROP TABLE IF EXISTS dbo.tblItemType

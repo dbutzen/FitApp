@@ -9,3 +9,13 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+:r .\DefaultData\ItemTypes.sql
+:r .\DefaultData\Items.sql
+:r .\DefaultData\UserAccessLevels.sql
+:r .\DefaultData\Activities.sql
+:r .\DefaultData\Users.sql
+:r .\DefaultData\Days.sql
+:r .\DefaultData\DayItems.sql
+:r .\DefaultData\DayActivities.sql
+
+
