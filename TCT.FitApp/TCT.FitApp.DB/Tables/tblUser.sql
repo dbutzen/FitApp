@@ -2,7 +2,7 @@
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
     [Name] VARCHAR(50) NOT NULL, 
-    [Username] VARCHAR(50) NOT NULL,
+    [Username] VARCHAR(50) NOT NULL UNIQUE,
     [Password] NVARCHAR(64) NOT NULL,
     [UniqueKey] UNIQUEIDENTIFIER NOT NULL,
     [CalorieGoal] INT NOT NULL, 
