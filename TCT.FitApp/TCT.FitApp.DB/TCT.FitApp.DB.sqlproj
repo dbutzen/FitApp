@@ -60,6 +60,7 @@
     <Folder Include="Tables" />
     <Folder Include="PostDeploy\DefaultData" />
     <Folder Include="ForeignKeys" />
+    <Folder Include="Functions" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeploy\Script.PostDeployment.sql" />
@@ -76,10 +77,9 @@
     <None Include="PostDeploy\DefaultData\DayActivities.sql" />
     <None Include="PostDeploy\DefaultData\DayItems.sql" />
     <None Include="PostDeploy\DefaultData\UserAccessLevels.sql" />
-    <None Include="localdb.publish.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="StoredProcedures\spWeeklyReport.sql" />
+    <Build Include="StoredProcedures\spGenerateReport.sql" />
     <Build Include="Tables\tblUser.sql" />
     <Build Include="Tables\tblDay.sql" />
     <Build Include="Tables\tblItem.sql" />
@@ -96,6 +96,9 @@
     <Build Include="Tables\tblItemType.sql" />
     <Build Include="ForeignKeys\tblItem_TypeId.sql" />
     <None Include="PostDeploy\DefaultData\ItemTypes.sql" />
+    <Build Include="Functions\fnCalcBurntCal.sql" />
+    <Build Include="Functions\fnCalcCalorieIntake.sql" />
+    <Build Include="Functions\fnCalcProteinIntake.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TCT.FitApp.DB.refactorlog" />

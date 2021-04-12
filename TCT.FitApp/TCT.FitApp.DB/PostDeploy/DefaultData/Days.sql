@@ -19,4 +19,8 @@
 	VALUES
 	(NEWID(), @UsersId, '2021-03-11', 1)
 
+		INSERT INTO dbo.tblDay(Id, UserId, Date, Succeeded)
+	VALUES
+	(NEWID(), @UsersId, '2021-03-12', 0)
+
 END

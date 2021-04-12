@@ -2,7 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
-    <TargetDatabaseName>TCT.FitApp.DB</TargetDatabaseName>
+    <TargetDatabaseName>FitAppDB</TargetDatabaseName>
     <DeployScriptFileName>TCT.FitApp.DB.sql</DeployScriptFileName>
     <BlockOnPossibleDataLoss>True</BlockOnPossibleDataLoss>
     <CreateNewDatabase>True</CreateNewDatabase>
