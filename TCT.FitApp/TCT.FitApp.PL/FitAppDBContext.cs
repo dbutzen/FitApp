@@ -6,32 +6,32 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TCT.FitApp.PL
 {
-    public partial class TCTFitAppDBContext : DbContext
+    public partial class FitAppEntities : DbContext
     {
-        public TCTFitAppDBContext()
+        public FitAppEntities()
         {
         }
 
-        public TCTFitAppDBContext(DbContextOptions<TCTFitAppDBContext> options)
+        public FitAppEntities(DbContextOptions<FitAppEntities> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<TblActivity> TblActivities { get; set; }
-        public virtual DbSet<TblDay> TblDays { get; set; }
-        public virtual DbSet<TblDayActivity> TblDayActivities { get; set; }
-        public virtual DbSet<TblDayItem> TblDayItems { get; set; }
-        public virtual DbSet<TblItem> TblItems { get; set; }
-        public virtual DbSet<TblItemType> TblItemTypes { get; set; }
-        public virtual DbSet<TblUser> TblUsers { get; set; }
-        public virtual DbSet<TblUserAccessLevel> TblUserAccessLevels { get; set; }
+        public virtual DbSet<tblActivity> tblActivities { get; set; }
+        public virtual DbSet<tblDay> tblDays { get; set; }
+        public virtual DbSet<tblDayActivity> TblDayActivities { get; set; }
+        public virtual DbSet<tblDayItem> tblDayItems { get; set; }
+        public virtual DbSet<tblItem> tblItems { get; set; }
+        public virtual DbSet<tblItemType> tblItemTypes { get; set; }
+        public virtual DbSet<tblUser> tblUsers { get; set; }
+        public virtual DbSet<tblUserAccessLevel> tblUserAccessLevels { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=(localdb)\\ProjectsV13;Database=TCT.FitApp.DB;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Server=(localdb)\\ProjectsV13;Database=FitAppDB;Integrated Security=True");
             }
         }
 
@@ -39,7 +39,7 @@ namespace TCT.FitApp.PL
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<TblActivity>(entity =>
+            modelBuilder.Entity<tblActivity>(entity =>
             {
                 entity.ToTable("tblActivity");
 
@@ -51,7 +51,7 @@ namespace TCT.FitApp.PL
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<TblDay>(entity =>
+            modelBuilder.Entity<tblDay>(entity =>
             {
                 entity.ToTable("tblDay");
 
@@ -66,7 +66,7 @@ namespace TCT.FitApp.PL
                     .HasConstraintName("tblDay_UserId");
             });
 
-            modelBuilder.Entity<TblDayActivity>(entity =>
+            modelBuilder.Entity<tblDayActivity>(entity =>
             {
                 entity.ToTable("tblDayActivity");
 
@@ -85,7 +85,7 @@ namespace TCT.FitApp.PL
                     .HasConstraintName("tblDayActivity_DayId");
             });
 
-            modelBuilder.Entity<TblDayItem>(entity =>
+            modelBuilder.Entity<tblDayItem>(entity =>
             {
                 entity.ToTable("tblDayItem");
 
@@ -104,7 +104,7 @@ namespace TCT.FitApp.PL
                     .HasConstraintName("tblDayItem_ItemId");
             });
 
-            modelBuilder.Entity<TblItem>(entity =>
+            modelBuilder.Entity<tblItem>(entity =>
             {
                 entity.ToTable("tblItem");
 
@@ -122,7 +122,7 @@ namespace TCT.FitApp.PL
                     .HasConstraintName("tblItem_TypeId");
             });
 
-            modelBuilder.Entity<TblItemType>(entity =>
+            modelBuilder.Entity<tblItemType>(entity =>
             {
                 entity.ToTable("tblItemType");
 
@@ -134,9 +134,12 @@ namespace TCT.FitApp.PL
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<TblUser>(entity =>
+            modelBuilder.Entity<tblUser>(entity =>
             {
                 entity.ToTable("tblUser");
+
+                entity.HasIndex(e => e.Username, "UQ__tblUser__536C85E4BBBF95E5")
+                    .IsUnique();
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -151,6 +154,11 @@ namespace TCT.FitApp.PL
                     .IsRequired()
                     .HasMaxLength(64);
 
+                entity.Property(e => e.Sex)
+                    .IsRequired()
+                    .HasMaxLength(6)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Username)
                     .IsRequired()
                     .HasMaxLength(50)
@@ -163,7 +171,7 @@ namespace TCT.FitApp.PL
                     .HasConstraintName("tblUser_UserAccessLevelId");
             });
 
-            modelBuilder.Entity<TblUserAccessLevel>(entity =>
+            modelBuilder.Entity<tblUserAccessLevel>(entity =>
             {
                 entity.ToTable("tblUserAccessLevel");
 

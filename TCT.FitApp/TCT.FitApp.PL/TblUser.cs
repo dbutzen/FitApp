@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace TCT.FitApp.PL
 {
-    public partial class TblUser
+    public partial class tblUser
     {
-        public TblUser()
+        public tblUser()
         {
-            TblDays = new HashSet<TblDay>();
+            TblDays = new HashSet<tblDay>();
         }
 
         public Guid Id { get; set; }
@@ -23,8 +23,9 @@ namespace TCT.FitApp.PL
         public int HeightInches { get; set; }
         public int WeightPounds { get; set; }
         public Guid UserAccessLevelId { get; set; }
+        public string Sex { get; set; }
 
-        public virtual TblUserAccessLevel UserAccessLevel { get; set; }
-        public virtual ICollection<TblDay> TblDays { get; set; }
+        public virtual tblUserAccessLevel UserAccessLevel { get; set; }
+        public virtual ICollection<tblDay> TblDays { get; set; }
     }
 }

@@ -7,9 +7,11 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TCT.FitApp.DB", "TCT.FitApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.PL", "TCT.FitApp.PL\TCT.FitApp.PL.csproj", "{F8E30A03-0210-4CC6-B583-070F68CB2FAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCT.FitApp.BL.Models", "TCT.FitApp.BL.Models\TCT.FitApp.BL.Models.csproj", "{6E8B317D-AFD9-4B0E-B7C9-8E08F503B1B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.BL.Models", "TCT.FitApp.BL.Models\TCT.FitApp.BL.Models.csproj", "{6E8B317D-AFD9-4B0E-B7C9-8E08F503B1B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCT.FitApp.BL", "TCT.FitApp.BL\TCT.FitApp.BL.csproj", "{CEAF086A-02F0-4B3E-9A1F-937253EECE2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.BL", "TCT.FitApp.BL\TCT.FitApp.BL.csproj", "{CEAF086A-02F0-4B3E-9A1F-937253EECE2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCT.FitApp.PL.Test", "TCT.FitApp.PL.Test\TCT.FitApp.PL.Test.csproj", "{1C1325A0-45E1-48C9-8619-2C55E5190BA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{CEAF086A-02F0-4B3E-9A1F-937253EECE2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEAF086A-02F0-4B3E-9A1F-937253EECE2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEAF086A-02F0-4B3E-9A1F-937253EECE2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C1325A0-45E1-48C9-8619-2C55E5190BA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C1325A0-45E1-48C9-8619-2C55E5190BA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C1325A0-45E1-48C9-8619-2C55E5190BA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C1325A0-45E1-48C9-8619-2C55E5190BA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

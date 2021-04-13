@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 namespace TCT.FitApp.PL
 {
-    public partial class TblItemType
+    public partial class tblItemType
     {
-        public TblItemType()
+        public tblItemType()
         {
-            TblItems = new HashSet<TblItem>();
+            TblItems = new HashSet<tblItem>();
         }
 
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<TblItem> TblItems { get; set; }
+        public virtual ICollection<tblItem> TblItems { get; set; }
     }
 }
