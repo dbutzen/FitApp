@@ -5,17 +5,17 @@ using System.Collections.Generic;
 
 namespace TCT.FitApp.PL
 {
-    public partial class tblUserAccessLevel
+    public partial class TblUserAccessLevel
     {
-        public tblUserAccessLevel()
+        public TblUserAccessLevel()
         {
-            TblUsers = new HashSet<tblUser>();
+            TblUsers = new HashSet<TblUser>();
         }
 
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<tblUser> TblUsers { get; set; }
+        public virtual ICollection<TblUser> TblUsers { get; set; }
     }
 }

@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace TCT.FitApp.PL
 {
-    public partial class tblActivity
+    public partial class TblActivity
     {
-        public tblActivity()
+        public TblActivity()
         {
-            TblDayActivities = new HashSet<tblDayActivity>();
+            TblDayActivities = new HashSet<TblDayActivity>();
         }
 
         public Guid Id { get; set; }
@@ -18,6 +18,6 @@ namespace TCT.FitApp.PL
         public int MediumCaloriesPerHour { get; set; }
         public int HardCaloriesPerHour { get; set; }
 
-        public virtual ICollection<tblDayActivity> TblDayActivities { get; set; }
+        public virtual ICollection<TblDayActivity> TblDayActivities { get; set; }
     }
 }

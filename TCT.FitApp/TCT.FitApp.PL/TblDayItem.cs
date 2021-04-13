@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace TCT.FitApp.PL
 {
-    public partial class tblDayItem
+    public partial class TblDayItem
     {
         public Guid Id { get; set; }
         public Guid DayId { get; set; }
         public Guid ItemId { get; set; }
         public int Servings { get; set; }
 
-        public virtual tblDay Day { get; set; }
-        public virtual tblItem Item { get; set; }
+        public virtual TblDay Day { get; set; }
+        public virtual TblItem Item { get; set; }
     }
 }

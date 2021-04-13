@@ -12,13 +12,13 @@ namespace JZR.UserTracker.PL.Test
     [TestClass]
     public class utUser
     {
-        protected FitAppEntities dc;
+        protected FitAppDataContext dc;
         protected IDbContextTransaction transaction;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            dc = new FitAppEntities();
+            dc = new FitAppDataContext();
             transaction = dc.Database.BeginTransaction();
         }
 
@@ -34,14 +34,14 @@ namespace JZR.UserTracker.PL.Test
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, dc.tblUsers.Count());
+            Assert.AreEqual(3, dc.TblUsers.Count());
         }
 
         [TestMethod]
         public void InsertTest()
         {
 
-            var row = new tblUser();
+            var row = new TblUser();
             row.Id = Guid.NewGuid();
             row.Name = "New Guy";
             row.Username = "imanewguy";
@@ -53,10 +53,10 @@ namespace JZR.UserTracker.PL.Test
             row.DaysInArowSucceeded = 13;
             row.HeightInches = 75;
             row.WeightPounds = 180;
-            row.UserAccessLevelId = dc.tblUserAccessLevels.FirstOrDefault(a => a.Name == "User").Id;
+            row.UserAccessLevelId = dc.TblUserAccessLevels.FirstOrDefault(a => a.Name == "User").Id;
             row.Sex = "Male";
 
-            dc.tblUsers.Add(row);
+            dc.TblUsers.Add(row);
             var result = dc.SaveChanges();
 
 
@@ -69,7 +69,7 @@ namespace JZR.UserTracker.PL.Test
         {
             InsertTest();
 
-            var row = dc.tblUsers.FirstOrDefault(u => u.Username == "imanewguy");
+            var row = dc.TblUsers.FirstOrDefault(u => u.Username == "imanewguy");
 
             if (row != null)
             {
@@ -77,7 +77,7 @@ namespace JZR.UserTracker.PL.Test
                 dc.SaveChanges();
             }
 
-            var user = dc.tblUsers.FirstOrDefault(u => u.Username == "imanewguy");
+            var user = dc.TblUsers.FirstOrDefault(u => u.Username == "imanewguy");
 
             Assert.AreEqual(row.Name, user.Name);
 
@@ -89,19 +89,18 @@ namespace JZR.UserTracker.PL.Test
 
             InsertTest();
 
-            var row = dc.tblUsers.FirstOrDefault(u => u.Username == "imanewguy");
+            var row = dc.TblUsers.FirstOrDefault(u => u.Username == "imanewguy");
 
             if (row != null)
             {
-                dc.tblUsers.Remove(row);
+                dc.TblUsers.Remove(row);
                 dc.SaveChanges();
             }
 
-            var deletedrow = dc.tblUsers.FirstOrDefault(u => u.Username == "imanewguy");
+            var deletedrow = dc.TblUsers.FirstOrDefault(u => u.Username == "imanewguy");
 
             Assert.IsNull(deletedrow);
         }
-
 
         private static string ComputeSha256Hash(string rawData)
         {

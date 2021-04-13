@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace TCT.FitApp.PL
 {
-    public partial class tblDay
+    public partial class TblDay
     {
-        public tblDay()
+        public TblDay()
         {
-            TblDayActivities = new HashSet<tblDayActivity>();
-            TblDayItems = new HashSet<tblDayItem>();
+            TblDayActivities = new HashSet<TblDayActivity>();
+            TblDayItems = new HashSet<TblDayItem>();
         }
 
         public Guid Id { get; set; }
@@ -18,8 +18,8 @@ namespace TCT.FitApp.PL
         public DateTime Date { get; set; }
         public bool Succeeded { get; set; }
 
-        public virtual tblUser User { get; set; }
-        public virtual ICollection<tblDayActivity> TblDayActivities { get; set; }
-        public virtual ICollection<tblDayItem> TblDayItems { get; set; }
+        public virtual TblUser User { get; set; }
+        public virtual ICollection<TblDayActivity> TblDayActivities { get; set; }
+        public virtual ICollection<TblDayItem> TblDayItems { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace TCT.FitApp.PL
 {
-    public partial class tblDayActivity
+    public partial class TblDayActivity
     {
         public Guid Id { get; set; }
         public Guid DayId { get; set; }
@@ -13,7 +13,7 @@ namespace TCT.FitApp.PL
         public int Duration { get; set; }
         public int DifficultyLevel { get; set; }
 
-        public virtual tblActivity Activity { get; set; }
-        public virtual tblDay Day { get; set; }
+        public virtual TblActivity Activity { get; set; }
+        public virtual TblDay Day { get; set; }
     }
 }
