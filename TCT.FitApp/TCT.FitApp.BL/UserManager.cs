@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TCT.FitApp.BL
 {
-    public class UserManager
+    public static class UserManager
     {
 
 

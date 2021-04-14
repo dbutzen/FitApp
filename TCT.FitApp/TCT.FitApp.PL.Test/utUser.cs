@@ -1,13 +1,11 @@
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using JZR.UserTracker.PL;
-using System.Linq;
 using Microsoft.EntityFrameworkCore.Storage;
-using TCT.FitApp.PL;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace JZR.UserTracker.PL.Test
+namespace TCT.FitApp.PL.Test
 {
     [TestClass]
     public class utUser
@@ -43,8 +41,8 @@ namespace JZR.UserTracker.PL.Test
 
             var row = new TblUser();
             row.Id = Guid.NewGuid();
-            row.Name = "New Guy";
-            row.Username = "imanewguy";
+            row.Name = "New User";
+            row.Username = "newuser";
             row.UniqueKey = Guid.NewGuid();
             row.Password = "pass";
             row.Password = ComputeSha256Hash($"{row.Password}{row.UniqueKey.ToString().ToUpper()}");
@@ -69,15 +67,15 @@ namespace JZR.UserTracker.PL.Test
         {
             InsertTest();
 
-            var row = dc.TblUsers.FirstOrDefault(u => u.Username == "imanewguy");
+            var row = dc.TblUsers.FirstOrDefault(u => u.Username == "newuser");
 
             if (row != null)
             {
-                row.Name = "Old Guy";
+                row.Name = "Old User";
                 dc.SaveChanges();
             }
 
-            var user = dc.TblUsers.FirstOrDefault(u => u.Username == "imanewguy");
+            var user = dc.TblUsers.FirstOrDefault(u => u.Username == "newuser");
 
             Assert.AreEqual(row.Name, user.Name);
 
@@ -89,7 +87,7 @@ namespace JZR.UserTracker.PL.Test
 
             InsertTest();
 
-            var row = dc.TblUsers.FirstOrDefault(u => u.Username == "imanewguy");
+            var row = dc.TblUsers.FirstOrDefault(u => u.Username == "newuser");
 
             if (row != null)
             {
@@ -97,7 +95,7 @@ namespace JZR.UserTracker.PL.Test
                 dc.SaveChanges();
             }
 
-            var deletedrow = dc.TblUsers.FirstOrDefault(u => u.Username == "imanewguy");
+            var deletedrow = dc.TblUsers.FirstOrDefault(u => u.Username == "newuser");
 
             Assert.IsNull(deletedrow);
         }
