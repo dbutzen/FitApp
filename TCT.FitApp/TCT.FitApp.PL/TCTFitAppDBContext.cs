@@ -189,6 +189,8 @@ namespace TCT.FitApp.PL
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<spGenerateReport>().HasNoKey();
+
             OnModelCreatingPartial(modelBuilder);
         }
 
