@@ -144,7 +144,7 @@ namespace TCT.FitApp.PL
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.DaysInArowSucceeded).HasColumnName("DaysInARowSucceeded");
+                entity.Property(e => e.DaysInARowSucceeded).HasColumnName("DaysInARowSucceeded");
 
                 entity.Property(e => e.Name)
                     .IsRequired()

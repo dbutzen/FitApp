@@ -48,7 +48,7 @@ namespace TCT.FitApp.PL.Test
             row.Password = ComputeSha256Hash($"{row.Password}{row.UniqueKey.ToString().ToUpper()}");
             row.CalorieGoal = 2000;
             row.ProteinGoal = 100;
-            row.DaysInArowSucceeded = 13;
+            row.DaysInARowSucceeded = 13;
             row.HeightInches = 75;
             row.WeightPounds = 180;
             row.UserAccessLevelId = dc.TblUserAccessLevels.FirstOrDefault(a => a.Name == "User").Id;

@@ -1,4 +1,4 @@
 ﻿ALTER TABLE [dbo].[tblDay]
 	ADD CONSTRAINT [tblDay_UserId]
 	FOREIGN KEY (UserId)
-	REFERENCES [tblUser] (Id)
+	REFERENCES [tblUser] (Id) ON DELETE CASCADE
