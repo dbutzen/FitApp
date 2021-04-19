@@ -45,6 +45,18 @@ namespace JZR.SurveyMaker.BL.Test
         }
 
         [TestMethod]
+        public void LoginTest()
+        {
+            var user = new User();
+            user.Username = "jryan";
+            user.Password = "password1";
+            var task = UserManager.Login(user);
+            task.Wait();
+            Assert.AreEqual("Jason Ryan", user.Name);
+        }
+
+
+        [TestMethod]
         public void InsertTest()
         {
             var user = new User();
@@ -56,8 +68,6 @@ namespace JZR.SurveyMaker.BL.Test
             user.DaysInARowSucceeded = 10;
             user.HeightInches = 80;
             user.WeightPounds = 180;
-            // user.UserAccessLevelId = UserAccessLevelManager.Load().FirstOrDefault(u => u.Name = "User").Id;
-            user.UserAccessLevelId = Guid.Parse("076F0DCB-DC99-44F6-BE98-8FD7EA2A6440"); // <-- temp
             user.Sex = "Female";
 
             var task =  UserManager.Insert(user, true);

@@ -39,7 +39,10 @@ namespace TCT.FitApp.BL
                         row.DaysInARowSucceeded = user.DaysInARowSucceeded;
                         row.HeightInches = user.HeightInches;
                         row.WeightPounds = user.WeightPounds;
-                        row.UserAccessLevelId = user.UserAccessLevelId;
+                        if (user.UserAccessLevelId != Guid.Empty)
+                            row.UserAccessLevelId = user.UserAccessLevelId;
+                        else
+                            row.UserAccessLevelId = dc.TblUserAccessLevels.FirstOrDefault(u => u.Name == "User").Id;
                         row.Sex = user.Sex;
 
                         user.Id = row.Id;
@@ -140,7 +143,12 @@ namespace TCT.FitApp.BL
                     {
                         dc.TblUsers
                         .ToList()
-                        .ForEach(u => users.Add(GetFromTableRow(u)));
+                        .ForEach(u =>
+                        {
+                            var user = new User();
+                            GetFromTableRow(user, u);
+                            users.Add(user);
+                        });
                     }
                 });
 
@@ -163,7 +171,15 @@ namespace TCT.FitApp.BL
                     using (var dc = new FitAppDataContext())
                     {
                         var row = dc.TblUsers.FirstOrDefault(u => u.Id == id);
-                        user = GetFromTableRow(row);
+                        if (row != null)
+                        {
+                            GetFromTableRow(user, row);
+                        }
+                        else
+                        {
+                            throw new Exception("User could not be found");
+                        }
+                        
                     }
                 });
 
@@ -186,7 +202,14 @@ namespace TCT.FitApp.BL
                     using (var dc = new FitAppDataContext())
                     {
                         var row = dc.TblUsers.FirstOrDefault(u => u.Username == username);
-                        user = GetFromTableRow(row);
+                        if (row != null)
+                        {
+                            GetFromTableRow(user, row);
+                        }
+                        else
+                        {
+                            throw new Exception("User could not be found");
+                        }
                     }
                 });
 
@@ -199,9 +222,48 @@ namespace TCT.FitApp.BL
             }
         }
 
-        private static User GetFromTableRow(TblUser row)
+        // Returns true if login is successful
+        public static async Task<bool> Login(User user)
         {
-            var user = new User();
+            try
+            {
+                var results = false;
+                await Task.Run(() =>
+                {
+                    using (var dc = new FitAppDataContext())
+                    {
+                        var row = dc.TblUsers.FirstOrDefault(u => u.Username == user.Username);
+                        if (row != null)
+                        {
+                            var hashed_password = ComputeSha256Hash($"{user.Password}{row.UniqueKey.ToString().ToUpper()}");
+
+                            if (hashed_password == row.Password)
+                            {
+                                GetFromTableRow(user, row);
+                                results = true;
+                            }
+                            else
+                            {
+                                throw new Exception("The username/email or password is incorrect.");
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("The username/email or password is incorrect.");
+                        }
+                    }
+                });
+
+                return results;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private static void GetFromTableRow(User user, TblUser row)
+        {
             user.Id = row.Id;
             user.Name = row.Name;
             user.Username = row.Username;
@@ -212,10 +274,8 @@ namespace TCT.FitApp.BL
             user.WeightPounds = row.WeightPounds;
             user.UserAccessLevelId = row.UserAccessLevelId;
             user.Sex = row.Sex;
-
-            return user;
-
         }
+
 
 
         // Use for hashing the plain password + uniquekey
