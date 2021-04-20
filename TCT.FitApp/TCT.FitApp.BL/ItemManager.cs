@@ -20,7 +20,7 @@ namespace TCT.FitApp.BL
                 {
                     IDbContextTransaction transaction = null;
 
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         if (rollback) transaction = dc.Database.BeginTransaction();
 
@@ -60,7 +60,7 @@ namespace TCT.FitApp.BL
                 {
                     IDbContextTransaction transaction = null;
 
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         if (rollback) transaction = dc.Database.BeginTransaction();
 
@@ -95,7 +95,7 @@ namespace TCT.FitApp.BL
                 {
                     IDbContextTransaction transaction = null;
 
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         if (rollback) transaction = dc.Database.BeginTransaction();
 
@@ -122,7 +122,7 @@ namespace TCT.FitApp.BL
                 var items = new List<Item>();
                 await Task.Run(() =>
                 {
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         dc.TblItems
                         .ToList()
@@ -151,7 +151,7 @@ namespace TCT.FitApp.BL
                 var item = new Item();
                 await Task.Run(() =>
                 {
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         var row = dc.TblItems.FirstOrDefault(u => u.Id == id);
                         if (row != null)
@@ -182,7 +182,7 @@ namespace TCT.FitApp.BL
                 var item = new Item();
                 await Task.Run(() =>
                 {
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         var row = dc.TblItems.FirstOrDefault(u => u.Name == name);
                         if (row != null)

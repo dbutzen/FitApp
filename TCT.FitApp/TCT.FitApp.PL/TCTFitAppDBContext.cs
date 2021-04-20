@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TCT.FitApp.PL
 {
-    public partial class FitAppDataContext : DbContext
+    public partial class FitAppEntities : DbContext
     {
-        public FitAppDataContext()
+        public FitAppEntities()
         {
         }
 
-        public FitAppDataContext(DbContextOptions<FitAppDataContext> options)
+        public FitAppEntities(DbContextOptions<FitAppEntities> options)
             : base(options)
         {
         }
