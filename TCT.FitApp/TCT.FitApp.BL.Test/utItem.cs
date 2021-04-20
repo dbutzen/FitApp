@@ -32,7 +32,7 @@ namespace JZR.SurveyMaker.BL.Test
         }
 
         [TestMethod]
-        public void LoadByItemnameTest()
+        public void LoadByNameTest()
         {
             var task = ItemManager.LoadByName("Strawberry");
             task.Wait();
@@ -67,7 +67,7 @@ namespace JZR.SurveyMaker.BL.Test
             var loadTask = ItemManager.Load();
             loadTask.Wait();
             var items = loadTask.Result;
-            var item = items.FirstOrDefault(u => u.Name == "Strawberry");
+            var item = items.FirstOrDefault(i => i.Name == "Strawberry");
             item.Name = "Updated Item";
             var task = ItemManager.Update(item, true);
             task.Wait();
@@ -82,7 +82,7 @@ namespace JZR.SurveyMaker.BL.Test
             loadTask.Wait();
             var items = loadTask.Result;
 
-            var item = items.FirstOrDefault(u => u.Name == "Strawberry");
+            var item = items.FirstOrDefault(i => i.Name == "Strawberry");
             var task = ItemManager.Delete(item.Id, true);
             task.Wait();
 
