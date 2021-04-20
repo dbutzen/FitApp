@@ -3,7 +3,7 @@ using System.Linq;
 using TCT.FitApp.BL;
 using TCT.FitApp.BL.Models;
 
-namespace JZR.SurveyMaker.BL.Test
+namespace TCT.FitApp.BL.Test
 {
     [TestClass]
     public class utItem
