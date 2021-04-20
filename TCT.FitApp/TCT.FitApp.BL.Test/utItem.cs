@@ -40,7 +40,18 @@ namespace JZR.SurveyMaker.BL.Test
             Assert.AreEqual("Strawberry", results.Name);
         }
 
-        //   ItemTypeManager.Load() is REQUIRED - I will fix this later - JR
+
+        //   ItemTypeManager.Load() is REQUIRED - I will fix these methods later - JR
+
+
+        //[TestMethod]
+        //public void LoadByTypeIdTest()
+        //{
+        //    var task = ItemManager.LoadByTypeId("------------");
+        //    task.Wait();
+        //    var results = task.Result;
+        //    Assert.AreEqual(2, results.Count);
+        //}
 
         //[TestMethod]
         //public void InsertTest()

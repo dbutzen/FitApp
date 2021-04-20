@@ -46,7 +46,6 @@ namespace TCT.FitApp.BL
                         row.Sex = user.Sex;
 
                         user.Id = row.Id;
-                        user.UniqueKey = row.UniqueKey;
 
                         dc.TblUsers.Add(row);
 
@@ -222,7 +221,7 @@ namespace TCT.FitApp.BL
             }
         }
 
-        // Returns true if login is successful
+        // Returns true and fill the user object if login is successful
         public static async Task<bool> Login(User user)
         {
             try
@@ -250,6 +249,62 @@ namespace TCT.FitApp.BL
                         else
                         {
                             throw new Exception("The username/email or password is incorrect.");
+                        }
+                    }
+                });
+
+                return results;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static async Task<int> ChangePassword(User user, string newPassword, bool rollback = false)
+        {
+            try
+            {
+                var results = 0;
+                await Task.Run(() =>
+                {
+                    using (var dc = new FitAppDataContext())
+                    {
+                        IDbContextTransaction transaction = null;
+
+                        if (rollback) transaction = dc.Database.BeginTransaction();
+
+
+                        var row = dc.TblUsers.FirstOrDefault(u => u.Id == user.Id);
+                        if (row != null)
+                        {
+                            var hashed_password = ComputeSha256Hash($"{user.Password}{row.UniqueKey.ToString().ToUpper()}");
+
+                            if (hashed_password == row.Password)
+                            {
+                                if (!string.IsNullOrEmpty(newPassword.Trim()))
+                                {
+                                    row.UniqueKey = Guid.NewGuid();
+                                    row.Password = ComputeSha256Hash($"{newPassword}{row.UniqueKey.ToString().ToUpper()}");
+
+
+                                    results = dc.SaveChanges();
+
+                                    if (rollback) transaction.Rollback();
+                                }
+                                else
+                                {
+                                    throw new Exception("New password can't be blank.");
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception("Old password is incorrect.");
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("User could not be found.");
                         }
                     }
                 });

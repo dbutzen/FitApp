@@ -206,6 +206,36 @@ namespace TCT.FitApp.BL
         }
 
 
+        public async static Task<List<Item>> LoadByTypeId(Guid typeId)
+        {
+            try
+            {
+                var items = new List<Item>();
+                await Task.Run(() =>
+                {
+                    using (var dc = new FitAppDataContext())
+                    {
+                        dc.TblItems.Where(u => u.TypeId == typeId)
+                        .ToList()
+                        .ForEach(u =>
+                        {
+                            var item = new Item();
+                            GetFromTableRow(item, u);
+                            items.Add(item);
+                        });
+                    }
+                });
+
+                return items;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         private static void GetFromTableRow(Item item, TblItem row)
         {
             item.Id = row.Id;

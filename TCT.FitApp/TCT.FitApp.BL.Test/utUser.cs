@@ -52,6 +52,18 @@ namespace JZR.SurveyMaker.BL.Test
             Assert.AreEqual("Jason Ryan", user.Name);
         }
 
+        [TestMethod]
+        public void ChangePasswordTest()
+        {
+            var loadTask = UserManager.LoadByUsername("jryan");
+            loadTask.Wait();
+            var user = loadTask.Result;
+            user.Password = "password1"; // <-- Old password must be entered
+            var task = UserManager.ChangePassword(user, "newpass", true);
+            task.Wait();
+            Assert.IsTrue(task.Result > 0);
+        }
+
 
         [TestMethod]
         public void InsertTest()
