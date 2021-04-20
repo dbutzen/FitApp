@@ -213,7 +213,7 @@ namespace TCT.FitApp.BL
                 var items = new List<Item>();
                 await Task.Run(() =>
                 {
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         dc.TblItems.Where(u => u.TypeId == typeId)
                         .ToList()

@@ -22,7 +22,7 @@ namespace TCT.FitApp.BL
                 {
                     IDbContextTransaction transaction = null;
 
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         if (rollback) transaction = dc.Database.BeginTransaction();
 
@@ -72,7 +72,7 @@ namespace TCT.FitApp.BL
                 {
                     IDbContextTransaction transaction = null;
 
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         if (rollback) transaction = dc.Database.BeginTransaction();
 
@@ -111,7 +111,7 @@ namespace TCT.FitApp.BL
                 {
                     IDbContextTransaction transaction = null;
 
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         if (rollback) transaction = dc.Database.BeginTransaction();
 
@@ -138,7 +138,7 @@ namespace TCT.FitApp.BL
                 var users = new List<User>();
                 await Task.Run(() =>
                 {
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         dc.TblUsers
                         .ToList()
@@ -167,7 +167,7 @@ namespace TCT.FitApp.BL
                 var user = new User();
                 await Task.Run(() =>
                 {
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         var row = dc.TblUsers.FirstOrDefault(u => u.Id == id);
                         if (row != null)
@@ -198,7 +198,7 @@ namespace TCT.FitApp.BL
                 var user = new User();
                 await Task.Run(() =>
                 {
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         var row = dc.TblUsers.FirstOrDefault(u => u.Username == username);
                         if (row != null)
@@ -229,7 +229,7 @@ namespace TCT.FitApp.BL
                 var results = false;
                 await Task.Run(() =>
                 {
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         var row = dc.TblUsers.FirstOrDefault(u => u.Username == user.Username);
                         if (row != null)
@@ -268,7 +268,7 @@ namespace TCT.FitApp.BL
                 var results = 0;
                 await Task.Run(() =>
                 {
-                    using (var dc = new FitAppDataContext())
+                    using (var dc = new FitAppEntities())
                     {
                         IDbContextTransaction transaction = null;
 

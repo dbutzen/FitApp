@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using TCT.FitApp.BL;
+using TCT.FitApp.BL.Models;
 
 namespace JZR.SurveyMaker.BL.Test
 {
@@ -41,36 +42,36 @@ namespace JZR.SurveyMaker.BL.Test
         }
 
 
-        //   ItemTypeManager.Load() is REQUIRED - I will fix these methods later - JR
+        [TestMethod]
+        public void LoadByTypeIdTest()
+        {
+            var loadTask = ItemTypeManager.Load();
+            loadTask.Wait();
+            var types = loadTask.Result;
+            var task = ItemManager.LoadByTypeId(types.FirstOrDefault(t => t.Name == "Food").Id);
+            task.Wait();
+            var results = task.Result;
+            Assert.AreEqual(2, results.Count);
+        }
 
+        [TestMethod]
+        public void InsertTest()
+        {
+            var loadTask = ItemTypeManager.Load();
+            loadTask.Wait();
+            var types = loadTask.Result;
 
-        //[TestMethod]
-        //public void LoadByTypeIdTest()
-        //{
-        //    var task = ItemManager.LoadByTypeId("------------");
-        //    task.Wait();
-        //    var results = task.Result;
-        //    Assert.AreEqual(2, results.Count);
-        //}
+            var item = new Item();
+            item.Name = "New Item";
+            item.TypeId = types.FirstOrDefault(t => t.Name == "Food").Id;
+            item.Calories = 10;
+            item.Protein = 7;
 
-        //[TestMethod]
-        //public void InsertTest()
-        //{
-        //    var loadTask = ItemTypeManager.Load();
-        //    loadTask.Wait();
-        //    var itemType = loadTask.Result;
+            var task = ItemManager.Insert(item, true);
+            task.Wait();
 
-        //    var item = new Item();
-        //    item.Name = "New Item";
-        //    item.TypeId = itemType.Id;
-        //    item.Calories = 10;
-        //    item.Protein = 7;
-
-        //    var task = ItemManager.Insert(item, true);
-        //    task.Wait();
-
-        //    Assert.IsTrue(task.Result > 0);
-        //}
+            Assert.IsTrue(task.Result > 0);
+        }
 
         [TestMethod]
         public void UpdateTest()

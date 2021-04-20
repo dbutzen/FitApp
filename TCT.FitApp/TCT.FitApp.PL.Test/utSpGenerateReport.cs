@@ -11,13 +11,13 @@ namespace TCT.FitApp.PL.Test
     [TestClass]
     public class utSpGenerateReport
     {
-        protected FitAppDataContext dc;
+        protected FitAppEntities dc;
         protected IDbContextTransaction transaction;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            dc = new FitAppDataContext();
+            dc = new FitAppEntities();
             transaction = dc.Database.BeginTransaction();
         }
 
