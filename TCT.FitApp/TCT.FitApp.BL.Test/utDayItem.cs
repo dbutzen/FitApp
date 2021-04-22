@@ -22,7 +22,7 @@ namespace TCT.FitApp.BL.Test
 
             var day = days.FirstOrDefault(d => d.Date == DateTime.Parse("03-12-21"));
 
-            var task = DayItemManager.Insert(day.Id, itemId, 2);
+            var task = DayItemManager.Insert(day.Id, itemId, 2, true);
             task.Wait();
             Assert.IsTrue(task.Result > 0);
         }
@@ -38,7 +38,7 @@ namespace TCT.FitApp.BL.Test
             dtask.Wait();
             var days = dtask.Result;
 
-            var day = days.FirstOrDefault(d => d.Date == DateTime.Parse("03-12-21"));
+            var day = days.FirstOrDefault(d => d.Date == DateTime.Parse("03-01-21"));
 
             var task = DayItemManager.Load();
             task.Wait();
@@ -57,7 +57,7 @@ namespace TCT.FitApp.BL.Test
             var task = DayItemManager.Load();
             task.Wait();
             var results = task.Result;
-            Assert.AreEqual(6, results.Count);
+            Assert.AreEqual(3, results.Count);
         }
     }
 }

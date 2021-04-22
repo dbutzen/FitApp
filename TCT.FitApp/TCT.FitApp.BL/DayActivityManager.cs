@@ -61,15 +61,23 @@ namespace TCT.FitApp.BL
                             dc.TblDayActivities.Remove(row);
                             results = dc.SaveChanges();
 
-                        if (rollback) transaction.Rollback();
-                    }
-                    else
-                    {
-                        throw new Exception("Row was not found.");
-                    }
-                }
-            });
-            return results;
+                            if (rollback) transaction.Rollback();
+                            return results;
+                        }
+                        else
+                        {
+                            throw new Exception("Row was not found.");
+                        }
+                    }});
+
+                return results;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public static async Task<List<DayActivity>> Load()

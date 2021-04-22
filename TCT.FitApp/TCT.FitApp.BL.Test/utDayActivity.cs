@@ -24,7 +24,7 @@ namespace TCT.FitApp.BL.Test
 
             var day = days.FirstOrDefault(d => d.Date == DateTime.Parse("03-12-21"));
 
-            var task = DayActivityManager.Insert(day.Id, activity.Id, 60, 2);
+            var task = DayActivityManager.Insert(day.Id, activity.Id, 60, 2, true);
             task.Wait();
             Assert.IsTrue(task.Result > 0);
         }
