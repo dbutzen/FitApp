@@ -105,10 +105,10 @@ namespace TCT.FitApp.BL
                 });
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
         }
 
@@ -142,10 +142,10 @@ namespace TCT.FitApp.BL
                 });
                 throw new Exception("Danger, Will Robinson!");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
 
         }
@@ -183,10 +183,10 @@ namespace TCT.FitApp.BL
                 });
                 throw new Exception("Danger, Will Robinson!");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
         }
 

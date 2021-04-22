@@ -44,30 +44,38 @@ namespace TCT.FitApp.BL
         }
         public static async Task<int> Delete(Guid id, bool rollback = false)
         {
-            int results = 0;
-            await Task.Run(() =>
+            try
             {
-                IDbContextTransaction transaction = null;
-                using (FitAppEntities dc = new FitAppEntities())
+                int results = 0;
+                await Task.Run(() =>
                 {
-                    if (rollback == true) transaction = dc.Database.BeginTransaction();
-                    TblDayActivity row = dc.TblDayActivities.FirstOrDefault(qa => qa.Id == id);
-                    
-                    if (row != null)
+                    IDbContextTransaction transaction = null;
+                    using (FitAppEntities dc = new FitAppEntities())
                     {
-                        dc.TblDayActivities.Remove(row);
-                        results = dc.SaveChanges();
+                        if (rollback == true) transaction = dc.Database.BeginTransaction();
+                        TblDayActivity row = dc.TblDayActivities.FirstOrDefault(qa => qa.Id == id);
 
-                        if (rollback) transaction.Rollback();
-                        return results;
+                        if (row != null)
+                        {
+                            dc.TblDayActivities.Remove(row);
+                            results = dc.SaveChanges();
+
+                            if (rollback) transaction.Rollback();
+                            return results;
+                        }
+                        else
+                        {
+                            throw new Exception("Row was not found.");
+                        }
                     }
-                    else
-                    {
-                        throw new Exception("Row was not found.");
-                    }
-                }
-            });
-            return results;
+                });
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         
     }

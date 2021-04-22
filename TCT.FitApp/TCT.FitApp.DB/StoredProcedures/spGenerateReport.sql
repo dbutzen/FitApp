@@ -5,13 +5,22 @@
 AS
 BEGIN
 	SELECT
-		u.Id,
+		d.Id,
+		u.Id as 'UserId',
 		d.Date,
 		u.CalorieGoal,
 		ISNULL(SUM(dbo.fnCalcCalorieIntake(di.Id)), 0) as 'CaloriesConsumed',
 		ISNULL(SUM(dbo.fnCalcBurntCal(da.Id)), 0) as 'CaloriesBurned',
 		u.ProteinGoal,
-		ISNULL(SUM(dbo.fnCalcProteinIntake(di.Id)), 0) as 'ProteinConsumed'
+		ISNULL(SUM(dbo.fnCalcProteinIntake(di.Id)), 0) as 'ProteinConsumed',
+		dbo.fnSucceeded
+		(
+			u.CalorieGoal,
+			ISNULL(SUM(dbo.fnCalcCalorieIntake(di.Id)), 0),
+			ISNULL(SUM(dbo.fnCalcBurntCal(da.Id)), 0),
+			u.ProteinGoal,
+			ISNULL(SUM(dbo.fnCalcProteinIntake(di.Id)), 0)
+		) as 'Succeeded'
 	FROM tblDay d
 	LEFT JOIN tblDayActivity da on da.DayId = d.Id
 	LEFT JOIN tblDayItem di on di.DayId = d.Id
@@ -20,6 +29,7 @@ BEGIN
 		d.Date BETWEEN @StartDate AND @EndDate AND
 		d.UserId = @UserId
 	GROUP BY
+		d.Id,
 		u.Id,
 		d.Date,
 		u.CalorieGoal,

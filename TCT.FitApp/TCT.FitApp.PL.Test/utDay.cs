@@ -93,7 +93,7 @@ namespace TCT.FitApp.PL.Test
         }
 
         [TestMethod]
-        public void GenerateTest()
+        public void LoadReportTest()
         {
             var paramUserId = new SqlParameter()
             {

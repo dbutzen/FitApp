@@ -157,10 +157,10 @@ namespace TCT.FitApp.BL
                 });
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
         }
 
@@ -194,10 +194,10 @@ namespace TCT.FitApp.BL
                 });
                 throw new Exception("Danger, Will Robinson!");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
 
         }
@@ -234,10 +234,10 @@ namespace TCT.FitApp.BL
                 });
                 throw new Exception("Danger, Will Robinson!");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
+                throw;
             }
         }
 
@@ -276,10 +276,12 @@ namespace TCT.FitApp.BL
                         results.ForEach(r => days.Add(new Day
                         {
                             Id = r.Id,
+                            UserId = r.UserId,
                             Date = r.Date,
                             CaloriesConsumed = r.CaloriesConsumed,
                             CaloriesBurned = r.CaloriesBurned,
-                            ProteinConsumed = r.ProteinConsumed
+                            ProteinConsumed = r.ProteinConsumed,
+                            Succeeded = r.Succeeded
                         }));
                     }
 
