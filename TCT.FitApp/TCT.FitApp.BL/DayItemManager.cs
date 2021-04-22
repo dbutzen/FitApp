@@ -37,7 +37,6 @@ namespace TCT.FitApp.BL
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -58,7 +57,6 @@ namespace TCT.FitApp.BL
                         results = dc.SaveChanges();
 
                         if (rollback) transaction.Rollback();
-                        return results;
                     }
                     else
                     {

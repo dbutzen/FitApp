@@ -29,9 +29,9 @@ namespace TCT.FitApp.BL
                         row.Duration = duration;
                         row.DifficultyLevel = difficultyLevel;
                         dc.TblDayActivities.Add(row);
-                        int results = dc.SaveChanges();
+                        results = dc.SaveChanges();
                         if (rollback) transaction.Rollback();
-                        
+
                     }
                 });
                 return results;
@@ -60,7 +60,6 @@ namespace TCT.FitApp.BL
                         results = dc.SaveChanges();
 
                         if (rollback) transaction.Rollback();
-                        return results;
                     }
                     else
                     {
@@ -70,6 +69,37 @@ namespace TCT.FitApp.BL
             });
             return results;
         }
-        
+
+        public static async Task<List<DayActivity>> Load()
+        {
+            try
+            {
+                List<DayActivity> dayActivites = new List<DayActivity>();
+
+                await Task.Run(() =>
+                {
+                    using (var dc = new FitAppEntities())
+                    {
+                        dc.TblDayActivities
+                            .ToList()
+                            .ForEach(da => dayActivites.Add(new DayActivity
+                            {
+                                Id = da.Id,
+                                DayId = da.DayId,
+                                ActivityId = da.ActivityId,
+                                DifficultyLevel = da.DifficultyLevel,
+                                Duration = da.Duration,
+                            }));
+                    }
+                });
+                return dayActivites;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
