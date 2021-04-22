@@ -15,6 +15,7 @@ namespace TCT.FitApp.BL
         {
             try
             {
+                int results = 0;
                 await Task.Run(() =>
                 {
                     IDbContextTransaction transaction = null;
@@ -29,9 +30,9 @@ namespace TCT.FitApp.BL
                         dc.TblDayItems.Add(row);
                         int results = dc.SaveChanges();
                         if (rollback) transaction.Rollback();
-                        return results;
                     }
                 });
+                return results;
             }
             catch (Exception)
             {
@@ -39,6 +40,7 @@ namespace TCT.FitApp.BL
                 throw;
             }
         }
+
         public static async Task<int> Delete(Guid id, bool rollback = false)
         {
             int results = 0;

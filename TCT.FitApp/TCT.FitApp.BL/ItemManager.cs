@@ -129,7 +129,7 @@ namespace TCT.FitApp.BL
                         .ForEach(u =>
                         {
                             var item = new Item();
-                            GetFromTableRow(item, u);
+                            Fill(item, u);
                             items.Add(item);
                         });
                     }
@@ -156,7 +156,7 @@ namespace TCT.FitApp.BL
                         var row = dc.TblItems.FirstOrDefault(u => u.Id == id);
                         if (row != null)
                         {
-                            GetFromTableRow(item, row);
+                            Fill(item, row);
                         }
                         else
                         {
@@ -187,7 +187,7 @@ namespace TCT.FitApp.BL
                         var row = dc.TblItems.FirstOrDefault(u => u.Name == name);
                         if (row != null)
                         {
-                            GetFromTableRow(item, row);
+                            Fill(item, row);
                         }
                         else
                         {
@@ -220,7 +220,7 @@ namespace TCT.FitApp.BL
                         .ForEach(u =>
                         {
                             var item = new Item();
-                            GetFromTableRow(item, u);
+                            Fill(item, u);
                             items.Add(item);
                         });
                     }
@@ -236,7 +236,7 @@ namespace TCT.FitApp.BL
         }
 
 
-        private static void GetFromTableRow(Item item, TblItem row)
+        private static void Fill(Item item, TblItem row)
         {
             item.Id = row.Id;
             item.Name = row.Name;

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using TCT.FitApp.PL;
 using TCT.FitApp.BL.Models;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace TCT.FitApp.BL
 {
@@ -239,6 +241,56 @@ namespace TCT.FitApp.BL
             }
         }
 
+        public async static Task<List<Day>> LoadReport(Guid userId, DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var days = new List<Day>();
+                await Task.Run(() =>
+                {
+                    using (var dc = new FitAppEntities())
+                    {
+                        var paramUserId = new SqlParameter()
+                        {
+                            ParameterName = "UserId",
+                            SqlDbType = System.Data.SqlDbType.UniqueIdentifier,
+                            Value = userId
+                        };
 
+                        var paramStartDate = new SqlParameter()
+                        {
+                            ParameterName = "StartDate",
+                            SqlDbType = System.Data.SqlDbType.Date,
+                            Value = startDate
+                        };
+
+                        var paramEndDate = new SqlParameter()
+                        {
+                            ParameterName = "EndDate",
+                            SqlDbType = System.Data.SqlDbType.Date,
+                            Value = endDate
+                        };
+
+                        var results = dc.Set<spGenerateReport>().FromSqlRaw("exec spGenerateReport @UserId, @StartDate, @EndDate", paramUserId, paramStartDate, paramEndDate).ToList();
+
+                        results.ForEach(r => days.Add(new Day
+                        {
+                            Id = r.Id,
+                            Date = r.Date,
+                            CaloriesConsumed = r.CaloriesConsumed,
+                            CaloriesBurned = r.CaloriesBurned,
+                            ProteinConsumed = r.ProteinConsumed
+                        }));
+                    }
+
+                });
+                return days;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

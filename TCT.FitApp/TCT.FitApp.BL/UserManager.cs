@@ -145,7 +145,7 @@ namespace TCT.FitApp.BL
                         .ForEach(u =>
                         {
                             var user = new User();
-                            GetFromTableRow(user, u);
+                            Fill(user, u);
                             users.Add(user);
                         });
                     }
@@ -172,7 +172,7 @@ namespace TCT.FitApp.BL
                         var row = dc.TblUsers.FirstOrDefault(u => u.Id == id);
                         if (row != null)
                         {
-                            GetFromTableRow(user, row);
+                            Fill(user, row);
                         }
                         else
                         {
@@ -203,7 +203,7 @@ namespace TCT.FitApp.BL
                         var row = dc.TblUsers.FirstOrDefault(u => u.Username == username);
                         if (row != null)
                         {
-                            GetFromTableRow(user, row);
+                            Fill(user, row);
                         }
                         else
                         {
@@ -238,7 +238,7 @@ namespace TCT.FitApp.BL
 
                             if (hashed_password == row.Password)
                             {
-                                GetFromTableRow(user, row);
+                                Fill(user, row);
                                 results = true;
                             }
                             else
@@ -317,7 +317,7 @@ namespace TCT.FitApp.BL
             }
         }
 
-        private static void GetFromTableRow(User user, TblUser row)
+        private static void Fill(User user, TblUser row)
         {
             user.Id = row.Id;
             user.Name = row.Name;
