@@ -16,7 +16,7 @@ namespace TCT.FitApp.BL.Test
             var task = ItemManager.Load();
             task.Wait();
             var results = task.Result;
-            Assert.AreEqual(3, results.Count);
+            Assert.AreEqual(4, results.Count);
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace TCT.FitApp.BL.Test
             var task = ItemManager.LoadByTypeId(types.FirstOrDefault(t => t.Name == "Food").Id);
             task.Wait();
             var results = task.Result;
-            Assert.AreEqual(2, results.Count);
+            Assert.AreEqual(3, results.Count);
         }
 
         [TestMethod]

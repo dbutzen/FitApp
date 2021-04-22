@@ -30,7 +30,7 @@ namespace TCT.FitApp.PL.Test
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, dc.TblDayItems.Count());
+            Assert.AreEqual(7, dc.TblDayItems.Count());
         }
 
         [TestMethod]
