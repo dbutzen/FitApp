@@ -190,6 +190,5 @@ namespace TCT.FitApp.BL
             }
         }
 
-
     }
 }

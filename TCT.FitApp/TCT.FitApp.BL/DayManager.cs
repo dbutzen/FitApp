@@ -113,6 +113,9 @@ namespace TCT.FitApp.BL
                                     }
                                     day.Items.Add(item);
                                 }
+
+                                //added this line
+                                days.Add(day);
                             }
                         }
                     }
@@ -168,13 +171,13 @@ namespace TCT.FitApp.BL
         {
             try
             {
+                int results = 0;
                 IDbContextTransaction transaction = null;
                 await Task.Run(() =>
                 {
                     using (FitAppEntities dc = new FitAppEntities())
                     {
                         TblDay row = dc.TblDays.FirstOrDefault(c => c.Id == id);
-                        int results = 0;
                         if (row != null)
                         {
                             if (rollback) transaction = dc.Database.BeginTransaction();
@@ -183,7 +186,6 @@ namespace TCT.FitApp.BL
                             results = dc.SaveChanges();
 
                             if (rollback) transaction.Rollback();
-                            return results;
                         }
                         else
                         {
@@ -192,7 +194,8 @@ namespace TCT.FitApp.BL
                     }
 
                 });
-                throw new Exception("Danger, Will Robinson!");
+                //throw new Exception("Danger, Will Robinson!");
+                return results;
             }
             catch (Exception)
             {
@@ -206,13 +209,13 @@ namespace TCT.FitApp.BL
         {
             try
             {
+                int results = 0;
                 IDbContextTransaction transaction = null;
                 await Task.Run(() =>
                 {
                     using (FitAppEntities dc = new FitAppEntities())
                     {
                         TblDay row = dc.TblDays.FirstOrDefault(c => c.Id == day.Id);
-                        int results = 0;
                         if (row != null)
                         {
                             if (rollback) transaction = dc.Database.BeginTransaction();
@@ -224,7 +227,6 @@ namespace TCT.FitApp.BL
                             results = dc.SaveChanges();
 
                             if (rollback) transaction.Rollback();
-                            return results;
                         }
                         else
                         {
@@ -232,7 +234,8 @@ namespace TCT.FitApp.BL
                         }
                     }
                 });
-                throw new Exception("Danger, Will Robinson!");
+                return results;
+                //throw new Exception("Danger, Will Robinson!");
             }
             catch (Exception)
             {

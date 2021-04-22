@@ -29,9 +29,9 @@ namespace TCT.FitApp.BL
                         row.Duration = duration;
                         row.DifficultyLevel = difficultyLevel;
                         dc.TblDayActivities.Add(row);
-                        int results = dc.SaveChanges();
+                        results = dc.SaveChanges();
                         if (rollback) transaction.Rollback();
-                        
+
                     }
                 });
                 return results;
@@ -42,6 +42,7 @@ namespace TCT.FitApp.BL
                 throw;
             }
         }
+
         public static async Task<int> Delete(Guid id, bool rollback = false)
         {
             try
@@ -60,23 +61,47 @@ namespace TCT.FitApp.BL
                             dc.TblDayActivities.Remove(row);
                             results = dc.SaveChanges();
 
-                            if (rollback) transaction.Rollback();
-                            return results;
-                        }
-                        else
-                        {
-                            throw new Exception("Row was not found.");
-                        }
+                        if (rollback) transaction.Rollback();
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found.");
+                    }
+                }
+            });
+            return results;
+        }
+
+        public static async Task<List<DayActivity>> Load()
+        {
+            try
+            {
+                List<DayActivity> dayActivites = new List<DayActivity>();
+
+                await Task.Run(() =>
+                {
+                    using (var dc = new FitAppEntities())
+                    {
+                        dc.TblDayActivities
+                            .ToList()
+                            .ForEach(da => dayActivites.Add(new DayActivity
+                            {
+                                Id = da.Id,
+                                DayId = da.DayId,
+                                ActivityId = da.ActivityId,
+                                DifficultyLevel = da.DifficultyLevel,
+                                Duration = da.Duration,
+                            }));
                     }
                 });
-                return results;
+                return dayActivites;
+
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-        
+
     }
 }
