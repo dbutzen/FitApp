@@ -10,7 +10,7 @@ using TCT.FitApp.PL;
 
 namespace TCT.FitApp.BL
 {
-    public class UserAccessLevelManager
+    public static class UserAccessLevelManager
     {
         public async static Task<int> Insert(UserAccessLevel userAccessLevel, bool rollback = false)
         {

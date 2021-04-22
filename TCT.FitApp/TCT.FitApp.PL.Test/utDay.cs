@@ -42,6 +42,7 @@ namespace TCT.FitApp.PL.Test
             row.UserId = dc.TblUsers.FirstOrDefault(u => u.Name == "Jason Ryan").Id;
             row.Date = DateTime.Today;
             row.Succeeded = true;
+            
 
             dc.TblDays.Add(row);
             var result = dc.SaveChanges();

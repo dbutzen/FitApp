@@ -19,7 +19,7 @@ BEGIN
 	ELSE IF @DifficultyLevel = 2
 		SELECT @CaloriesPerHour = MediumCaloriesPerHour FROM tblActivity WHERE Id = @ActivityId
 	ELSE IF @DifficultyLevel = 3
-		SELECT @CaloriesPerHour = MediumCaloriesPerHour FROM tblActivity WHERE Id = @ActivityId
+		SELECT @CaloriesPerHour = HardCaloriesPerHour FROM tblActivity WHERE Id = @ActivityId
 	ELSE
 		SET @CaloriesPerHour = 0;
 

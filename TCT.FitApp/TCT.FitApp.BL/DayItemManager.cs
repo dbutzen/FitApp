@@ -15,20 +15,23 @@ namespace TCT.FitApp.BL
         {
             try
             {
-                IDbContextTransaction transaction = null;
-                using (FitAppEntities dc = new FitAppEntities())
+                await Task.Run(() =>
                 {
-                    if (rollback) transaction = dc.Database.BeginTransaction();
-                    TblDayItem row = new TblDayItem();
-                    row.Id = Guid.NewGuid();
-                    row.ItemId = itemId;
-                    row.DayId = dayId;
-                    row.Servings = servings;
-                    dc.TblDayItems.Add(row);
-                    int results = dc.SaveChanges();
-                    if (rollback) transaction.Rollback();
-                    return results;
-                }
+                    IDbContextTransaction transaction = null;
+                    using (FitAppEntities dc = new FitAppEntities())
+                    {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
+                        TblDayItem row = new TblDayItem();
+                        row.Id = Guid.NewGuid();
+                        row.ItemId = itemId;
+                        row.DayId = dayId;
+                        row.Servings = servings;
+                        dc.TblDayItems.Add(row);
+                        int results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                        return results;
+                    }
+                });
             }
             catch (Exception)
             {
@@ -38,25 +41,29 @@ namespace TCT.FitApp.BL
         }
         public static async Task<int> Delete(Guid id, bool rollback = false)
         {
-            IDbContextTransaction transaction = null;
-            using (FitAppEntities dc = new FitAppEntities())
+            int results = 0;
+            await Task.Run(() =>
             {
-                if (rollback == true) transaction = dc.Database.BeginTransaction();
-                TblDayItem row = dc.TblDayItems.FirstOrDefault(qa => qa.Id == id);
-                int results = 0;
-                if (row != null)
+                IDbContextTransaction transaction = null;
+                using (FitAppEntities dc = new FitAppEntities())
                 {
-                    dc.TblDayItems.Remove(row);
-                    results = dc.SaveChanges();
+                    if (rollback == true) transaction = dc.Database.BeginTransaction();
+                    TblDayItem row = dc.TblDayItems.FirstOrDefault(qa => qa.Id == id);
+                    if (row != null)
+                    {
+                        dc.TblDayItems.Remove(row);
+                        results = dc.SaveChanges();
 
-                    if (rollback) transaction.Rollback();
-                    return results;
+                        if (rollback) transaction.Rollback();
+                        return results;
+                    }
+                    else
+                    {
+                        throw new Exception("Row was not found.");
+                    }
                 }
-                else
-                {
-                    throw new Exception("Row was not found.");
-                }
-            }
+            });
+            return results;
         }
 
     }
