@@ -22,7 +22,7 @@
 
 	INSERT INTO dbo.tblUser(Id, Name, Username, Password, UniqueKey, CalorieGoal, ProteinGoal, DaysInARowSucceeded, HeightInches, WeightPounds,UserAccessLevelId, Sex)
 	VALUES
-	(NEWID(), 'Dan Butzen', 'dbutzen', @HashedPassword, @UniqueKey, 1800, 70, 16, 73, 179, @UserAccessLevelId, 'Male')
+	(NEWID(), 'Dan Butzen', 'dbutzen', @HashedPassword, @UniqueKey, 1800, 70, 16, 74, 160, @UserAccessLevelId, 'Male')
 
 
 	-- Chris

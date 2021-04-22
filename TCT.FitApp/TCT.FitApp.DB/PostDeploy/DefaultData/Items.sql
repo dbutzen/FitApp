@@ -10,12 +10,20 @@
 	VALUES
 	(NEWID(), 'Strawberry', @TypeId, 4, 1, @UserId)
 
+
+
 	SELECT @UserId = Id from tblUser where Username = 'dbutzen'
 
 	INSERT INTO dbo.tblItem(Id, Name, TypeId, Calories, Protein, UserId)
 	VALUES
-	(NEWID(), 'Cauliflower', @TypeId, 3, 2, @UserId)
+	(NEWID(), 'Cauliflower', @TypeId, 3, 2, @UserId),
+	(NEWID(), 'PROTEIN MAX', @TypeId, 500, 80, @UserId)
 	
+	
+
+
+
+
 	SELECT @UserId = Id from tblUser where Username = 'cvanhefty'
 	SELECT @TypeId = Id from tblItemType where Name = 'Drink'
 

@@ -11,7 +11,9 @@
 	
 	INSERT INTO dbo.tblDay(Id, UserId, Date, Succeeded)
 	VALUES
-	(NEWID(), @UsersId, '2021-02-21', 1)
+	(NEWID(), @UsersId, '2021-02-21', 1),
+	(NEWID(), @UsersId, '2021-02-22', 1),
+	(NEWID(), @UsersId, '2021-02-23', 0)
 
 	SELECT @UsersId = Id from tblUser where Username = 'jryan'
 	
