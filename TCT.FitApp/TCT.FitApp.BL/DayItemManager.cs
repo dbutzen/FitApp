@@ -27,8 +27,9 @@ namespace TCT.FitApp.BL
                         row.ItemId = itemId;
                         row.DayId = dayId;
                         row.Servings = servings;
+
                         dc.TblDayItems.Add(row);
-                        int results = dc.SaveChanges();
+                        results = dc.SaveChanges();
                         if (rollback) transaction.Rollback();
                     }
                 });
@@ -68,5 +69,34 @@ namespace TCT.FitApp.BL
             return results;
         }
 
+        public static async Task<List<DayItem>> Load()
+        {
+            try
+            {
+                List<DayItem> dayItems= new List<DayItem>();
+
+                await Task.Run(() =>
+                {
+                    using (var dc = new FitAppEntities())
+                    {
+                        dc.TblDayItems
+                            .ToList()
+                            .ForEach(di => dayItems.Add(new DayItem
+                            {
+                                Id = di.Id,
+                                DayId = di.DayId,
+                                ItemId = di.ItemId,
+                                Servings = di.Servings
+                            }));
+                    }
+                });
+                return dayItems;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

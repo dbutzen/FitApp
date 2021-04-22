@@ -42,6 +42,7 @@ namespace TCT.FitApp.BL
                 throw;
             }
         }
+
         public static async Task<int> Delete(Guid id, bool rollback = false)
         {
             int results = 0;
