@@ -114,13 +114,14 @@ namespace TCT.FitApp.BL
         {
             try
             {
+                int results = 0;
                 IDbContextTransaction transaction = null;
                 await Task.Run(() =>
                 {
                     using (FitAppEntities dc = new FitAppEntities())
                     {
                         TblActivity row = dc.TblActivities.FirstOrDefault(c => c.Id == id);
-                        int results = 0;
+                        
                         if (row != null)
                         {
                             if (rollback) transaction = dc.Database.BeginTransaction();
@@ -129,7 +130,7 @@ namespace TCT.FitApp.BL
                             results = dc.SaveChanges();
 
                             if (rollback) transaction.Rollback();
-                            return results;
+                            
                         }
                         else
                         {
@@ -137,7 +138,7 @@ namespace TCT.FitApp.BL
                         }
                     }
 
-                });
+                }); return results;
                 throw new Exception("Danger, Will Robinson!");
             }
             catch (Exception)
@@ -152,16 +153,18 @@ namespace TCT.FitApp.BL
         {
             try
             {
-                IDbContextTransaction transaction = null;
+                int results = 0;
                 await Task.Run(() =>
                 {
+                    IDbContextTransaction transaction = null;
                     using (FitAppEntities dc = new FitAppEntities())
                     {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
                         TblActivity row = dc.TblActivities.FirstOrDefault(c => c.Id == activity.Id);
-                        int results = 0;
+                       
                         if (row != null)
                         {
-                            if (rollback) transaction = dc.Database.BeginTransaction();
+                            
 
                             row.Name = activity.Name;
                             row.EasyCaloriesPerHour = activity.EasyCaloriesPerHour;
@@ -171,14 +174,14 @@ namespace TCT.FitApp.BL
                             results = dc.SaveChanges();
 
                             if (rollback) transaction.Rollback();
-                            return results;
+                            
                         }
                         else
                         {
                             throw new Exception("Row was not found.");
                         }
                     }
-                });
+                }); return results;
                 throw new Exception("Danger, Will Robinson!");
             }
             catch (Exception)
