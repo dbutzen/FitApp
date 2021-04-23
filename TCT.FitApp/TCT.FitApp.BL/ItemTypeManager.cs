@@ -110,35 +110,27 @@ namespace TCT.FitApp.BL
         {
             try
             {
-                IDbContextTransaction transaction = null;
+                var results = 0;
                 await Task.Run(() =>
                 {
-                    using (FitAppEntities dc = new FitAppEntities())
+                    IDbContextTransaction transaction = null;
+
+                    using (var dc = new FitAppEntities())
                     {
-                        TblItemType row = dc.TblItemTypes.FirstOrDefault(c => c.Id == id);
-                        int results = 0;
-                        if (row != null)
-                        {
-                            if (rollback) transaction = dc.Database.BeginTransaction();
+                        if (rollback) transaction = dc.Database.BeginTransaction();
 
-                            dc.TblItemTypes.Remove(row);
-                            results = dc.SaveChanges();
+                        var row = dc.TblItemTypes.FirstOrDefault(i => i.Id == id);
+                        dc.TblItemTypes.Remove(row);
+                        results = dc.SaveChanges();
 
-                            if (rollback) transaction.Rollback();
-                            return results;
-                        }
-                        else
-                        {
-                            throw new Exception("Row was not found.");
-                        }
+                        if (rollback) transaction.Rollback();
                     }
-
                 });
-                throw new Exception("Danger, Will Robinson!");
+
+                return results;
             }
             catch (Exception)
             {
-
                 throw;
             }
 
@@ -148,35 +140,29 @@ namespace TCT.FitApp.BL
         {
             try
             {
-                IDbContextTransaction transaction = null;
+                var results = 0;
                 await Task.Run(() =>
                 {
-                    using (FitAppEntities dc = new FitAppEntities())
+                    IDbContextTransaction transaction = null;
+
+                    using (var dc = new FitAppEntities())
                     {
-                        TblItemType row = dc.TblItemTypes.FirstOrDefault(c => c.Id == itemType.Id);
-                        int results = 0;
-                        if (row != null)
-                        {
-                            if (rollback) transaction = dc.Database.BeginTransaction();
+                        if (rollback) transaction = dc.Database.BeginTransaction();
 
-                            row.Name = itemType.Name;
+                        var row = dc.TblItemTypes.FirstOrDefault(i => i.Id == itemType.Id);
 
-                            results = dc.SaveChanges();
+                        row.Name = itemType.Name;
 
-                            if (rollback) transaction.Rollback();
-                            return results;
-                        }
-                        else
-                        {
-                            throw new Exception("Row was not found.");
-                        }
+                        results = dc.SaveChanges();
+
+                        if (rollback) transaction.Rollback();
                     }
                 });
-                throw new Exception("Danger, Will Robinson!");
+
+                return results;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
