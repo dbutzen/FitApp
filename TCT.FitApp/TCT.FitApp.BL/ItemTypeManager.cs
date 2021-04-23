@@ -46,7 +46,7 @@ namespace TCT.FitApp.BL
                 {
                     using (FitAppEntities dc = new FitAppEntities())
                     {
-                        var row = dc.TblActivities.FirstOrDefault(a => a.Id == itemTypeId);
+                        var row = dc.TblItemTypes.FirstOrDefault(i => i.Id == itemTypeId);
 
                         if (row != null)
                         {

@@ -69,58 +69,65 @@ namespace TCT.FitApp.BL
             }
         }
 
-        public async static Task<List<Day>> LoadById(Guid dayId)
+        public static async Task<Day> LoadById(Guid id)
         {
             try
             {
-                List<Day> days = new List<Day>();
+                Day day = new Day();
+
                 await Task.Run(() =>
                 {
                     using (FitAppEntities dc = new FitAppEntities())
                     {
-                        foreach (TblDay d in dc.TblDays.ToList())
-                        {
-                            if (d.Id == dayId)
-                            {
-                                Day day = new Day { Id = d.Id, UserId = d.UserId, Date = d.Date, Succeeded = d.Succeeded };
-                                day.Activities = new List<Activity>();
-                                foreach (TblDayActivity da in d.TblDayActivities.ToList())
-                                {
-                                    Activity activity = new Activity
-                                    {
-                                        Id = da.ActivityId,
-                                        Name = da.Activity.Name,
-                                        EasyCaloriesPerHour = da.Activity.EasyCaloriesPerHour,
-                                        MediumCaloriesPerHour = da.Activity.MediumCaloriesPerHour,
-                                        HardCaloriesPerHour = da.Activity.HardCaloriesPerHour
-                                    };
-                                    day.Activities.Add(activity);
-                                }
-                                day.Items = new List<Item>();
-                                foreach (TblDayItem di in d.TblDayItems.ToList())
-                                {
-                                    Item item = new Item
-                                    {
-                                        Id = di.ItemId,
-                                        Calories = di.Item.Calories,
-                                        Name = di.Item.Name,
-                                        Protein = di.Item.Protein,
-                                        TypeId = di.Item.TypeId
-                                    };
-                                    if (di.Item.UserId != null)
-                                    {
-                                        item.CreatedUserId = (Guid)di.Item.UserId;
-                                    }
-                                    day.Items.Add(item);
-                                }
+                        var row = dc.TblDays.FirstOrDefault(d => d.Id == id);
 
-                                //added this line
-                                days.Add(day);
+
+                        if (row != null)
+                        {
+                            day.Id = row.Id;
+                            day.UserId = row.UserId;
+                            day.Date = row.Date;
+                            day.Succeeded = row.Succeeded;
+
+                            day.Activities = new List<Activity>();
+                            foreach (TblDayActivity da in row.TblDayActivities.ToList())
+                            {
+                                Activity activity = new Activity
+                                {
+                                    Id = da.ActivityId,
+                                    Name = da.Activity.Name,
+                                    EasyCaloriesPerHour = da.Activity.EasyCaloriesPerHour,
+                                    MediumCaloriesPerHour = da.Activity.MediumCaloriesPerHour,
+                                    HardCaloriesPerHour = da.Activity.HardCaloriesPerHour
+                                };
+                                day.Activities.Add(activity);
                             }
+                            day.Items = new List<Item>();
+                            foreach (TblDayItem di in row.TblDayItems.ToList())
+                            {
+                                Item item = new Item
+                                {
+                                    Id = di.ItemId,
+                                    Calories = di.Item.Calories,
+                                    Name = di.Item.Name,
+                                    Protein = di.Item.Protein,
+                                    TypeId = di.Item.TypeId
+                                };
+                                if (di.Item.UserId != null)
+                                {
+                                    item.CreatedUserId = (Guid)di.Item.UserId;
+                                }
+                                day.Items.Add(item);
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Row could not be found");
                         }
                     }
                 });
-                return days;
+
+                return day;
             }
             catch (Exception)
             {

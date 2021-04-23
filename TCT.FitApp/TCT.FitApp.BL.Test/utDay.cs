@@ -88,7 +88,7 @@ namespace TCT.FitApp.BL.Test
 
             var results = DayManager.LoadById(day.Id);
             results.Wait();
-            Assert.AreEqual(1, results.Result.Count);
+            Assert.AreEqual(day.Date, results.Result.Date);
         }
     }
 }

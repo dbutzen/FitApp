@@ -25,7 +25,7 @@ namespace TCT.FitApp.BL.Test
         {
             var task = ItemTypeManager.Load();
             task.Wait();
-            var id = task.Result.First().Id;
+            var id = task.Result.FirstOrDefault(i => i.Name == "Food").Id;
 
             var task2 = ItemTypeManager.LoadById(id);
             task2.Wait();
