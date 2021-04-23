@@ -37,33 +37,31 @@ namespace TCT.FitApp.BL
             }
         }
 
-        public async static Task<List<Activity>> LoadById(Guid activityId)
+        public async static Task<Activity> LoadById(Guid activityId)
         {
             try
             {
-                List<Activity> activities = new List<Activity>();
+                Activity activity = new Activity();
                 await Task.Run(() =>
                 {
                     using (FitAppEntities dc = new FitAppEntities())
                     {
-                        foreach (TblActivity it in dc.TblActivities.ToList())
+                        var row = dc.TblActivities.FirstOrDefault(a => a.Id == activityId);
+
+                        if (row != null)
                         {
-                            if (it.Id == activityId)
-                            {
-                                Activity activity = new Activity
-                                {
-                                    Id = it.Id,
-                                    Name = it.Name,
-                                    EasyCaloriesPerHour = it.EasyCaloriesPerHour,
-                                    MediumCaloriesPerHour = it.MediumCaloriesPerHour,
-                                    HardCaloriesPerHour = it.HardCaloriesPerHour
-                                };
-                                activities.Add(activity);
-                            }
+                            activity.Id = row.Id;
+                            activity.Name = row.Name;
+                            activity.EasyCaloriesPerHour = row.EasyCaloriesPerHour;
+                            activity.MediumCaloriesPerHour = row.MediumCaloriesPerHour;
+                            activity.HardCaloriesPerHour = row.HardCaloriesPerHour;
                         }
+                        else
+                            throw new Exception("Row could not be found");
+                        
                     }
                 });
-                return activities;
+                return activity;
             }
             catch (Exception)
             {

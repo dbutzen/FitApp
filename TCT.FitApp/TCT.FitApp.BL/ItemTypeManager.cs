@@ -37,30 +37,28 @@ namespace TCT.FitApp.BL
             }
         }
 
-        public async static Task<List<ItemType>> LoadById(Guid itemTypeId)
+        public async static Task<ItemType> LoadById(Guid itemTypeId)
         {
             try
             {
-                List<ItemType> itemTypes = new List<ItemType>();
+                ItemType itemType = new ItemType();
                 await Task.Run(() =>
                 {
                     using (FitAppEntities dc = new FitAppEntities())
                     {
-                        foreach (TblItemType it in dc.TblItemTypes.ToList())
+                        var row = dc.TblActivities.FirstOrDefault(a => a.Id == itemTypeId);
+
+                        if (row != null)
                         {
-                                if (it.Id == itemTypeId)
-                                {
-                                    ItemType itemType = new ItemType
-                                    {
-                                        Id = it.Id,
-                                        Name = it.Name
-                                    };
-                                    itemTypes.Add(itemType);
-                                }
+                            itemType.Id = row.Id;
+                            itemType.Name = row.Name;
                         }
+                        else
+                            throw new Exception("Row could not be found");
+
                     }
                 });
-                return itemTypes;
+                return itemType;
             }
             catch (Exception)
             {
