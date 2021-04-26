@@ -32,16 +32,16 @@ namespace TCT.FitApp.API.Controllers
         }
 
         /// <summary>
-        /// Get a item by itemname
+        /// Get an item by name
         /// </summary>
-        /// <param name="itemname"></param>
+        /// <param name="name"></param>
         /// <returns></returns>
         [HttpGet("{itemName}")]
-        public async Task<ActionResult<Item>> Get(string itemName)
+        public async Task<ActionResult<Item>> Get(string name)
         {
             try
             {
-                return Ok(await ItemManager.LoadByName(itemName));
+                return Ok(await ItemManager.LoadByName(name));
             }
             catch (Exception ex)
             {
