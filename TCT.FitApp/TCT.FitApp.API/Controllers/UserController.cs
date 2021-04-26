@@ -72,6 +72,7 @@ namespace TCT.FitApp.API.Controllers
         /// Insert a new user
         /// </summary>
         /// <param name="User"></param>
+        /// <param name="rollback"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] User User, bool rollback = false)
@@ -89,7 +90,7 @@ namespace TCT.FitApp.API.Controllers
         /// <summary>
         /// Returns a user if login is successful
         /// </summary>
-        /// <param name="User"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         [Route("Login")]
         [HttpPost]
@@ -112,6 +113,7 @@ namespace TCT.FitApp.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <param name="User"></param>
+        /// <param name="rollback"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] User User, bool rollback = false)
@@ -130,6 +132,7 @@ namespace TCT.FitApp.API.Controllers
         /// Delete a user
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="rollback"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id, bool rollback = false)

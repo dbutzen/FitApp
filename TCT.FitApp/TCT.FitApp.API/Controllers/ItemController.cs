@@ -89,6 +89,7 @@ namespace TCT.FitApp.API.Controllers
         /// Insert a new item
         /// </summary>
         /// <param name="Item"></param>
+        /// <param name="rollback"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Item Item, bool rollback = false)
@@ -109,6 +110,7 @@ namespace TCT.FitApp.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <param name="Item"></param>
+        /// <param name="rollback"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] Item Item, bool rollback = false)
@@ -127,6 +129,7 @@ namespace TCT.FitApp.API.Controllers
         /// Delete an item
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="rollback"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id, bool rollback = false)
