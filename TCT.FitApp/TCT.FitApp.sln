@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.PL.Test", "TCT.F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.BL.Test", "TCT.FitApp.BL.Test\TCT.FitApp.BL.Test.csproj", "{2EC509E0-8384-4731-BA02-758C8DF542E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCT.FitApp.API", "TCT.FitApp.API\TCT.FitApp.API.csproj", "{74F874C3-2D56-4D6F-A801-488926EC87AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.API", "TCT.FitApp.API\TCT.FitApp.API.csproj", "{74F874C3-2D56-4D6F-A801-488926EC87AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCT.FitApp.API.Test", "TCT.FitApp.API.Test\TCT.FitApp.API.Test.csproj", "{7F7105F5-846D-4997-97E0-BD8C50F9CFF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{74F874C3-2D56-4D6F-A801-488926EC87AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74F874C3-2D56-4D6F-A801-488926EC87AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74F874C3-2D56-4D6F-A801-488926EC87AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F7105F5-846D-4997-97E0-BD8C50F9CFF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F7105F5-846D-4997-97E0-BD8C50F9CFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F7105F5-846D-4997-97E0-BD8C50F9CFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F7105F5-846D-4997-97E0-BD8C50F9CFF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

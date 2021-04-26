@@ -10,7 +10,7 @@ using TCT.FitApp.BL.Models;
 
 namespace TCT.FitApp.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -93,13 +93,10 @@ namespace TCT.FitApp.API.Controllers
         /// <returns></returns>
         [Route("Login")]
         [HttpPost]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(User user)
         {
             try
             {
-                var user = new User();
-                user.Username = username;
-                user.Password = password;
                 await UserManager.Login(user);
                 return Ok(user);
             }
@@ -109,25 +106,6 @@ namespace TCT.FitApp.API.Controllers
             }
         }
 
-        /// <summary>
-        /// Change user password
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="newPassword"></param>
-        /// <returns></returns>
-        [Route("ChangePassword")]
-        [HttpPost]
-        public async Task<IActionResult> ChangePassword(User user, string newPassword, bool rollback = false)
-        {
-            try
-            {
-                return Ok(await UserManager.ChangePassword(user, newPassword, rollback));
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
 
         /// <summary>
         /// Update a user
@@ -140,7 +118,7 @@ namespace TCT.FitApp.API.Controllers
         {
             try
             {
-                return Ok(await UserManager.Update(User));
+                return Ok(await UserManager.Update(User, rollback));
             }
             catch (Exception ex)
             {
