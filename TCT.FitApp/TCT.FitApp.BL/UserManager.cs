@@ -239,6 +239,9 @@ namespace TCT.FitApp.BL
                             if (hashed_password == row.Password)
                             {
                                 Fill(user, row);
+
+                                // Set to null the hide the password
+                                user.Password = null;
                                 results = true;
                             }
                             else
