@@ -36,7 +36,7 @@ namespace TCT.FitApp.API.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        [HttpGet("{itemName}")]
+        [HttpGet("{name}")]
         public async Task<ActionResult<Item>> Get(string name)
         {
             try

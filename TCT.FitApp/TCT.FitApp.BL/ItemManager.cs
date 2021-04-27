@@ -31,7 +31,7 @@ namespace TCT.FitApp.BL
                         row.TypeId = item.TypeId;
                         row.Calories = item.Calories;
                         row.Protein = item.Protein;
-                        row.UserId = item.CreatedUserId;
+                        row.CreatedByUserId = item.CreatedByUserId;
 
                         item.Id = row.Id;
  
@@ -70,7 +70,7 @@ namespace TCT.FitApp.BL
                         row.TypeId = item.TypeId;
                         row.Calories = item.Calories;
                         row.Protein = item.Protein;
-                        row.UserId = item.CreatedUserId;
+                        row.CreatedByUserId = item.CreatedByUserId;
 
                         results = dc.SaveChanges();
 
@@ -243,7 +243,7 @@ namespace TCT.FitApp.BL
             item.TypeId = row.TypeId;
             item.Calories = row.Calories;
             item.Protein = row.Protein;
-            item.CreatedUserId = row.UserId;
+            item.CreatedByUserId = row.CreatedByUserId;
         }
     }
 }
