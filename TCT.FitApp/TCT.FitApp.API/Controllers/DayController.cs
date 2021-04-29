@@ -51,7 +51,7 @@ namespace TCT.FitApp.API.Controllers
         {
             try
             {
-                return Ok(await DayManager.Insert(day));
+                return Ok(await DayManager.Insert(day, rollback));
             }
             catch (Exception ex)
             {
@@ -66,7 +66,7 @@ namespace TCT.FitApp.API.Controllers
         {
             try
             {
-                return Ok(await DayManager.Update(day));
+                return Ok(await DayManager.Update(day, rollback));
             }
             catch (Exception ex)
             {
@@ -80,7 +80,27 @@ namespace TCT.FitApp.API.Controllers
         {
             try
             {
-                return Ok(await DayManager.Delete(id));
+                return Ok(await DayManager.Delete(id, rollback));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get a list of days for reporting
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        [HttpGet("GenerateReport")]
+        public async Task<IActionResult> GenerateReport(Guid userId, DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                return Ok(await DayManager.LoadReport(userId, startDate, endDate));
             }
             catch (Exception ex)
             {

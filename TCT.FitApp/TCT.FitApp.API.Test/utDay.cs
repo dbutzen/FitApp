@@ -62,7 +62,7 @@ namespace TCT.FitApp.API.Test
         {
             List<Day> days = GetDays();
 
-            Assert.AreEqual(10, days.Count);
+            Assert.AreEqual(6, days.Count);
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace TCT.FitApp.API.Test
         [TestMethod]
         public void InsertTest()
         {
-            var userId = GetUsers().FirstOrDefault(u => u.Username == "cjvanhefty").Id;
+            var userId = GetUsers().FirstOrDefault(u => u.Username == "cvanhefty").Id;
 
             Day day = new Day();
             day.Id = Guid.NewGuid();
@@ -132,6 +132,23 @@ namespace TCT.FitApp.API.Test
             var result = int.Parse(response.Content.ReadAsStringAsync().Result);
 
             Assert.IsTrue(result > 0);
+        }
+
+        [TestMethod]
+        public void LoadReportTest()
+        {
+            var userId = GetUsers().FirstOrDefault(u => u.Username == "jryan").Id;
+
+            HttpResponseMessage response;
+            string result;
+            dynamic items;
+
+            response = client.GetAsync($"Day/GenerateReport?userId={userId}&startDate=2021-03-11&endDate=2021-03-12").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            items = (JArray)JsonConvert.DeserializeObject(result);
+            List<Day> days = items.ToObject<List<Day>>();
+
+            Assert.AreEqual(2, days.Count);
         }
 
         // Stored Procedure UT

@@ -42,6 +42,20 @@ namespace TCT.FitApp.API.Test
             return itemList;
         }
 
+        private List<ItemType> GetItemTypes()
+        {
+            HttpResponseMessage response;
+            string result;
+            dynamic itemTypes;
+
+            response = client.GetAsync("ItemType").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            itemTypes = (JArray)JsonConvert.DeserializeObject(result);
+            List<ItemType> itemTypeList = itemTypes.ToObject<List<ItemType>>();
+
+            return itemTypeList;
+        }
+
         [TestMethod]
         public void LoadTest()
         {
@@ -85,30 +99,28 @@ namespace TCT.FitApp.API.Test
         }
 
 
-        // ItemTypeController is required
-        //[TestMethod]
+        [TestMethod]
         public void LoadByTypeId()
         {
             HttpResponseMessage response;
             string result;
-
-            var typeId = Guid.Empty;  // ItemTypeController is required
+            dynamic itemTypes;
+            var typeId = GetItemTypes().FirstOrDefault(i => i.Name == "Food").Id;
             response = client.GetAsync($"Item/Type/{typeId}").Result;
             result = response.Content.ReadAsStringAsync().Result;
-            var item = JsonConvert.DeserializeObject<Item>(result);
+            itemTypes = (JArray)JsonConvert.DeserializeObject(result);
+            List<ItemType> itemTypeList = itemTypes.ToObject<List<ItemType>>();
 
-
-            Assert.AreEqual(typeId, item.Id);
+            Assert.IsTrue(itemTypeList.Count > 0);
 
         }
 
-        // ItemTypeController is required
-        //[TestMethod]
+        [TestMethod]
         public void InsertTest()
         {
             var item = new Item();
             item.Name = "New Item";
-            //item.TypeId = 
+            item.TypeId = GetItemTypes().FirstOrDefault(i => i.Name == "Food").Id;
             item.Calories = 10;
             item.Protein = 7;
 

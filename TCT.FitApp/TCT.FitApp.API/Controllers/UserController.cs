@@ -21,7 +21,6 @@ namespace TCT.FitApp.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> Get()
         {
-            // Return all the Users
             try
             {
                 return Ok(await UserManager.Load());
