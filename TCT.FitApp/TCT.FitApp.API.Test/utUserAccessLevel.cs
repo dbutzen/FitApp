@@ -84,6 +84,7 @@ namespace TCT.FitApp.API.Test
 
         }
 
+        [TestMethod]
         public void InsertTest()
         {
             var userAccessLevel = new UserAccessLevel();

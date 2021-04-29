@@ -12,11 +12,11 @@ using System;
 namespace TCT.FitApp.API.Test
 {
     [TestClass]
-    public class utActivity
+    public class utItemType
     {
         public HttpClient client { get; }
 
-        public utActivity()
+        public utItemType()
         {
             var webHostBuilder = new WebHostBuilder()
                 .UseEnvironment("Development")
@@ -28,26 +28,26 @@ namespace TCT.FitApp.API.Test
         }
 
 
-        private List<Activity> GetActivities()
+        private List<ItemType> GetItemTypes()
         {
             HttpResponseMessage response;
             string result;
-            dynamic activities;
+            dynamic itemTypes;
 
-            response = client.GetAsync("Activity").Result;
+            response = client.GetAsync("ItemType").Result;
             result = response.Content.ReadAsStringAsync().Result;
-            activities = (JArray)JsonConvert.DeserializeObject(result);
-            List<Activity> activityList = activities.ToObject<List<Activity>>();
+            itemTypes = (JArray)JsonConvert.DeserializeObject(result);
+            List<ItemType> itemTypeList = itemTypes.ToObject<List<ItemType>>();
 
-            return activityList;
+            return itemTypeList;
         }
 
         [TestMethod]
         public void LoadTest()
         {
-            List<Activity> activities = GetActivities();
+            List<ItemType> itemTypes = GetItemTypes();
 
-            Assert.AreEqual(3, activities.Count);
+            Assert.AreEqual(2, itemTypes.Count);
 
         }
 
@@ -57,31 +57,30 @@ namespace TCT.FitApp.API.Test
             HttpResponseMessage response;
             string result;
 
-            var id = GetActivities().FirstOrDefault(i => i.Name == "Running").Id;
+            var id = GetItemTypes().FirstOrDefault(i => i.Name == "Food").Id;
 
-            response = client.GetAsync($"Activity/{id}").Result;
+            response = client.GetAsync($"ItemType/{id}").Result;
             result = response.Content.ReadAsStringAsync().Result;
-            var activity = JsonConvert.DeserializeObject<Activity>(result);
+            var itemType = JsonConvert.DeserializeObject<ItemType>(result);
 
 
-            Assert.AreEqual("Running", activity.Name);
+            Assert.AreEqual("Food", itemType.Name);
 
         }
+
+
 
         [TestMethod]
         public void InsertTest()
         {
-            var activity = new Activity();
-            activity.Name = "Eating";
-            activity.EasyCaloriesPerHour = 10;
-            activity.MediumCaloriesPerHour = 15;
-            activity.HardCaloriesPerHour = 20;
+            var itemType = new ItemType();
+            itemType.Name = "Plasma";
 
-            var serializedObject = JsonConvert.SerializeObject(activity);
+            var serializedObject = JsonConvert.SerializeObject(itemType);
             var content = new StringContent(serializedObject);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
-            var response = client.PostAsync("Activity?rollback=true", content).Result;
+            var response = client.PostAsync("ItemType?rollback=true", content).Result;
             var result = bool.Parse(response.Content.ReadAsStringAsync().Result);
 
             Assert.IsTrue(result);
@@ -91,14 +90,14 @@ namespace TCT.FitApp.API.Test
         [TestMethod]
         public void UpdateTest()
         {
-            var activity = GetActivities().FirstOrDefault(i => i.Name == "Running");
-            activity.Name = "Running Faster";
+            var itemType = GetItemTypes().FirstOrDefault(i => i.Name == "Food");
+            itemType.Name = "Better Food";
 
-            var serializedObject = JsonConvert.SerializeObject(activity);
+            var serializedObject = JsonConvert.SerializeObject(itemType);
             var content = new StringContent(serializedObject);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
-            var response = client.PutAsync($"Activity/{activity.Id}?rollback=true", content).Result;
+            var response = client.PutAsync($"ItemType/{itemType.Id}?rollback=true", content).Result;
             var result = int.Parse(response.Content.ReadAsStringAsync().Result);
 
             Assert.IsTrue(result > 0);
@@ -108,9 +107,9 @@ namespace TCT.FitApp.API.Test
         [TestMethod]
         public void DeleteTest()
         {
-            var id = GetActivities().FirstOrDefault(i => i.Name == "Running").Id;
+            var id = GetItemTypes().FirstOrDefault(i => i.Name == "Food").Id;
 
-            var response = client.DeleteAsync($"Activity/{id}?rollback=true").Result;
+            var response = client.DeleteAsync($"ItemType/{id}?rollback=true").Result;
             var result = int.Parse(response.Content.ReadAsStringAsync().Result);
 
             Assert.IsTrue(result > 0);
