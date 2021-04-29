@@ -5,5 +5,5 @@
     [TypeId] UNIQUEIDENTIFIER NOT NULL, 
     [Calories] INT NOT NULL, 
     [Protein] INT NOT NULL,
-    [UserId] UNIQUEIDENTIFIER NULL,
+    [CreatedByUserId] UNIQUEIDENTIFIER NULL,
 )

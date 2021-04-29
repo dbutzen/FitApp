@@ -49,9 +49,9 @@ namespace TCT.FitApp.BL
                                     Protein = di.Item.Protein,
                                     TypeId = di.Item.TypeId
                                 };
-                                if (di.Item.UserId != null)
+                                if (di.Item.CreatedByUserId != null)
                                 {
-                                    item.CreatedUserId = (Guid)di.Item.UserId;
+                                    item.CreatedByUserId = (Guid)di.Item.CreatedByUserId;
                                 }
                                 day.Items.Add(item);
                             }
@@ -112,9 +112,9 @@ namespace TCT.FitApp.BL
                                     Protein = di.Item.Protein,
                                     TypeId = di.Item.TypeId
                                 };
-                                if (di.Item.UserId != null)
+                                if (di.Item.CreatedByUserId != null)
                                 {
-                                    item.CreatedUserId = (Guid)di.Item.UserId;
+                                    item.CreatedByUserId = (Guid)di.Item.CreatedByUserId;
                                 }
                                 day.Items.Add(item);
                             }

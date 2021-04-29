@@ -92,8 +92,7 @@ namespace TCT.FitApp.API.Controllers
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        [Route("Login")]
-        [HttpPost]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login(User user)
         {
             try
