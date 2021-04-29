@@ -41,6 +41,36 @@ namespace TCT.FitApp.BL
             }
         }
 
+        public static async Task<int> InsertWithDayItem(DayItem dayItem, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                await Task.Run(() =>
+                {
+                    IDbContextTransaction transaction = null;
+                    using (FitAppEntities dc = new FitAppEntities())
+                    {
+                        if (rollback) transaction = dc.Database.BeginTransaction();
+                        TblDayItem row = new TblDayItem();
+                        row.Id = Guid.NewGuid();
+                        row.ItemId = dayItem.ItemId;
+                        row.DayId = dayItem.DayId;
+                        row.Servings = dayItem.Servings;
+
+                        dc.TblDayItems.Add(row);
+                        results = dc.SaveChanges();
+                        if (rollback) transaction.Rollback();
+                    }
+                });
+                return results;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public static async Task<int> Delete(Guid id, bool rollback = false)
         {
             try
