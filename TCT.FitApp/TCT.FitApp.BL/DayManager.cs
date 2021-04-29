@@ -81,7 +81,6 @@ namespace TCT.FitApp.BL
                     {
                         var row = dc.TblDays.FirstOrDefault(d => d.Id == id);
 
-
                         if (row != null)
                         {
                             day.Id = row.Id;
@@ -140,9 +139,11 @@ namespace TCT.FitApp.BL
         {
             try
             {
-                IDbContextTransaction transaction = null;
+                int results = 0;
                 await Task.Run(() =>
                 {
+                    IDbContextTransaction transaction = null;
+
                     using (FitAppEntities dc = new FitAppEntities())
                     {
                         if (rollback) transaction = dc.Database.BeginTransaction();
@@ -155,7 +156,7 @@ namespace TCT.FitApp.BL
                         day.Id = newrow.Id;
 
                         dc.TblDays.Add(newrow);
-                        int results = dc.SaveChanges();
+                        results = dc.SaveChanges();
                         if (rollback) transaction.Rollback();
 
                         if (results > 0)
