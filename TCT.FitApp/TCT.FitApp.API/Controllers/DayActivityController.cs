@@ -9,7 +9,7 @@ using TCT.FitApp.BL.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace TCT.FitApp.API
+namespace TCT.FitApp.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
@@ -35,7 +35,7 @@ namespace TCT.FitApp.API
         {
             try
             {
-                return Ok(await DayActivityManager.Insert(dayActivity.DayId, dayActivity.ActivityId, 60, 2));
+                return Ok(await DayActivityManager.Insert(dayActivity.DayId, dayActivity.ActivityId, 60, 2, rollback));
             }
             catch (Exception ex)
             {
@@ -49,7 +49,7 @@ namespace TCT.FitApp.API
         {
             try
             {
-                return Ok(await DayActivityManager.Delete(id));
+                return Ok(await DayActivityManager.Delete(id, rollback));
             }
             catch (Exception ex)
             {
