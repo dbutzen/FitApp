@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.BL.Test", "TCT.F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.API", "TCT.FitApp.API\TCT.FitApp.API.csproj", "{74F874C3-2D56-4D6F-A801-488926EC87AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCT.FitApp.API.Test", "TCT.FitApp.API.Test\TCT.FitApp.API.Test.csproj", "{7F7105F5-846D-4997-97E0-BD8C50F9CFF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.API.Test", "TCT.FitApp.API.Test\TCT.FitApp.API.Test.csproj", "{7F7105F5-846D-4997-97E0-BD8C50F9CFF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{95A1421C-D7D0-4DB4-AEAB-3CB221DE7CD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nutritionix", "Nutritionix\Nutritionix.csproj", "{599A55D2-0879-4F70-85D7-B612B3F70B9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,9 +63,16 @@ Global
 		{7F7105F5-846D-4997-97E0-BD8C50F9CFF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F7105F5-846D-4997-97E0-BD8C50F9CFF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F7105F5-846D-4997-97E0-BD8C50F9CFF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{599A55D2-0879-4F70-85D7-B612B3F70B9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{599A55D2-0879-4F70-85D7-B612B3F70B9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{599A55D2-0879-4F70-85D7-B612B3F70B9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{599A55D2-0879-4F70-85D7-B612B3F70B9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{599A55D2-0879-4F70-85D7-B612B3F70B9A} = {95A1421C-D7D0-4DB4-AEAB-3CB221DE7CD7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0F244B51-AABB-4600-A2D4-C301956E86D5}

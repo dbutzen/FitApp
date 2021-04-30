@@ -1,0 +1,85 @@
+﻿<Window x:Class="Nutritionix.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nutritionix"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="10">
+                <StackPanel>
+                    <TextBlock Text="Search by UPC" Margin="2"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtUPC" Text="012000182303" Margin="2" Grid.Column="0"/>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <Button x:Name="btnSubmitUPC" Margin="2"   Width="50"  Content="Submit" Click="btnSubmitUPC_Click"/>
+                            <!--<Button x:Name="btnSubmitName" Margin="2"   Width="50"  Content="Name " Click="btnSubmitName_Click"/>-->
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Row="1" Margin="10">
+                <StackPanel  Margin="10" Orientation="Horizontal">
+                    <TextBlock Text="Name:" Width="100"/>
+                    <TextBox x:Name="txtItemName"  IsReadOnly="True" Width="200"/>
+                </StackPanel>
+                <StackPanel  Margin="10" Orientation="Horizontal">
+                    <TextBlock  Text="Protein:" Width="100"/>
+                    <TextBox x:Name="txtItemProtein" IsReadOnly="True" Width="200"/>
+                </StackPanel>
+                <StackPanel  Margin="10" Orientation="Horizontal">
+                    <TextBlock Text="Calories:" Width="100"/>
+                    <TextBox x:Name="txtItemCalories"  IsReadOnly="True" Width="200"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        
+        <!--Search by Name-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="10">
+                <StackPanel>
+                    <TextBlock Text="Search by Name" Margin="2"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="txtKeyword" Text="steak ribeye" Margin="2" Grid.Column="0"/>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <Button x:Name="btnSubmitName" Margin="2"   Width="50"  Content="Submit" Click="btnSubmitName_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+            <DataGrid x:Name="dgItems" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="1" Margin="10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding brand_name}" Header="Brand"/>
+                    <DataGridTextColumn Binding="{Binding item_name}" Header="Name"/>
+                    <DataGridTextColumn Binding="{Binding item_description}" Header="Description"/>
+                    <DataGridTextColumn Binding="{Binding nf_protein}" Header="Protein"/>
+                    <DataGridTextColumn Binding="{Binding nf_calories}" Header="Calories"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
