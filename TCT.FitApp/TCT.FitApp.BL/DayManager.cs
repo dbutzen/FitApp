@@ -51,7 +51,7 @@ namespace TCT.FitApp.BL
                                 };
                                 if (di.Item.CreatedByUserId != null)
                                 {
-                                    item.CreatedByUserId = (Guid)di.Item.CreatedByUserId;
+                                    di.Item.CreatedByUserId = (Guid)di.Item.CreatedByUserId;
                                 }
                                 day.Items.Add(item);
                             }
