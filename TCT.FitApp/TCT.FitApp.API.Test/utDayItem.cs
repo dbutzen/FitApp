@@ -42,6 +42,34 @@ namespace TCT.FitApp.API.Test
             return dayItemList;
         }
 
+        private List<Item> GetItems()
+        {
+            HttpResponseMessage response;
+            string result;
+            dynamic items;
+
+            response = client.GetAsync("Item").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            items = (JArray)JsonConvert.DeserializeObject(result);
+            List<Item> itemList = items.ToObject<List<Item>>();
+
+            return itemList;
+        }
+
+        private List<Day> GetDays()
+        {
+            HttpResponseMessage response;
+            string result;
+            dynamic days;
+
+            response = client.GetAsync("Day").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            days = (JArray)JsonConvert.DeserializeObject(result);
+            List<Day> dayList = days.ToObject<List<Day>>();
+
+            return dayList;
+        }
+
         [TestMethod]
         public void LoadTest()
         {
@@ -49,18 +77,19 @@ namespace TCT.FitApp.API.Test
 
             Assert.AreEqual(7, dayItems.Count);
 
-        }
-
-       
+        }             
 
         [TestMethod]
         public void InsertTest()
         {
+            var dayId = GetDays().FirstOrDefault(d => d.Date == DateTime.Parse("03-12-21")).Id;
+            var itemId = GetItems().FirstOrDefault(i => i.Name == "Cauliflower").Id;
+
             var dayItem = new DayItem();
 
             // hard coded ID placeholders until rest is done
-            dayItem.DayId = Guid.Parse("BCAE77FD-2E15-4354-9D71-375609C6370A");
-            dayItem.ItemId = Guid.Parse("0F7D719C-27AA-45ED-922A-D09D1383673B");
+            dayItem.DayId = dayId;
+            dayItem.ItemId = itemId;
             dayItem.Servings = 3;
 
             var serializedObject = JsonConvert.SerializeObject(dayItem);
