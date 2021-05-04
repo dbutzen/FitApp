@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using TCT.FitApp.Mobile.Components;
 using TCT.FitApp.Mobile.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,18 +21,12 @@ namespace TCT.FitApp.Mobile.Pages
             InitializeComponent();
         }
 
-        private HttpClient InitializeClient()
-        {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("https://daadd72e4c4f.ngrok.io/");
-            return client;
-        }
 
         private void btnLogin_Clicked(object sender, EventArgs e)
         {
             try
             {
-                var client = InitializeClient();
+                var client = App.Client;
                 var user = new User();
                 user.Username = txtUserName.Text;
                 user.Password = txtPassword.Text;
