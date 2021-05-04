@@ -33,7 +33,7 @@ namespace TCT.FitApp.BL
                         row.Username = user.Name;
                         row.UniqueKey = Guid.NewGuid();
                         row.Password = ComputeSha256Hash($"{user.Password}{row.UniqueKey.ToString().ToUpper()}");
-                        
+
                         row.CalorieGoal = user.CalorieGoal;
                         row.ProteinGoal = user.ProteinGoal;
                         row.DaysInARowSucceeded = user.DaysInARowSucceeded;
@@ -178,7 +178,7 @@ namespace TCT.FitApp.BL
                         {
                             throw new Exception("User could not be found");
                         }
-                        
+
                     }
                 });
 
@@ -244,14 +244,6 @@ namespace TCT.FitApp.BL
                                 user.Password = null;
                                 results = true;
                             }
-                            else
-                            {
-                                throw new Exception("The username/email or password is incorrect.");
-                            }
-                        }
-                        else
-                        {
-                            throw new Exception("The username/email or password is incorrect.");
                         }
                     }
                 });
