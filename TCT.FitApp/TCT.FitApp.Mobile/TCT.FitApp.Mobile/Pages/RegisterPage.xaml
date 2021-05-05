@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TCT.FitApp.Mobile.Components"
-             x:Class="TCT.FitApp.Mobile.Pages.LoginPage">
+             x:Class="TCT.FitApp.Mobile.Pages.RegisterPage">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -18,26 +18,28 @@
                         Color="#2296F3"
                         Size="88"
                         FontFamily="IconFonts"
-                        Glyph="{x:Static local:IconFont.Login}"/>
+                        Glyph="{x:Static local:IconFont.AccountCircle}"/>
                         </Image.Source>
                     </Image>
                     <Entry x:Name="txtUserName" Placeholder="Username" Margin="10"/>
                     <Entry x:Name="txtPassword" IsPassword="True" Placeholder="Password" Margin="10"/>
-                    <Button x:Name="btnLogin" Text="Login" TextColor="White" Background="#2296F3" Margin="10" Clicked="btnLogin_Clicked"/>
+                    <Entry x:Name="txtConfirmPassword" IsPassword="True" Placeholder="Confirm Password" Margin="10"/>
+                    <Button x:Name="btnRegister" Text="Register" TextColor="White" Background="#2296F3" Margin="10" Clicked="btnRegister_Clicked"/>
                     <Grid HorizontalOptions="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Text="Don't have an account?"
+                        <Label Grid.Column="0" Text="Already have an account?"
                                VerticalOptions="Center"/>
                         <Button BackgroundColor="Transparent"
                                 Grid.Column="1"
                                 VerticalOptions="Center"
                                 FontAttributes="Bold"
                                 TextColor="#2296F3"
-                                Text="Register"
-                                Clicked="btnRegister_Clicked"/>
+                                x:Name="btnLogin"
+                                Text="Login"
+                                Clicked="btnLogin_Clicked"/>
                     </Grid>
                 </StackLayout>
             </Grid>

@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
 using TCT.FitApp.BL;
 using TCT.FitApp.BL.Models;
@@ -42,14 +43,30 @@ namespace TCT.FitApp.BL.Test
         }
 
         [TestMethod]
+        public void LoadBySessionKeyTest()
+        {
+            var user = new User();
+            user.Username = "jryan";
+            user.Password = "password1";
+            var loginTask = UserManager.Login(user, false, true);
+            loginTask.Wait();
+            var sessionKey = loginTask.Result;
+
+            var task = UserManager.LoadBySessionKey(sessionKey);
+            task.Wait();
+            var results = task.Result;
+            Assert.AreEqual("jryan", results.Username);
+        }
+
+        [TestMethod]
         public void LoginTest()
         {
             var user = new User();
             user.Username = "jryan";
             user.Password = "password1";
-            var task = UserManager.Login(user);
+            var task = UserManager.Login(user, false, true);
             task.Wait();
-            Assert.AreEqual("Jason Ryan", user.Name);
+            Assert.IsTrue(task.Result != Guid.Empty);
         }
 
         [TestMethod]
@@ -93,6 +110,7 @@ namespace TCT.FitApp.BL.Test
             var users = loadTask.Result;
             var user = users.FirstOrDefault(u => u.Username == "jryan");
             user.Name = "Updated User";
+            user.SessionKey = Guid.NewGuid();
             var task = UserManager.Update(user, true);
             task.Wait();
 

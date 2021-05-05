@@ -68,6 +68,24 @@ namespace TCT.FitApp.API.Controllers
         }
 
         /// <summary>
+        /// Get a user by sessionKey
+        /// </summary>
+        /// <param name="sessionKey"></param>
+        /// <returns></returns>
+        [HttpPost("LoadBySessionKey/{sessionKey:Guid}")]
+        public async Task<ActionResult<User>> LoadBySessionKey(Guid sessionKey)
+        {
+            try
+            {
+                return Ok(await UserManager.LoadBySessionKey(sessionKey));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Insert a new user
         /// </summary>
         /// <param name="User"></param>
@@ -87,18 +105,20 @@ namespace TCT.FitApp.API.Controllers
         }
 
         /// <summary>
-        /// Returns a user if login is successful
+        /// Returns a session key if login is successful
         /// </summary>
         /// <param name="user"></param>
+        /// <param name="logoutOtherDevices"></param>
+        /// <param name="rollback"></param>
         /// <returns></returns>
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(User user)
+        public async Task<IActionResult> Login(User user, bool logoutOtherDevices = false, bool rollback = false)
         {
             try
             {
-                var results = await UserManager.Login(user);
-                if (results)
-                    return Ok(user);
+                var sessionKey = await UserManager.Login(user, logoutOtherDevices, rollback);
+                if (sessionKey != Guid.Empty)
+                    return Ok(sessionKey);
                 else
                     throw new Exception("Username or password is incorrect");
             }

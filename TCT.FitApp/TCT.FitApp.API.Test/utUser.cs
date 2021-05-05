@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Linq;
+using System;
 
 namespace TCT.FitApp.API.Test
 {
@@ -41,6 +42,18 @@ namespace TCT.FitApp.API.Test
             return users;
         }
 
+        private Guid Login(User user, bool logoutOtherDevices = false, bool rollback = true)
+        {
+            var serializedObject = JsonConvert.SerializeObject(user);
+            var content = new StringContent(serializedObject);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+            var response = client.PostAsync($"User/Login?logoutOtherDevices={logoutOtherDevices}&rollback={rollback}", content).Result;
+            var result = JsonConvert.DeserializeObject<Guid>(response.Content.ReadAsStringAsync().Result);
+
+            return result;
+        }
+
         [TestMethod]
         public void LoadTest()
         {
@@ -59,6 +72,24 @@ namespace TCT.FitApp.API.Test
             var id = GetUsers().FirstOrDefault(u => u.Username == "jryan").Id;
 
             response = client.GetAsync($"User/{id}").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            var user = JsonConvert.DeserializeObject<User>(result);
+
+
+            Assert.AreEqual("jryan", user.Username);
+
+        }
+
+        [TestMethod]
+        public void LoadBySessionKeyTest()
+        {
+
+            var sessionKey = Login(new User { Username = "jryan", Password = "password1"});
+            HttpResponseMessage response;
+            string result;
+
+
+            response = client.PostAsync($"User/LoadBySessionKey/{sessionKey}", null).Result;
             result = response.Content.ReadAsStringAsync().Result;
             var user = JsonConvert.DeserializeObject<User>(result);
 
@@ -144,14 +175,7 @@ namespace TCT.FitApp.API.Test
             user.Username = "jryan";
             user.Password = "password1";
 
-            var serializedObject = JsonConvert.SerializeObject(user);
-            var content = new StringContent(serializedObject);
-            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
-            var response = client.PostAsync("User/Login", content).Result;
-            var result = JsonConvert.DeserializeObject<User>(response.Content.ReadAsStringAsync().Result);
-
-            Assert.AreEqual(user.Username, result.Username);
+            Assert.IsTrue(Login(user) != Guid.Empty);
 
         }
 

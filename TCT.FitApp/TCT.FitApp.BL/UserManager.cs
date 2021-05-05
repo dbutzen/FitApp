@@ -33,7 +33,6 @@ namespace TCT.FitApp.BL
                         row.Username = user.Name;
                         row.UniqueKey = Guid.NewGuid();
                         row.Password = ComputeSha256Hash($"{user.Password}{row.UniqueKey.ToString().ToUpper()}");
-
                         row.CalorieGoal = user.CalorieGoal;
                         row.ProteinGoal = user.ProteinGoal;
                         row.DaysInARowSucceeded = user.DaysInARowSucceeded;
@@ -80,6 +79,7 @@ namespace TCT.FitApp.BL
 
                         row.Name = user.Name;
                         row.Username = user.Username;
+                        row.SessionKey = user.SessionKey;
                         row.CalorieGoal = user.CalorieGoal;
                         row.ProteinGoal = user.ProteinGoal;
                         row.DaysInARowSucceeded = user.DaysInARowSucceeded;
@@ -191,6 +191,37 @@ namespace TCT.FitApp.BL
             }
         }
 
+        public async static Task<User> LoadBySessionKey(Guid sessionKey)
+        {
+            try
+            {
+                var user = new User();
+                await Task.Run(() =>
+                {
+                    using (var dc = new FitAppEntities())
+                    {
+                        var row = dc.TblUsers.FirstOrDefault(u => u.SessionKey == sessionKey);
+                        if (row != null)
+                        {
+                            Fill(user, row);
+                        }
+                        else
+                        {
+                            throw new Exception("User could not be found");
+                        }
+
+                    }
+                });
+
+                return user;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async static Task<User> LoadByUsername(string username)
         {
             try
@@ -221,12 +252,12 @@ namespace TCT.FitApp.BL
             }
         }
 
-        // Returns true and fill the user object if login is successful
-        public static async Task<bool> Login(User user)
+        // Returns the user's secured key
+        public static async Task<Guid> Login(User user, bool logoutOtherDevices = false, bool rollback = false)
         {
             try
             {
-                var results = false;
+                var results = Guid.Empty;
                 await Task.Run(() =>
                 {
                     using (var dc = new FitAppEntities())
@@ -239,10 +270,14 @@ namespace TCT.FitApp.BL
                             if (hashed_password == row.Password)
                             {
                                 Fill(user, row);
-
-                                // Set to null the hide the password
-                                user.Password = null;
-                                results = true;
+                                user.SessionKey = row.SessionKey;
+                                if (logoutOtherDevices || user.SessionKey == null)
+                                {
+                                    user.SessionKey = Guid.NewGuid();
+                                    var task = Update(user, rollback);
+                                    task.Wait();
+                                }
+                                results = (Guid)user.SessionKey;
                             }
                         }
                     }

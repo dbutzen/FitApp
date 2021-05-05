@@ -5,6 +5,7 @@
     [Username] VARCHAR(50) NOT NULL UNIQUE,
     [Password] NVARCHAR(64) NOT NULL,
     [UniqueKey] UNIQUEIDENTIFIER NOT NULL,
+    [SessionKey] UNIQUEIDENTIFIER NULL,
     [CalorieGoal] INT NOT NULL, 
     [ProteinGoal] INT NOT NULL, 
     [DaysInARowSucceeded] INT NOT NULL, 

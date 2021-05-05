@@ -17,6 +17,7 @@ namespace TCT.FitApp.PL
         public string Username { get; set; }
         public string Password { get; set; }
         public Guid UniqueKey { get; set; }
+        public Guid? SessionKey { get; set; }
         public int CalorieGoal { get; set; }
         public int ProteinGoal { get; set; }
         public int DaysInARowSucceeded { get; set; }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TCT.FitApp.Mobile.Components;
 using TCT.FitApp.Mobile.Models;
@@ -17,13 +18,25 @@ namespace TCT.FitApp.Mobile.Pages
     {
         public LoginPage()
         {
-            Title = "Account Login";
             InitializeComponent();
         }
 
-
-        private void btnLogin_Clicked(object sender, EventArgs e)
+        private void EnableLoadingScreen()
         {
+            grdLogin.IsEnabled = false;
+            aiLoading.IsRunning = true;
+        }
+
+        private void DisableLoadingScreen()
+        {
+            grdLogin.IsEnabled = true;
+            aiLoading.IsRunning = false;
+        }
+
+
+        private async void btnLogin_Clicked(object sender, EventArgs e)
+        {
+            EnableLoadingScreen();
             try
             {
                 var client = App.Client;
@@ -34,13 +47,14 @@ namespace TCT.FitApp.Mobile.Pages
                 var serializedObject = JsonConvert.SerializeObject(user);
                 var content = new StringContent(serializedObject);
                 content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
-                var response = client.PostAsync("User/Login", content).Result;
-
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                HttpResponseMessage response = null;
+                await Task.Run(()=> { response = client.PostAsync("User/Login", content).Result; });
+                if (response.IsSuccessStatusCode)
                 {
+                    App.ReturnPage = ReturnPage.Home;
                     App.LoggedInUser = JsonConvert.DeserializeObject<User>(response.Content.ReadAsStringAsync().Result);
-                    Navigation.PushModalAsync(new NavigationPage(new HomePage { Title = App.LoggedInUser.Name}));
+                    await Navigation.PopModalAsync();
+
                 }
                 else
                 {
@@ -49,19 +63,17 @@ namespace TCT.FitApp.Mobile.Pages
             }
             catch (Exception ex)
             {
-                grdErrorMessage.IsVisible = true;
-                lblErrorMessage.Text = ex.Message;
+                 await DisplayAlert("Login Failed", ex.Message, "OK");
             }
+            DisableLoadingScreen();
         }
 
-        private void btnClose_Clicked(object sender, EventArgs e)
+        private  void btnRegister_Clicked(object sender, EventArgs e)
         {
-            grdErrorMessage.IsVisible = false;
+            App.ReturnPage = ReturnPage.Register;
+            Navigation.PopModalAsync();
         }
 
-        private void btnRegister_Clicked(object sender, EventArgs e)
-        {
 
-        }
     }
 }
