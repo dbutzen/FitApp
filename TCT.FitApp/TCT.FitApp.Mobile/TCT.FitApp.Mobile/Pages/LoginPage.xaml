@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TCT.FitApp.Mobile.Components"
+             x:Class="TCT.FitApp.Mobile.Pages.LoginPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="grdErrorMessage" Grid.Row="0" IsVisible="false" BackgroundColor="#F44336">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblErrorMessage" Grid.Column="0" Grid.ColumnSpan="1" TextColor="White" Margin="5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                <ImageButton
+                    x:Name="btnClose"
+                    Grid.Column="1"
+                    Padding="10"
+                    VerticalOptions="Center"
+                    Clicked="btnClose_Clicked">
+                    <ImageButton.Source>
+                        <FontImageSource
+                            Color="#F44336"
+                            Size="16"
+                            FontFamily="IconFonts"
+                            Glyph="{x:Static local:IconFont.Close}"/>
+                    </ImageButton.Source>
+                </ImageButton>
+            </Grid>
+            <Grid Grid.Row="1">
+                <StackLayout  VerticalOptions="Center" WidthRequest="300" HorizontalOptions="Center">
+                    <Image>
+                        <Image.Source>
+                            <FontImageSource
+                        Color="#2296F3"
+                        Size="88"
+                        FontFamily="IconFonts"
+                        Glyph="{x:Static local:IconFont.Login}"/>
+                        </Image.Source>
+                    </Image>
+                    <Entry x:Name="txtUserName" Placeholder="Username" Margin="10"/>
+                    <Entry x:Name="txtPassword" IsPassword="True" Placeholder="Password" Margin="10"/>
+                    <Button x:Name="btnLogin" Text="Login" TextColor="White" Background="#2296F3" Margin="10" Clicked="btnLogin_Clicked"/>
+                    <Grid HorizontalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="Don't have an account?"
+                               VerticalOptions="Center"/>
+                        <Button BackgroundColor="Transparent"
+                                Grid.Column="1"
+                                VerticalOptions="Center"
+                                FontAttributes="Bold" TextColor="#2296F3" Text="Register"/>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

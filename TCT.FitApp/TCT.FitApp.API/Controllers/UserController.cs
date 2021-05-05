@@ -96,8 +96,11 @@ namespace TCT.FitApp.API.Controllers
         {
             try
             {
-                await UserManager.Login(user);
-                return Ok(user);
+                var results = await UserManager.Login(user);
+                if (results)
+                    return Ok(user);
+                else
+                    throw new Exception("Username or password is incorrect");
             }
             catch (Exception ex)
             {
