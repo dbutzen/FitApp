@@ -12,7 +12,7 @@ namespace TCT.FitApp.Mobile
     public partial class App : Application
     {
         public static ReturnPage ReturnPage;
-        public static Guid SessionKey = Guid.Parse("0264DE04-88C2-4642-A37E-15B22494AE45");
+        public static Guid SessionKey;// = Guid.Parse("D98D63B4-84AD-42EF-8F68-1665A4D2F29C");
         public static User LoggedInUser;
         public App()
         {
@@ -32,15 +32,22 @@ namespace TCT.FitApp.Mobile
 
         }
 
-        private void LoadUser()
+        public static void LoadUser()
         {
-            HttpResponseMessage response;
-            string result;
+            try
+            {
+                if (SessionKey != Guid.Empty)
+                {
+                    HttpResponseMessage response;
+                    string result;
 
 
-            response = App.Client.PostAsync($"User/LoadBySessionKey/{SessionKey}", null).Result;
-            result = response.Content.ReadAsStringAsync().Result;
-            LoggedInUser = JsonConvert.DeserializeObject<User>(result);
+                    response = App.Client.PostAsync($"User/LoadBySessionKey/{SessionKey}", null).Result;
+                    result = response.Content.ReadAsStringAsync().Result;
+                    LoggedInUser = JsonConvert.DeserializeObject<User>(result);
+                }
+            }
+            catch { }
         }
 
         protected override void OnStart()

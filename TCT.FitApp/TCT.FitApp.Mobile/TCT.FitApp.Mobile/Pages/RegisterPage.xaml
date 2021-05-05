@@ -21,6 +21,7 @@
                         Glyph="{x:Static local:IconFont.AccountCircle}"/>
                         </Image.Source>
                     </Image>
+                    <Entry x:Name="txtDisplayName" Placeholder="Display Name" Margin="10"/>
                     <Entry x:Name="txtUserName" Placeholder="Username" Margin="10"/>
                     <Entry x:Name="txtPassword" IsPassword="True" Placeholder="Password" Margin="10"/>
                     <Entry x:Name="txtConfirmPassword" IsPassword="True" Placeholder="Confirm Password" Margin="10"/>

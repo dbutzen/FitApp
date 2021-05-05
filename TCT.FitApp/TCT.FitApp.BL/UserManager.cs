@@ -30,7 +30,7 @@ namespace TCT.FitApp.BL
 
                         row.Id = Guid.NewGuid();
                         row.Name = user.Name;
-                        row.Username = user.Name;
+                        row.Username = user.Username;
                         row.UniqueKey = Guid.NewGuid();
                         row.Password = ComputeSha256Hash($"{user.Password}{row.UniqueKey.ToString().ToUpper()}");
                         row.CalorieGoal = user.CalorieGoal;

@@ -19,5 +19,7 @@ namespace TCT.FitApp.Mobile.Models
         public int WeightPounds { get; set; }
         public Guid UserAccessLevelId { get; set; }
         public string Sex { get; set; }
+
+        public string ConfirmPassword { get; set; }
     }
 }

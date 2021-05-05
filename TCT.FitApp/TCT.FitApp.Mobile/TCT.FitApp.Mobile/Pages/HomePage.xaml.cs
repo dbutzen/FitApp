@@ -49,8 +49,6 @@ namespace TCT.FitApp.Mobile.Pages
                 Authenticate();
                 return;
             }
-
-
             Title = App.LoggedInUser.Name;
 
         }
