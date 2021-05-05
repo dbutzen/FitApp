@@ -332,6 +332,7 @@ namespace TCT.FitApp.BL
             user.WeightPounds = row.WeightPounds;
             user.UserAccessLevelId = row.UserAccessLevelId;
             user.Sex = row.Sex;
+            user.UserAccessLevelName = row.UserAccessLevel.Name;
         }
 
 
