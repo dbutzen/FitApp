@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCT.FitApp.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Vehicle List" Height="600" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Blue" Offset="1"/>
+                <GradientStop Color="LightBlue" Offset="0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-    </Grid>
+        <DataGrid x:Name="grdMain" HorizontalAlignment="Left" Height="340" Margin="10,130,0,0" VerticalAlignment="Top" Width="780"/>
+        <Button x:Name="btnItems" Content="Items" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="10,20,0,0" Height="90" FontSize="20" Click="btnItems_Click"/>
+        <Button x:Name="btnItemTypes" Content="Item Types" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="210,20,0,0" FontSize="20" Height="90" Click="btnItemTypes_Click"/>
+        <Button x:Name="btnActivities" Content="Activities" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="410,20,0,0" FontSize="20" Height="90" Click="btnActivities_Click"/>
+        <Button x:Name="btnUsers" Content="Users" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="610,20,0,0" Height="90" FontSize="20" Click="btnUsers_Click"/>
+        <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="540,480,0,0" Height="90" FontSize="20" Click="btnEdit_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="275,480,0,0" Height="90" FontSize="20" Click="btnDelete_Click"/>
+        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Margin="10,480,0,0" FontSize="20" Height="90" Click="btnAdd_Click"/>
+        </Grid>
 </Window>
