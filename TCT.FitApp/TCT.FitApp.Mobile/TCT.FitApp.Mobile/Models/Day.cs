@@ -15,9 +15,9 @@ namespace TCT.FitApp.Mobile.Models
 
 
         // For the reporting
-        public int CaloriesConsumed { get; set; }
-        public double CaloriesBurned { get; set; }
-        public int ProteinConsumed { get; set; }
+        public int CaloriesConsumed { get; set; } = 0;
+        public double CaloriesBurned { get; set; } = 0;
+        public int ProteinConsumed { get; set; } = 0;
 
     }
 }

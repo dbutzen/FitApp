@@ -29,8 +29,20 @@ namespace TCT.FitApp.API.Controllers
             }
         }
 
-        // returns a day by ID....details
-        // GET api/<DayController>/5
+
+        [HttpGet("{userId:Guid}/{date:DateTime}")]
+        public async Task<ActionResult<Day>> Get(Guid userId, DateTime date)
+        {
+            try
+            {
+                return Ok(await DayManager.Load(userId, date));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Day>> Get(Guid id)
         {

@@ -82,6 +82,22 @@ namespace TCT.FitApp.API.Test
         }
 
         [TestMethod]
+        public void LoadByUserIdAndDateTest()
+        {
+            HttpResponseMessage response;
+            string result;
+
+            var userId = GetUsers().FirstOrDefault(u => u.Username == "jryan").Id;
+
+            response = client.GetAsync($"Day/{userId}/2021-03-11").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            var day = JsonConvert.DeserializeObject<Day>(result);
+
+
+            Assert.AreEqual(DateTime.Parse("2021-03-11"), day.Date);
+        }
+
+        [TestMethod]
         public void InsertTest()
         {
             var userId = GetUsers().FirstOrDefault(u => u.Username == "cvanhefty").Id;

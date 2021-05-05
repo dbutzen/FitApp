@@ -1,17 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TCT.FitApp.Mobile.Components"
+             xmlns:controls="clr-namespace:Xamarin.Forms.Controls;assembly=CircularProgressBar" xmlns:plugin="clr-namespace:Xam.Plugin;assembly=Xam.Plugin"
              x:Class="TCT.FitApp.Mobile.Pages.HomePage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="lblWelcome"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="btnLogout" Text="Logout"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand"
-                    Clicked="btnLogout_Clicked"
-                    />
-        </StackLayout>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0">
+                    <Label Text="Hello," FontAttributes="Bold"/>
+                    <Label x:Name="txtDisplayName" Text="Jason Ryan" FontSize="20" FontAttributes="Bold"/>
+                </StackLayout>
+                <Button
+                        Grid.Column="1"
+                        x:Name="btnLogout"
+                        Text="Logout"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="btnLogout_Clicked"/>
+            </Grid>
+            <Grid Grid.Row="1" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!--Calories Card-->
+                <Grid Grid.Column="0" Margin="5" BackgroundColor="White">
+                    <Grid Margin="10">
+                        <StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <StackLayout>
+                                        <Label Text="Calorie Goal" FontSize="15" FontAttributes="Bold"/>
+                                        <Label x:Name="lblCalorieGoal" Margin="0,-5,0,0" Text="&lt; 2000" FontSize="15" FontAttributes="Bold" />
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label x:Name="lblCalorieConsumed" Margin="0,-5,0,0" Text="+ 1000" FontSize="12"/>
+                                            <Label x:Name="lblCalorieBurned" Margin="0,-5,0,0" Text="- 500" FontSize="12"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Label x:Name="lblCalorieToBurn" VerticalOptions="Center" FontAttributes="Bold"  HorizontalOptions="Center"/>
+                                    <controls:CircularProgressBar x:Name="pbCaloriesRate" HeightRequest="60" WidthRequest="60"/>
+                                </Grid>
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+                <!--Protein Card-->
+                <Grid Grid.Column="1" Margin="5" BackgroundColor="White">
+                    <Grid Margin="10">
+                        <StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <StackLayout>
+                                        <Label Text="Protein Goal" FontSize="15" FontAttributes="Bold"/>
+                                        <Label x:Name="lblProtein" Text="1500/2000"/>
+                                    </StackLayout>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Label x:Name="lblProteinRate" FontAttributes="Bold"  VerticalOptions="Center" HorizontalOptions="Center"/>
+                                    <controls:CircularProgressBar x:Name="pbProteinRate" HeightRequest="60" WidthRequest="60"  Progress="80"/>
+                                </Grid>
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
+    

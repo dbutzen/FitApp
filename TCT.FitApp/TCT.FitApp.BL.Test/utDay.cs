@@ -31,6 +31,19 @@ namespace TCT.FitApp.BL.Test
         }
 
         [TestMethod]
+        public void LoadByUserIdAndDate()
+        {
+            var userTask = UserManager.LoadByUsername("jryan");
+            userTask.Wait();
+            var userId = userTask.Result.Id;
+
+            var task = DayManager.Load(userId, DateTime.Parse("2021-03-11"));
+            task.Wait();
+            var results = task.Result;
+            Assert.AreNotEqual(Guid.Empty, results.Id);
+        }
+
+        [TestMethod]
         public void UpdateTest()
         {
             var taskd = DayManager.Load();

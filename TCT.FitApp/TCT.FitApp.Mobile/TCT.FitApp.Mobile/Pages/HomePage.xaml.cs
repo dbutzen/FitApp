@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using TCT.FitApp.Mobile.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,8 +16,11 @@ namespace TCT.FitApp.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+        User user;
+        Day day;
         public HomePage()
         {
+            Title = "Dashboard";
             InitializeComponent();
             Authenticate();
         }
@@ -49,8 +55,59 @@ namespace TCT.FitApp.Mobile.Pages
                 Authenticate();
                 return;
             }
-            Title = App.LoggedInUser.Name;
-            lblWelcome.Text = $"Welcome {App.LoggedInUser.Name}";
+            Load();
+            //Title = App.LoggedInUser.Name;
+            //lblWelcome.Text = $"Welcome {App.LoggedInUser.Name}";
+        }
+        private void Load()
+        {
+            user = App.LoggedInUser;
+
+            LoadUserData();
+            Rebind();
+        }
+
+        private void Rebind()
+        {
+            txtDisplayName.Text = user.Name;
+            if (day == null) { day = new Day(); }
+            lblCalorieGoal.Text = $"<\t{user.CalorieGoal} cal";
+            //var calorieRate = (day.CaloriesBurned * 100) / user.CalorieGoal;
+            lblCalorieConsumed.Text = $"+\t{day.CaloriesConsumed} cal";
+            lblCalorieBurned.Text = $"-\t{day.CaloriesBurned} cal";
+
+            double toBurn = 0;
+            var cal = day.CaloriesConsumed - day.CaloriesBurned;
+            if (cal > user.CalorieGoal)
+                toBurn = cal - user.CalorieGoal;
+            lblCalorieToBurn.Text = $"{toBurn}";
+            lblProtein.Text = $"{day.ProteinConsumed} g/{user.ProteinGoal} g";
+            var proteinRate = (day.ProteinConsumed * 100) / user.ProteinGoal;
+            lblProteinRate.Text = $"{proteinRate}%";
+            pbProteinRate.Progress = proteinRate;
+        }
+        private void LoadUserData()
+        {
+            try
+            {
+                
+                var client = App.Client;
+                HttpResponseMessage response;
+                string result;
+                response = client.GetAsync($"Day/GenerateReport?userId={user.Id}&startDate={DateTime.Today}&endDate={DateTime.Today}").Result;
+                result = response.Content.ReadAsStringAsync().Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var days = JsonConvert.DeserializeObject<List<Day>>(result);
+                    day = days.FirstOrDefault();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                DisplayAlert("Error", ex.Message, "OK");
+            }
         }
 
         private void btnLogout_Clicked(object sender, EventArgs e)

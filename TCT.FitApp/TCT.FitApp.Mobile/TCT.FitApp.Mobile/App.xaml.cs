@@ -53,7 +53,6 @@ namespace TCT.FitApp.Mobile
         protected override void OnStart()
         {
             
-           
 
         }
 
