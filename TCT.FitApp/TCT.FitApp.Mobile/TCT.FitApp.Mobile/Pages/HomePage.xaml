@@ -4,9 +4,14 @@
              x:Class="TCT.FitApp.Mobile.Pages.HomePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label x:Name="lblWelcome"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button x:Name="btnLogout" Text="Logout"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                    Clicked="btnLogout_Clicked"
+                    />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -36,11 +36,11 @@ namespace TCT.FitApp.Mobile
         {
             try
             {
+                SessionKey = (Guid)Application.Current.Properties["fitappskey"];
                 if (SessionKey != Guid.Empty)
                 {
                     HttpResponseMessage response;
                     string result;
-
 
                     response = App.Client.PostAsync($"User/LoadBySessionKey/{SessionKey}", null).Result;
                     result = response.Content.ReadAsStringAsync().Result;
@@ -52,6 +52,9 @@ namespace TCT.FitApp.Mobile
 
         protected override void OnStart()
         {
+            
+           
+
         }
 
         protected override void OnSleep()

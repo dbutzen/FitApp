@@ -51,8 +51,10 @@ namespace TCT.FitApp.Mobile.Pages
                 await Task.Run(()=> { response = client.PostAsync("User/Login", content).Result; });
                 if (response.IsSuccessStatusCode)
                 {
+                    
                     App.SessionKey = JsonConvert.DeserializeObject<Guid>(response.Content.ReadAsStringAsync().Result);
-                    // Store the session key in the device's memory
+                    Application.Current.Properties["fitappskey"] = App.SessionKey;
+                    await Application.Current.SavePropertiesAsync();
                     App.LoadUser();
                     App.ReturnPage = ReturnPage.Home;
                     await Navigation.PopModalAsync();

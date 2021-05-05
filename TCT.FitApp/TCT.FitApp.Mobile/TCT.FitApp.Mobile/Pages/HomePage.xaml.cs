@@ -50,7 +50,16 @@ namespace TCT.FitApp.Mobile.Pages
                 return;
             }
             Title = App.LoggedInUser.Name;
+            lblWelcome.Text = $"Welcome {App.LoggedInUser.Name}";
+        }
 
+        private void btnLogout_Clicked(object sender, EventArgs e)
+        {
+            App.LoggedInUser = null;
+            Application.Current.Properties["fitappskey"] = null;
+            Application.Current.SavePropertiesAsync();
+            App.ReturnPage = ReturnPage.Login;
+            Authenticate();
         }
     }
 }
