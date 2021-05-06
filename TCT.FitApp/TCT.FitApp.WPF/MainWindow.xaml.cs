@@ -68,15 +68,7 @@ namespace TCT.FitApp.WPF
 
         private void btnActivities_Click(object sender, RoutedEventArgs e)
         {
-            grdMain.ItemsSource = null;
-            grdMain.ItemsSource = activities;
-
-            grdMain.Columns[0].Visibility = Visibility.Hidden;
-
-            grdMain.Columns[1].Header = "Activity Name";
-            grdMain.Columns[2].Header = "Easy Cal/Hr";
-            grdMain.Columns[3].Header = "Medium Cal/Hr";
-            grdMain.Columns[4].Header = "Hard Cal/Hr";
+            ActivityRebind();
         }
 
         private void btnUsers_Click(object sender, RoutedEventArgs e)
@@ -103,17 +95,49 @@ namespace TCT.FitApp.WPF
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-
+            if (grdMain.ItemsSource == activities)
+            {
+                var activity = activities[grdMain.SelectedIndex];
+                new MaintainActivities(activity).ShowDialog();
+                ActivityRebind();
+            }
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private void ActivityRebind()
         {
+            grdMain.ItemsSource = null;
+            grdMain.ItemsSource = activities;
 
+            grdMain.Columns[0].Visibility = Visibility.Hidden;
+
+            grdMain.Columns[1].Header = "Activity Name";
+            grdMain.Columns[2].Header = "Easy Cal/Hr";
+            grdMain.Columns[3].Header = "Medium Cal/Hr";
+            grdMain.Columns[4].Header = "Hard Cal/Hr";
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            if (grdMain.ItemsSource == activities)
+            {
+                var activity = activities[grdMain.SelectedIndex];
+                var result = MessageBox.Show("Are you sure you want to delete ", "Confirm Delete", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                    await ActivityManager.Delete(activity.Id);
+                activities.Remove(activity);
+                ActivityRebind();
+            }
+        }
 
+        private async void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (grdMain.ItemsSource == activities)
+            {
+                new MaintainActivities().ShowDialog();
+                activities = await ActivityManager.Load();
+                ActivityRebind();
+            }
+                
         }
     }
 }

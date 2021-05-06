@@ -14,7 +14,7 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <DataGrid x:Name="grdMain" HorizontalAlignment="Left" Height="340" Margin="10,130,0,0" VerticalAlignment="Top" Width="780"/>
+        <DataGrid x:Name="grdMain" HorizontalAlignment="Left" Height="340" Margin="10,130,0,0" VerticalAlignment="Top" Width="780" />
         <Button x:Name="btnItems" Content="Items" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="10,20,0,0" Height="90" FontSize="20" Click="btnItems_Click"/>
         <Button x:Name="btnItemTypes" Content="Item Types" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="210,20,0,0" FontSize="20" Height="90" Click="btnItemTypes_Click"/>
         <Button x:Name="btnActivities" Content="Activities" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="410,20,0,0" FontSize="20" Height="90" Click="btnActivities_Click"/>
