@@ -94,10 +94,11 @@ namespace TCT.FitApp.WPF
             grdMain.Columns[9].Visibility = Visibility.Hidden;
             grdMain.Columns[10].Visibility = Visibility.Hidden;
             grdMain.Columns[11].Visibility = Visibility.Hidden;
+            grdMain.Columns[12].Visibility = Visibility.Hidden;
 
             grdMain.Columns[1].Header = "Name";
             grdMain.Columns[2].Header = "Username";
-            grdMain.Columns[12].Header = "Access Level";
+            grdMain.Columns[13].Header = "Access Level";
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCT.FitApp.WPF"
         mc:Ignorable="d"
-        Title="MaintainActivities" Height="450" Width="800">
+        Title="MaintainActivities" Height="400" Width="400">
     <Grid>
-        
+        <Button x:Name="btnSubmid" Content="Submit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="180" Margin="10,20,0,0" Height="90" FontSize="20"/>
     </Grid>
 </Window>
