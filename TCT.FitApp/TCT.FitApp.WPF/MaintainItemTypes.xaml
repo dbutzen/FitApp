@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCT.FitApp.WPF"
         mc:Ignorable="d"
-        Title="MaintainItemTypes" Height="450" Width="800">
+        Title="MaintainItemTypes" Height="350" Width="400">
     <Grid>
-        
+        <Label Content="Item Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0" FontSize="20" />
+        <TextBox x:Name="txtItemType" Text="Filler" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="250" Margin="0,53,20,0" FontSize="20" />
+        <Button x:Name="btnSubmit" Content="Submit" Height="50" Width="150" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="125,250,0,0" />
     </Grid>
 </Window>
