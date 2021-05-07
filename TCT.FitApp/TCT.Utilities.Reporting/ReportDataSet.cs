@@ -1,0 +1,3 @@
+﻿namespace TCT.Utilities.Reporting
+{
+}

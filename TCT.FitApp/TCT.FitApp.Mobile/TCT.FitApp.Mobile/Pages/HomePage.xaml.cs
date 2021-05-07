@@ -70,6 +70,7 @@ namespace TCT.FitApp.Mobile.Pages
         private void Rebind()
         {
             txtDisplayName.Text = user.Name;
+            txtDate.Text = $"Today, {DateTime.Today.ToString("MMM d")}";
             if (day == null) { day = new Day(); }
             lblCalorieGoal.Text = $"<\t{user.CalorieGoal} cal";
             //var calorieRate = (day.CaloriesBurned * 100) / user.CalorieGoal;

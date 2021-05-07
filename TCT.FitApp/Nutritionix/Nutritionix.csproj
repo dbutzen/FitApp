@@ -10,4 +10,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TCT.Utilities.Reporting\TCT.Utilities.Reporting.csproj" />
+  </ItemGroup>
+
 </Project>

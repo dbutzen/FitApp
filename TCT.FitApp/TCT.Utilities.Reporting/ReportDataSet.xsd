@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReportDataSet" targetNamespace="http://tempuri.org/ReportDataSet.xsd" xmlns:mstns="http://tempuri.org/ReportDataSet.xsd" xmlns="http://tempuri.org/ReportDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReportDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportDataSet" msprop:Generator_UserDSName="ReportDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="UserData" msprop:Generator_TableClassName="UserDataDataTable" msprop:Generator_TableVarName="tableUserData" msprop:Generator_TablePropName="UserData" msprop:Generator_RowDeletingName="UserDataRowDeleting" msprop:Generator_RowChangingName="UserDataRowChanging" msprop:Generator_RowEvHandlerName="UserDataRowChangeEventHandler" msprop:Generator_RowDeletedName="UserDataRowDeleted" msprop:Generator_UserTableName="UserData" msprop:Generator_RowChangedName="UserDataRowChanged" msprop:Generator_RowEvArgName="UserDataRowChangeEvent" msprop:Generator_RowClassName="UserDataRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_UserColumnName="Date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Activities" msprop:Generator_ColumnVarNameInTable="columnActivities" msprop:Generator_ColumnPropNameInRow="Activities" msprop:Generator_ColumnPropNameInTable="ActivitiesColumn" msprop:Generator_UserColumnName="Activities" type="xs:string" minOccurs="0" />
+              <xs:element name="CaloriesConsumed" msprop:Generator_ColumnVarNameInTable="columnCaloriesConsumed" msprop:Generator_ColumnPropNameInRow="CaloriesConsumed" msprop:Generator_ColumnPropNameInTable="CaloriesConsumedColumn" msprop:Generator_UserColumnName="CaloriesConsumed" type="xs:int" minOccurs="0" />
+              <xs:element name="CaloriesBurned" msprop:Generator_ColumnVarNameInTable="columnCaloriesBurned" msprop:Generator_ColumnPropNameInRow="CaloriesBurned" msprop:Generator_ColumnPropNameInTable="CaloriesBurnedColumn" msprop:Generator_UserColumnName="CaloriesBurned" type="xs:int" minOccurs="0" />
+              <xs:element name="ProteinConsumed" msprop:Generator_ColumnVarNameInTable="columnProteinConsumed" msprop:Generator_ColumnPropNameInRow="ProteinConsumed" msprop:Generator_ColumnPropNameInTable="ProteinConsumedColumn" msprop:Generator_UserColumnName="ProteinConsumed" type="xs:int" minOccurs="0" />
+              <xs:element name="Succeeded" msprop:Generator_ColumnVarNameInTable="columnSucceeded" msprop:Generator_ColumnPropNameInRow="Succeeded" msprop:Generator_ColumnPropNameInTable="SucceededColumn" msprop:Generator_UserColumnName="Succeeded" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
