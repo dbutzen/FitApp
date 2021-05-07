@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using TCT.FitApp.BL;
 using TCT.FitApp.BL.Models;
 
+
 namespace TCT.FitApp.WPF
 {
     /// <summary>
@@ -41,7 +42,6 @@ namespace TCT.FitApp.WPF
             activities = (List<Activity>)await ActivityManager.Load();
             users = (List<User>)await UserManager.Load();
             userAccessLevels = (List<UserAccessLevel>)await UserAccessLevelManager.Load();
-
         }
 
         private void btnItems_Click(object sender, RoutedEventArgs e)
@@ -73,6 +73,11 @@ namespace TCT.FitApp.WPF
 
         private void btnUsers_Click(object sender, RoutedEventArgs e)
         {
+            UserRebind();
+        }
+
+        private void UserRebind()
+        {
             grdMain.ItemsSource = null;
             grdMain.ItemsSource = users;
 
@@ -95,11 +100,22 @@ namespace TCT.FitApp.WPF
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (grdMain.ItemsSource == activities)
+            if (grdMain.SelectedIndex > -1)
             {
-                var activity = activities[grdMain.SelectedIndex];
-                new MaintainActivities(activity).ShowDialog();
-                ActivityRebind();
+                if (grdMain.ItemsSource == activities)
+                {
+                    var activity = activities[grdMain.SelectedIndex];
+                    new MaintainActivities(activity).ShowDialog();
+                    ActivityRebind();
+                }
+                else if (grdMain.ItemsSource == users)
+                {
+                    var user = users[grdMain.SelectedIndex];
+                    var window = new MaintainUsers(user);
+                    window.Owner = this;
+                    window.ShowDialog();
+                    UserRebind();
+                }
             }
         }
 

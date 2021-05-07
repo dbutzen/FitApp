@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TCT.FitApp.BL.Models\TCT.FitApp.BL.Models.csproj" />
     <ProjectReference Include="..\TCT.FitApp.BL\TCT.FitApp.BL.csproj" />
+    <ProjectReference Include="..\TCT.Utilities.Reporting\TCT.Utilities.Reporting.csproj" />
   </ItemGroup>
 
 </Project>

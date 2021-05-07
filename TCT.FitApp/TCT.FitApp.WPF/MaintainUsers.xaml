@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCT.FitApp.WPF"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
         Title="MaintainUsers" Height="350" Width="400">
     <Grid>
         <Label Content="Username:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0" FontSize="20" />
@@ -13,6 +14,6 @@
         <Label x:Name="lblFullName" Content="Filler" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,100,50,0" FontSize="20" />
         <Label Content="Access Level:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,150,0,0" FontSize="20" />
         <ComboBox x:Name="cboAccessLevels" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" Margin="0, 150, 20, 0" FontSize="20" />
-        <Button x:Name="btnSubmit" Content="Submit" Height="50" Width="150" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="125,250,0,0" />
+        <Button x:Name="btnSubmit" Content="Submit" Height="50" Width="150" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="125,250,0,0" Click="btnSubmit_Click" />
     </Grid>
 </Window>
