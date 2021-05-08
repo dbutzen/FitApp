@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TCT.FitApp.BL;
 using TCT.FitApp.BL.Models;
 using TCT.Utilities.Reporting;
 using TCT.Utilities.Reporting.Models;
@@ -23,10 +24,19 @@ namespace TCT.FitApp.WPF
     public partial class MaintainUsers : Window
     {
         User user;
+        List<UserAccessLevel> userAccessLevels;
         public MaintainUsers(User user)
         {
             this.user = user;
             InitializeComponent();
+            Reload();
+        }
+
+        private async void Reload()
+        {
+            cboAccessLevels.ItemsSource = null;
+            userAccessLevels = (List<UserAccessLevel>)await UserAccessLevelManager.Load();
+            cboAccessLevels.ItemsSource = userAccessLevels;
         }
 
         private void CreateReport()
@@ -45,6 +55,13 @@ namespace TCT.FitApp.WPF
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            Task.Run(async () =>
+            {
+
+                UserAccessLevel userAccessLevel = userAccessLevels[cboAccessLevels.SelectedIndex];
+                user.UserAccessLevelId = userAccessLevel.Id;
+                int results = await UserManager.Update(user);
+            });
         }
     }
 }
