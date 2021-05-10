@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,6 +15,12 @@ namespace TCT.FitApp.API.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly ILogger<UserController> _logger;
+        public UserController(ILogger<UserController> logger)
+        {
+            _logger = logger;
+        }
+
         /// <summary>
         /// Return a list of users
         /// </summary>
@@ -124,6 +131,7 @@ namespace TCT.FitApp.API.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogWarning(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
