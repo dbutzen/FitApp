@@ -61,7 +61,7 @@ namespace TCT.FitApp.API.Test
         {
             List<Item> items = GetItems();
 
-            Assert.AreEqual(4, items.Count);
+            Assert.AreEqual(12, items.Count);
 
         }
 

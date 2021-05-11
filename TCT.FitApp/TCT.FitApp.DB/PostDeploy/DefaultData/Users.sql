@@ -34,6 +34,6 @@
 
 	INSERT INTO dbo.tblUser(Id, Name, Username, Password, UniqueKey, CalorieGoal, ProteinGoal, DaysInARowSucceeded, HeightInches, WeightPounds, UserAccessLevelId, Sex)
 	VALUES
-	(NEWID(), 'Chris Van Hefty', 'cvanhefty', @HashedPassword, @UniqueKey, 2200, 81, 11, 77, 209, @UserAccessLevelId, 'Male')
+	(NEWID(), 'Chris Van Hefty', 'cvanhefty', @HashedPassword, @UniqueKey, 2200, 60, 11, 77, 209, @UserAccessLevelId, 'Male')
 
 END

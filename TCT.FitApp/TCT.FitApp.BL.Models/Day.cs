@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 namespace TCT.FitApp.BL.Models
 {
     public class Day
@@ -12,6 +12,10 @@ namespace TCT.FitApp.BL.Models
         public List<Activity> Activities { get; set; }
         public List<Item> Items { get; set; }
         public bool Succeeded { get; set; }
+
+        //public int CaloriesConsumed { get { return Items.Sum(i => i.Servings * i.Calories); } }
+        //public double CaloriesBurned { get { return Activities.Sum(i => i.CaloriesBurned); } }
+        //public int ProteinConsumed { get { return Items.Sum(i => i.Servings * i.Protein); } }
 
 
         // For the reporting

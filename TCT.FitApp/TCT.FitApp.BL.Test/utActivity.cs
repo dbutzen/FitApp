@@ -19,7 +19,7 @@ namespace TCT.FitApp.BL.Test
             var task = ActivityManager.Load();
             task.Wait();
             var results = task.Result;
-            Assert.AreEqual(3, results.Count);
+            Assert.AreEqual(4, results.Count);
         }
 
         [TestMethod]

@@ -62,7 +62,7 @@ namespace TCT.FitApp.API.Test
         {
             List<Day> days = GetDays();
 
-            Assert.AreEqual(6, days.Count);
+            Assert.AreEqual(10, days.Count);
         }
 
         [TestMethod]

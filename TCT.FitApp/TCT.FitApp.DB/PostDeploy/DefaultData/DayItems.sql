@@ -49,4 +49,48 @@
 	INSERT INTO dbo.tblDayItem(Id, DayId, Itemid, Servings)
 	VALUES
 	(NEWID(), @DayId, @ItemId, 1)
+
+
+
+	-- Jason
+
+	SELECT @UsersId = Id from tblUser where Username = 'jryan'
+	SELECT @DayId = Id FROM tblDay WHERE Date = '2021-05-10'
+	SELECT @ItemId = Id FROM tblItem WHERE Name = 'Egg'
+
+	INSERT INTO dbo.tblDayItem(Id, DayId, Itemid, Servings)
+	VALUES
+	(NEWID(), @DayId, @ItemId, 3)
+
+	SELECT @ItemId = Id FROM tblItem WHERE Name = 'Shrimp'
+
+	INSERT INTO dbo.tblDayItem(Id, DayId, Itemid, Servings)
+	VALUES
+	(NEWID(), @DayId, @ItemId, 3)
+
+	SELECT @ItemId = Id FROM tblItem WHERE Name = 'Oat'
+
+	INSERT INTO dbo.tblDayItem(Id, DayId, Itemid, Servings)
+	VALUES
+	(NEWID(), @DayId, @ItemId, 1)
+
+	SELECT @ItemId = Id FROM tblItem WHERE Name = 'Peanut'
+
+	INSERT INTO dbo.tblDayItem(Id, DayId, Itemid, Servings)
+	VALUES
+	(NEWID(), @DayId, @ItemId, 1)
+
+	SELECT @ItemId = Id FROM tblItem WHERE Name = 'Coconut Water'
+
+	INSERT INTO dbo.tblDayItem(Id, DayId, Itemid, Servings)
+	VALUES
+	(NEWID(), @DayId, @ItemId, 4)
+
+	SELECT @ItemId = Id FROM tblItem WHERE Name = 'Cranberry Juice'
+
+	INSERT INTO dbo.tblDayItem(Id, DayId, Itemid, Servings)
+	VALUES
+	(NEWID(), @DayId, @ItemId, 2)
+
+	--End
 END

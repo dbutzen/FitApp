@@ -47,7 +47,7 @@ namespace TCT.FitApp.API.Test
         {
             List<Activity> activities = GetActivities();
 
-            Assert.AreEqual(3, activities.Count);
+            Assert.AreEqual(4, activities.Count);
 
         }
 
