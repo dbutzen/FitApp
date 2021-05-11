@@ -106,7 +106,7 @@ namespace TCT.FitApp.Mobile.Pages
                 result = response.Content.ReadAsStringAsync().Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    //day = JsonConvert.DeserializeObject<Day>(result);
+                    day = JsonConvert.DeserializeObject<Day>(result);
                 }
 
             }

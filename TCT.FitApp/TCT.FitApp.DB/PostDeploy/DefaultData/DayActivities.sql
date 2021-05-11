@@ -40,15 +40,14 @@
 	VALUES
 	(NEWID(), @DateId, @ActivityId, 30, 2)
 
-	-- 05-10-2021
-	SELECT @DateId = Id from tblDay where  Date = '2021-05-10'
+
+	SELECT @DateId = Id from tblDay where  Date = '2021-05-11'
 	SELECT @ActivityId = Id from tblActivity where  Name = 'Cycling'
 	
 	INSERT INTO dbo.tblDayActivity(Id, DayId, ActivityId, Duration, DifficultyLevel)
 	VALUES
 	(NEWID(), @DateId, @ActivityId, 45, 1)
 
-		SELECT @DateId = Id from tblDay where  Date = '2021-05-10'
 	SELECT @ActivityId = Id from tblActivity where  Name = 'Walking'
 	
 	INSERT INTO dbo.tblDayActivity(Id, DayId, ActivityId, Duration, DifficultyLevel)
