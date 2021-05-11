@@ -119,5 +119,12 @@ namespace TCT.FitApp.Mobile.Pages
             App.ReturnPage = ReturnPage.Login;
             Authenticate();
         }
+
+        private async void btnProfile_Clicked(object sender, EventArgs e)
+        {
+            var profilePage = new ProfilePage(user);
+            //App.ReturnPage = ReturnPage.Profile;
+            await Navigation.PushModalAsync(profilePage);
+        }
     }
 }

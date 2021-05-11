@@ -24,13 +24,21 @@
                     <Label x:Name="txtDisplayName"  FontSize="20" FontAttributes="Bold"/>
                     <Label x:Name="txtDate" Text="Today, May 6th"  FontSize="15" FontAttributes="Bold"/>
                 </StackLayout>
-                <Button
-                        Grid.Column="1"
+                <StackLayout Grid.Column="1">
+                    <Button
                         x:Name="btnLogout"
                         Text="Logout"
                         VerticalOptions="CenterAndExpand"
                         HorizontalOptions="CenterAndExpand"
                         Clicked="btnLogout_Clicked"/>
+                    <Button
+                        x:Name="btnProfile"
+                        Text="Profile"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="btnProfile_Clicked"/>
+                </StackLayout>
+
             </Grid>
             <Grid Grid.Row="1" Margin="10">
                 <Grid.ColumnDefinitions>

@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 
 namespace TCT.FitApp.Mobile
 {
-    public enum ReturnPage {Login, Register, Home}
+    public enum ReturnPage {Login, Register, Home, Profile}
     public partial class App : Application
     {
         public static ReturnPage ReturnPage;
