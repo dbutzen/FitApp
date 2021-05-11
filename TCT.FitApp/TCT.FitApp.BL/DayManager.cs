@@ -32,6 +32,8 @@ namespace TCT.FitApp.BL
                                 {
                                     Id = da.ActivityId,
                                     Name = da.Activity.Name,
+                                    Duration = da.Duration,
+                                    DifficultyLevel = da.DifficultyLevel,
                                     EasyCaloriesPerHour = da.Activity.EasyCaloriesPerHour,
                                     MediumCaloriesPerHour = da.Activity.MediumCaloriesPerHour,
                                     HardCaloriesPerHour = da.Activity.HardCaloriesPerHour
@@ -47,7 +49,8 @@ namespace TCT.FitApp.BL
                                     Calories = di.Item.Calories,
                                     Name = di.Item.Name,
                                     Protein = di.Item.Protein,
-                                    TypeId = di.Item.TypeId
+                                    TypeId = di.Item.TypeId,
+                                    Servings = di.Servings
                                 };
                                 if (di.Item.CreatedByUserId != null)
                                 {
@@ -95,6 +98,8 @@ namespace TCT.FitApp.BL
                                 {
                                     Id = da.ActivityId,
                                     Name = da.Activity.Name,
+                                    Duration = da.Duration,
+                                    DifficultyLevel = da.DifficultyLevel,
                                     EasyCaloriesPerHour = da.Activity.EasyCaloriesPerHour,
                                     MediumCaloriesPerHour = da.Activity.MediumCaloriesPerHour,
                                     HardCaloriesPerHour = da.Activity.HardCaloriesPerHour
@@ -110,7 +115,8 @@ namespace TCT.FitApp.BL
                                     Calories = di.Item.Calories,
                                     Name = di.Item.Name,
                                     Protein = di.Item.Protein,
-                                    TypeId = di.Item.TypeId
+                                    TypeId = di.Item.TypeId,
+                                    Servings = di.Servings
                                 };
                                 if (di.Item.CreatedByUserId != null)
                                 {
@@ -161,6 +167,8 @@ namespace TCT.FitApp.BL
                                 {
                                     Id = da.ActivityId,
                                     Name = da.Activity.Name,
+                                    Duration = da.Duration,
+                                    DifficultyLevel = da.DifficultyLevel,
                                     EasyCaloriesPerHour = da.Activity.EasyCaloriesPerHour,
                                     MediumCaloriesPerHour = da.Activity.MediumCaloriesPerHour,
                                     HardCaloriesPerHour = da.Activity.HardCaloriesPerHour
@@ -176,7 +184,8 @@ namespace TCT.FitApp.BL
                                     Calories = di.Item.Calories,
                                     Name = di.Item.Name,
                                     Protein = di.Item.Protein,
-                                    TypeId = di.Item.TypeId
+                                    TypeId = di.Item.TypeId,
+                                    Servings = di.Servings
                                 };
                                 if (di.Item.CreatedByUserId != null)
                                 {

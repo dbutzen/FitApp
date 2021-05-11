@@ -61,7 +61,7 @@ namespace TCT.FitApp.BL.Test
             var task = DayActivityManager.Load();
             task.Wait();
             var results = task.Result;
-            Assert.AreEqual(5, results.Count);
+            Assert.AreEqual(7, results.Count);
         }
     }
 }

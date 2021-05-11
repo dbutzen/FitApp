@@ -111,5 +111,37 @@ namespace TCT.FitApp.BL
             }
         }
 
+        public static async Task<List<DayActivity>> LoadByDayId(Guid dayId)
+        {
+            try
+            {
+                List<DayActivity> dayActivites = new List<DayActivity>();
+
+                await Task.Run(() =>
+                {
+                    using (var dc = new FitAppEntities())
+                    {
+                        var rows = dc.TblDayActivities.Where(da => da.DayId == dayId);
+
+                        rows.ToList()
+                            .ForEach(da => dayActivites.Add(new DayActivity
+                            {
+                                Id = da.Id,
+                                DayId = da.DayId,
+                                ActivityId = da.ActivityId,
+                                DifficultyLevel = da.DifficultyLevel,
+                                Duration = da.Duration,
+                            }));
+                    }
+                });
+                return dayActivites;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

@@ -75,7 +75,7 @@ namespace TCT.FitApp.API.Test
         {
             List<DayItem> dayItems = GetDayItems();
 
-            Assert.AreEqual(7, dayItems.Count);
+            Assert.AreEqual(13, dayItems.Count);
 
         }             
 

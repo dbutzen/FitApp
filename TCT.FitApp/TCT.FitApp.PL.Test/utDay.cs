@@ -32,7 +32,7 @@ namespace TCT.FitApp.PL.Test
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(6, dc.TblDays.Count());
+            Assert.AreEqual(10, dc.TblDays.Count());
         }
 
         [TestMethod]
@@ -79,7 +79,7 @@ namespace TCT.FitApp.PL.Test
 
             InsertTest();
 
-            var row = dc.TblDays.FirstOrDefault(u => u.Date == DateTime.Today);
+            var row = dc.TblDays.FirstOrDefault(u => u.Date == DateTime.Parse("2021-03-11"));
 
             if (row != null)
             {
@@ -87,7 +87,7 @@ namespace TCT.FitApp.PL.Test
                 dc.SaveChanges();
             }
 
-            var deletedrow = dc.TblDays.FirstOrDefault(u => u.Date == DateTime.Today);
+            var deletedrow = dc.TblDays.FirstOrDefault(u => u.Date == DateTime.Parse("2021-03-11"));
 
             Assert.IsNull(deletedrow);
         }

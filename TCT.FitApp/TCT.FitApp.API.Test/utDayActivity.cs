@@ -90,7 +90,7 @@ namespace TCT.FitApp.API.Test
         {
             List<DayActivity> dayActivities = GetDayActivities();
 
-            Assert.AreEqual(5, dayActivities.Count);
+            Assert.AreEqual(7, dayActivities.Count);
         }
 
         [TestMethod]

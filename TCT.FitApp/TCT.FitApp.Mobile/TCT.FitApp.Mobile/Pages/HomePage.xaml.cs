@@ -86,21 +86,25 @@ namespace TCT.FitApp.Mobile.Pages
             var proteinRate = (day.ProteinConsumed * 100) / user.ProteinGoal;
             lblProteinRate.Text = $"{proteinRate}%";
             pbProteinRate.Progress = proteinRate;
+
+            dgvActivities.ItemsSource = null;
+            dgvActivities.ItemsSource = day.Activities;
         }
+
         private void LoadUserData()
         {
             try
             {
-                
+
+                day = new Day();
                 var client = App.Client;
                 HttpResponseMessage response;
                 string result;
-                response = client.GetAsync($"Day/GenerateReport?userId={user.Id}&startDate={DateTime.Today}&endDate={DateTime.Today}").Result;
+                response = client.GetAsync($"Day/{user.Id}/{DateTime.Today.ToString("yyyy-MM-dd")}").Result;
                 result = response.Content.ReadAsStringAsync().Result;
-                if (response.IsSuccessStatusCode)
+                if (!string.IsNullOrEmpty(result))
                 {
-                    var days = JsonConvert.DeserializeObject<List<Day>>(result);
-                    day = days.FirstOrDefault();
+                    day = JsonConvert.DeserializeObject<Day>(result);
                 }
 
             }
@@ -120,11 +124,9 @@ namespace TCT.FitApp.Mobile.Pages
             Authenticate();
         }
 
-        private async void btnProfile_Clicked(object sender, EventArgs e)
+        private void btnViewProfile_Clicked(object sender, EventArgs e)
         {
-            var profilePage = new ProfilePage(user);
-            //App.ReturnPage = ReturnPage.Profile;
-            await Navigation.PushModalAsync(profilePage);
+
         }
     }
 }

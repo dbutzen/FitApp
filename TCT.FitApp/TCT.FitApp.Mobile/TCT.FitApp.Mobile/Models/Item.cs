@@ -12,7 +12,9 @@ namespace TCT.FitApp.Mobile.Models
         public string Name { get; set; }
         public int Calories { get; set; }
         public int Protein { get; set; }
-        
+
+        public int Servings { get; set; }
+
 
     }
 }

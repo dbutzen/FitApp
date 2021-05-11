@@ -27,7 +27,7 @@ namespace TCT.FitApp.BL.Test
             var task = DayManager.Load();
             task.Wait();
             var results = task.Result;
-            Assert.AreEqual(6, results.Count);
+            Assert.AreEqual(10, results.Count);
         }
 
         [TestMethod]

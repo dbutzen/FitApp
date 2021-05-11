@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace TCT.FitApp.Mobile.Models
@@ -13,11 +14,15 @@ namespace TCT.FitApp.Mobile.Models
         public List<Item> Items { get; set; }
         public bool Succeeded { get; set; }
 
+        public int CaloriesConsumed { get { return Items.Sum(i => i.Servings * i.Calories); } }
+        public double CaloriesBurned { get { return Activities.Sum(i => i.CaloriesBurned); } }
+        public int ProteinConsumed { get { return Items.Sum(i => i.Servings * i.Protein); } }
+
 
         // For the reporting
-        public int CaloriesConsumed { get; set; } = 0;
-        public double CaloriesBurned { get; set; } = 0;
-        public int ProteinConsumed { get; set; } = 0;
+        public int _CaloriesConsumed { get; set; }
+        public double _CaloriesBurned { get; set; }
+        public int _ProteinConsumed { get; set; }
 
     }
 }
