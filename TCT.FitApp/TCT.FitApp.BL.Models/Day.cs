@@ -9,8 +9,8 @@ namespace TCT.FitApp.BL.Models
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public DateTime Date { get; set; }
-        public List<Activity> Activities { get; set; }
-        public List<Item> Items { get; set; }
+        public List<Activity> Activities { get; set; } = new List<Activity>();
+        public List<Item> Items { get; set; } = new List<Item>();
         public bool Succeeded { get; set; }
 
         //public int CaloriesConsumed { get { return Items.Sum(i => i.Servings * i.Calories); } }

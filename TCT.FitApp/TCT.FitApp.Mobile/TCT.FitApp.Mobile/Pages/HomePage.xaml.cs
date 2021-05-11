@@ -83,7 +83,9 @@ namespace TCT.FitApp.Mobile.Pages
                 toBurn = cal - user.CalorieGoal;
             lblCalorieToBurn.Text = $"{toBurn}";
             lblProtein.Text = $"{day.ProteinConsumed} g/{user.ProteinGoal} g";
-            var proteinRate = (day.ProteinConsumed * 100) / user.ProteinGoal;
+            var proteinRate = 0;
+            if (user.ProteinGoal > 0)
+             proteinRate = (day.ProteinConsumed * 100) / user.ProteinGoal;
             lblProteinRate.Text = $"{proteinRate}%";
             pbProteinRate.Progress = proteinRate;
 
@@ -102,9 +104,9 @@ namespace TCT.FitApp.Mobile.Pages
                 string result;
                 response = client.GetAsync($"Day/{user.Id}/{DateTime.Today.ToString("yyyy-MM-dd")}").Result;
                 result = response.Content.ReadAsStringAsync().Result;
-                if (!string.IsNullOrEmpty(result))
+                if (response.IsSuccessStatusCode)
                 {
-                    day = JsonConvert.DeserializeObject<Day>(result);
+                    //day = JsonConvert.DeserializeObject<Day>(result);
                 }
 
             }
@@ -124,9 +126,17 @@ namespace TCT.FitApp.Mobile.Pages
             Authenticate();
         }
 
-        private void btnViewProfile_Clicked(object sender, EventArgs e)
+        private async void btnViewProfile_Clicked(object sender, EventArgs e)
         {
-
+            var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+            var page = new ProfilePage(user) { Title = "Profile"};
+            page.Disappearing += (sender2, e2) =>
+            {
+                waitHandle.Set();
+            };
+            await Navigation.PushAsync(page);
+            await Task.Run(() => waitHandle.WaitOne());
+            Rebind();
         }
     }
 }

@@ -79,7 +79,6 @@ namespace TCT.FitApp.BL
 
                         row.Name = user.Name;
                         row.Username = user.Username;
-                        row.SessionKey = user.SessionKey;
                         row.CalorieGoal = user.CalorieGoal;
                         row.ProteinGoal = user.ProteinGoal;
                         row.DaysInARowSucceeded = user.DaysInARowSucceeded;
@@ -87,6 +86,9 @@ namespace TCT.FitApp.BL
                         row.WeightPounds = user.WeightPounds;
                         row.UserAccessLevelId = user.UserAccessLevelId;
                         row.Sex = user.Sex;
+
+                        if (user.SessionKey != null)
+                            row.SessionKey = user.SessionKey;
 
                         results = dc.SaveChanges();
 
