@@ -30,8 +30,8 @@ namespace TCT.FitApp.Mobile.Pages
 
         private async void btnHome_Clicked(object sender, EventArgs e)
         {
-            App.ReturnPage = ReturnPage.Home;
-            await Navigation.PopModalAsync();
+            //App.ReturnPage = ReturnPage.Home;
+            await Navigation.PopAsync();
         }
 
         private void btnEdit_Clicked(object sender, EventArgs e)

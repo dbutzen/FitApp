@@ -85,12 +85,18 @@ namespace TCT.FitApp.Mobile.Pages
             lblProtein.Text = $"{day.ProteinConsumed} g/{user.ProteinGoal} g";
             var proteinRate = 0;
             if (user.ProteinGoal > 0)
-             proteinRate = (day.ProteinConsumed * 100) / user.ProteinGoal;
+            {
+                var rate = (day.ProteinConsumed * 100) / user.ProteinGoal;
+                proteinRate = rate > 100 ? 100 : rate;
+            }
             lblProteinRate.Text = $"{proteinRate}%";
             pbProteinRate.Progress = proteinRate;
 
             dgvActivities.ItemsSource = null;
             dgvActivities.ItemsSource = day.Activities;
+
+            dgvItems.ItemsSource = null;
+            dgvItems.ItemsSource = day.Items;
         }
 
         private void LoadUserData()

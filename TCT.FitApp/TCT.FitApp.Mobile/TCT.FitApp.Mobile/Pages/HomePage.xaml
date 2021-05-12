@@ -7,11 +7,13 @@
              x:Class="TCT.FitApp.Mobile.Pages.HomePage">
     <ContentPage.Content>
 
+        <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" Margin="10">
                 <Grid.ColumnDefinitions>
@@ -44,7 +46,7 @@
                 <StackLayout>
                     <!--Protein Card-->
                     <Grid BackgroundColor="White">
-                        <Grid Margin="10">
+                        <Grid Margin="15">
                             <StackLayout>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -53,7 +55,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Grid>
                                         <StackLayout>
-                                            <Label Text="Protein Goal" FontSize="15" FontAttributes="Bold"/>
+                                            <Label Text="Protein" FontSize="15" FontAttributes="Bold"/>
                                             <Label x:Name="lblProtein"/>
                                         </StackLayout>
                                     </Grid>
@@ -67,7 +69,7 @@
                     </Grid>
                     <!--Calories Card-->
                     <Grid  BackgroundColor="White">
-                        <Grid Margin="10">
+                        <Grid Margin="15">
                             <StackLayout>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -76,7 +78,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Grid>
                                         <StackLayout>
-                                            <Label Text="Calorie Goal" FontSize="15" FontAttributes="Bold"/>
+                                            <Label Text="Calories" FontSize="15" FontAttributes="Bold"/>
                                             <Label x:Name="lblCalorieGoal" Margin="0,-5,0,0"  FontSize="15" FontAttributes="Bold" />
                                             <StackLayout Orientation="Horizontal">
                                                 <Label x:Name="lblCalorieConsumed" Margin="0,-5,0,0" FontSize="12"/>
@@ -96,10 +98,10 @@
                     </Grid>
                 </StackLayout>
             </Grid>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" HeightRequest="200">
                 <!--Activities Card-->
                 <Grid Margin="10,-10,10,10" BackgroundColor="White">
-                    <Grid Margin="10">
+                    <Grid Margin="15">
                         <StackLayout>
                             <Label Text="Activities" FontSize="15"  FontAttributes="Bold"/>
                             <dg:DataGrid
@@ -120,7 +122,32 @@
                     </Grid>
                 </Grid>
             </Grid>
+            <Grid Grid.Row="3" HeightRequest="200">
+                <!--Items Card-->
+                <Grid Margin="10,-10,10,10" BackgroundColor="White">
+                    <Grid Margin="15">
+                        <StackLayout>
+                            <Label Text="Items" FontSize="15"  FontAttributes="Bold"/>
+                            <dg:DataGrid
+                                x:Name="dgvItems"
+                                SelectionEnabled="True"
+                                BorderColor="#FFFFFF"
+                                BackgroundColor="#FFFFF"
+                                HeaderBackground="#FFFFFF"
+                                ActiveRowColor="#8899AA">
+                                <dg:DataGrid.Columns>
+                                    <dg:DataGridColumn Title="Name" PropertyName="Name"/>
+                                    <dg:DataGridColumn Title="Servings" PropertyName="Servings"/>
+                                    <dg:DataGridColumn Title="Calories" PropertyName="Calories"/>
+                                    <dg:DataGridColumn Title="Protein" PropertyName="Protein"/>
+                                </dg:DataGrid.Columns>
+                            </dg:DataGrid>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </Grid>
         </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
     
