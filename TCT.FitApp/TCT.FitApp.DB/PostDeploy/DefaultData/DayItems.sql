@@ -55,7 +55,7 @@
 	-- Jason
 
 	SELECT @UsersId = Id from tblUser where Username = 'jryan'
-	SELECT @DayId = Id FROM tblDay WHERE Date = '2021-05-11'
+	SELECT @DayId = Id FROM tblDay WHERE Date = '2021-05-12'
 	SELECT @ItemId = Id FROM tblItem WHERE Name = 'Egg'
 
 	INSERT INTO dbo.tblDayItem(Id, DayId, Itemid, Servings)

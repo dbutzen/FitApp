@@ -8,6 +8,7 @@ BEGIN
 		d.Id,
 		u.Id as 'UserId',
 		d.Date,
+		(SELECT COUNT(id) FROM tblDayActivity WHERE UserId = u.Id AND DayId = d.Id) as 'ActivityCount',
 		u.CalorieGoal,
 		ISNULL(SUM(dbo.fnCalcCalorieIntake(di.Id)), 0) as 'CaloriesConsumed',
 		ISNULL(SUM(dbo.fnCalcBurntCal(da.Id)), 0) as 'CaloriesBurned',
@@ -32,6 +33,8 @@ BEGIN
 		d.Id,
 		u.Id,
 		d.Date,
+		UserId,
 		u.CalorieGoal,
 		u.ProteinGoal
+	ORDER BY d.Date
 END

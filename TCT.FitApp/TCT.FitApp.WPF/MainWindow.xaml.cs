@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -51,7 +54,7 @@ namespace TCT.FitApp.WPF
             items = (List<Item>)await ItemManager.Load();
             itemTypes = (List<ItemType>)await ItemTypeManager.Load();
             activities = (List<Activity>)await ActivityManager.Load();
-            users = (List<User>)await UserManager.Load();
+            users = LoadUsers();
             userAccessLevels = (List<UserAccessLevel>)await UserAccessLevelManager.Load();
         }
 
@@ -102,7 +105,6 @@ namespace TCT.FitApp.WPF
         private void btnUsers_Click(object sender, RoutedEventArgs e)
         {
             UserRebind();
-            
         }
 
         private void UserRebind()
@@ -194,6 +196,20 @@ namespace TCT.FitApp.WPF
                 ActivityRebind();
             }
                 
+        }
+
+        private List<User> LoadUsers()
+        {
+            HttpResponseMessage response;
+            string result;
+            dynamic items;
+
+            response = App.Client.GetAsync("User").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            items = (JArray)JsonConvert.DeserializeObject(result);
+            List<User> users = items.ToObject<List<User>>();
+
+            return users;
         }
     }
 }

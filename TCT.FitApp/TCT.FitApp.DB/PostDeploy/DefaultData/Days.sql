@@ -44,7 +44,5 @@
 	VALUES
 	(NEWID(), @UsersId, '2021-5-13', 0)
 
-
-
 	-- End
 END

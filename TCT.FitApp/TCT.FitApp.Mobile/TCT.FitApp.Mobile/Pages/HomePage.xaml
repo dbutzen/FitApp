@@ -8,145 +8,145 @@
     <ContentPage.Content>
 
         <ScrollView>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <StackLayout Grid.Column="0">
-                    <Label Text="Hello," FontAttributes="Bold"/>
-                    <Label x:Name="txtDisplayName"  FontSize="20" FontAttributes="Bold"/>
-                    <Label x:Name="txtDate" Text="Today, May 6th"  FontSize="15" FontAttributes="Bold"/>
-                </StackLayout>
-                <StackLayout Grid.Column="1" Orientation="Horizontal">
-                    <Button
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Column="0">
+                        <Label Text="Hello," FontAttributes="Bold"/>
+                        <Label x:Name="txtDisplayName"  FontSize="20" FontAttributes="Bold"/>
+                        <Label x:Name="txtDate" Text="Today, May 6th"  FontSize="15" FontAttributes="Bold"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1" Orientation="Horizontal">
+                        <Button
                         Grid.Column="1"
                         x:Name="btnViewProfile"
                         Text="View Profile"
                         VerticalOptions="CenterAndExpand"
                         HorizontalOptions="CenterAndExpand"
                         Clicked="btnViewProfile_Clicked"/>
-                    <Button
+                        <Button
                         Grid.Column="1"
                         x:Name="btnLogout"
                         Text="Logout"
                         VerticalOptions="CenterAndExpand"
                         HorizontalOptions="CenterAndExpand"
                         Clicked="btnLogout_Clicked"/>
-                </StackLayout>
-            </Grid>
-            <Grid Grid.Row="1" Margin="10">
-                <StackLayout>
-                    <!--Protein Card-->
-                    <Grid BackgroundColor="White">
-                        <Grid Margin="15">
-                            <StackLayout>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="auto"/>
-                                    </Grid.ColumnDefinitions>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="1" Margin="10">
+                    <StackLayout>
+                        <!--Protein Card-->
+                        <Grid BackgroundColor="White">
+                            <Grid Margin="15">
+                                <StackLayout>
                                     <Grid>
-                                        <StackLayout>
-                                            <Label Text="Protein" FontSize="15" FontAttributes="Bold"/>
-                                            <Label x:Name="lblProtein"/>
-                                        </StackLayout>
-                                    </Grid>
-                                    <Grid Grid.Column="1">
-                                        <Label x:Name="lblProteinRate" FontAttributes="Bold"  VerticalOptions="Center" HorizontalOptions="Center"/>
-                                        <controls:CircularProgressBar x:Name="pbProteinRate" HeightRequest="60" WidthRequest="60"  Progress="80"/>
-                                    </Grid>
-                                </Grid>
-                            </StackLayout>
-                        </Grid>
-                    </Grid>
-                    <!--Calories Card-->
-                    <Grid  BackgroundColor="White">
-                        <Grid Margin="15">
-                            <StackLayout>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid>
-                                        <StackLayout>
-                                            <Label Text="Calories" FontSize="15" FontAttributes="Bold"/>
-                                            <Label x:Name="lblCalorieGoal" Margin="0,-5,0,0"  FontSize="15" FontAttributes="Bold" />
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label x:Name="lblCalorieConsumed" Margin="0,-5,0,0" FontSize="12"/>
-                                                <Label x:Name="lblCalorieBurned" Margin="0,-5,0,0"  FontSize="12"/>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid>
+                                            <StackLayout>
+                                                <Label Text="Protein" FontSize="15" FontAttributes="Bold"/>
+                                                <Label x:Name="lblProtein"/>
                                             </StackLayout>
-                                        </StackLayout>
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <Label x:Name="lblProteinRate" FontAttributes="Bold"  VerticalOptions="Center" HorizontalOptions="Center"/>
+                                            <controls:CircularProgressBar x:Name="pbProteinRate" HeightRequest="60" WidthRequest="60"  Progress="80"/>
+                                        </Grid>
                                     </Grid>
-                                    <Grid Grid.Column="1">
-                                        <StackLayout WidthRequest="35"  HorizontalOptions="Center">
-                                            <Label Text="To Burn" FontSize="10" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
-                                            <Label x:Name="lblCalorieToBurn" HorizontalTextAlignment="Center" FontSize="25"  FontAttributes="Bold" />
-                                        </StackLayout>
-                                    </Grid>
-                                </Grid>
-                            </StackLayout>
+                                </StackLayout>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </StackLayout>
-            </Grid>
-            <Grid Grid.Row="2" HeightRequest="200">
-                <!--Activities Card-->
-                <Grid Margin="10,-10,10,10" BackgroundColor="White">
-                    <Grid Margin="15">
-                        <StackLayout>
-                            <Label Text="Activities" FontSize="15"  FontAttributes="Bold"/>
-                            <dg:DataGrid
+                        <!--Calories Card-->
+                        <Grid  BackgroundColor="White">
+                            <Grid Margin="15">
+                                <StackLayout>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid>
+                                            <StackLayout>
+                                                <Label Text="Calories" FontSize="15" FontAttributes="Bold"/>
+                                                <Label x:Name="lblCalorieGoal" Margin="0,-5,0,0"  FontSize="15" FontAttributes="Bold" />
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label x:Name="lblCalorieConsumed" Margin="0,-5,0,0" FontSize="12"/>
+                                                    <Label x:Name="lblCalorieBurned" Margin="0,-5,0,0"  FontSize="12"/>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <StackLayout WidthRequest="35"  HorizontalOptions="Center">
+                                                <Label Text="To Burn" FontSize="10" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+                                                <Label x:Name="lblCalorieToBurn" HorizontalTextAlignment="Center" FontSize="25"  FontAttributes="Bold" />
+                                            </StackLayout>
+                                        </Grid>
+                                    </Grid>
+                                </StackLayout>
+                            </Grid>
+                        </Grid>
+                    </StackLayout>
+                </Grid>
+                <Grid Grid.Row="2" HeightRequest="200">
+                    <!--Activities Card-->
+                    <Grid Margin="10,-10,10,10" BackgroundColor="White">
+                        <Grid Margin="15">
+                            <StackLayout>
+                                <Label Text="Activities" FontSize="15"  FontAttributes="Bold"/>
+                                <dg:DataGrid
                                 x:Name="dgvActivities"
                                 SelectionEnabled="True"
                                 BorderColor="#FFFFFF"
                                 BackgroundColor="#FFFFF"
                                 HeaderBackground="#FFFFFF"
                                 ActiveRowColor="#8899AA">
-                                <dg:DataGrid.Columns>
-                                    <dg:DataGridColumn Title="Name" PropertyName="Name"/>
-                                    <dg:DataGridColumn Title="Duration (mins)" PropertyName="Duration"/>
-                                    <dg:DataGridColumn Title="Difficulty" PropertyName="DifficultyLevel"/>
-                                    <dg:DataGridColumn Title="Calories Burned" PropertyName="CaloriesBurned"/>
-                                </dg:DataGrid.Columns>
-                            </dg:DataGrid>
-                        </StackLayout>
+                                    <dg:DataGrid.Columns>
+                                        <dg:DataGridColumn Title="Name" PropertyName="Name"/>
+                                        <dg:DataGridColumn Title="Duration (mins)" PropertyName="Duration"/>
+                                        <dg:DataGridColumn Title="Difficulty" PropertyName="DifficultyLevel"/>
+                                        <dg:DataGridColumn Title="Calories Burned" PropertyName="CaloriesBurned"/>
+                                    </dg:DataGrid.Columns>
+                                </dg:DataGrid>
+                            </StackLayout>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-            <Grid Grid.Row="3" HeightRequest="200">
-                <!--Items Card-->
-                <Grid Margin="10,-10,10,10" BackgroundColor="White">
-                    <Grid Margin="15">
-                        <StackLayout>
-                            <Label Text="Items" FontSize="15"  FontAttributes="Bold"/>
-                            <dg:DataGrid
+                <Grid Grid.Row="3" HeightRequest="200">
+                    <!--Items Card-->
+                    <Grid Margin="10,-10,10,10" BackgroundColor="White">
+                        <Grid Margin="15">
+                            <StackLayout>
+                                <Label Text="Items" FontSize="15"  FontAttributes="Bold"/>
+                                <dg:DataGrid
                                 x:Name="dgvItems"
                                 SelectionEnabled="True"
                                 BorderColor="#FFFFFF"
                                 BackgroundColor="#FFFFF"
                                 HeaderBackground="#FFFFFF"
                                 ActiveRowColor="#8899AA">
-                                <dg:DataGrid.Columns>
-                                    <dg:DataGridColumn Title="Name" PropertyName="Name"/>
-                                    <dg:DataGridColumn Title="Servings" PropertyName="Servings"/>
-                                    <dg:DataGridColumn Title="Calories" PropertyName="Calories"/>
-                                    <dg:DataGridColumn Title="Protein" PropertyName="Protein"/>
-                                </dg:DataGrid.Columns>
-                            </dg:DataGrid>
-                        </StackLayout>
+                                    <dg:DataGrid.Columns>
+                                        <dg:DataGridColumn Title="Name" PropertyName="Name"/>
+                                        <dg:DataGridColumn Title="Servings" PropertyName="Servings"/>
+                                        <dg:DataGridColumn Title="Calories" PropertyName="Calories"/>
+                                        <dg:DataGridColumn Title="Protein" PropertyName="Protein"/>
+                                    </dg:DataGrid.Columns>
+                                </dg:DataGrid>
+                            </StackLayout>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

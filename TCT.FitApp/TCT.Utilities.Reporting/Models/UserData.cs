@@ -11,7 +11,7 @@ namespace TCT.Utilities.Reporting.Models
         public DateTime Date { get; set; }
         public int Activities { get; set; }
         public int CaloriesConsumed { get; set; }
-        public int CaloriesBurned { get; set; }
+        public double CaloriesBurned { get; set; }
         public int ProteinConsumed { get; set; }
         public string Succeeded { get; set; }
     }

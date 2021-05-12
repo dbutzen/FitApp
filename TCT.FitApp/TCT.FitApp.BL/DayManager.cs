@@ -364,6 +364,7 @@ namespace TCT.FitApp.BL
                             Id = r.Id,
                             UserId = r.UserId,
                             Date = r.Date,
+                            ActivityCount = r.ActivityCount,
                             CaloriesConsumed = r.CaloriesConsumed,
                             CaloriesBurned = r.CaloriesBurned,
                             ProteinConsumed = r.ProteinConsumed,

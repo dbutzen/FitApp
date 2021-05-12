@@ -41,7 +41,7 @@
 	(NEWID(), @DateId, @ActivityId, 30, 2)
 
 
-	SELECT @DateId = Id from tblDay where  Date = '2021-05-11'
+	SELECT @DateId = Id from tblDay where  Date = '2021-05-12'
 	SELECT @ActivityId = Id from tblActivity where  Name = 'Cycling'
 	
 	INSERT INTO dbo.tblDayActivity(Id, DayId, ActivityId, Duration, DifficultyLevel)

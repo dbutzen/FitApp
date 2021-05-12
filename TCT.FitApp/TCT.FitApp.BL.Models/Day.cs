@@ -19,6 +19,8 @@ namespace TCT.FitApp.BL.Models
 
 
         // For the reporting
+
+        public int ActivityCount { get; set; }
         public int CaloriesConsumed { get; set; }
         public double CaloriesBurned { get; set; }
         public int ProteinConsumed { get; set; }
