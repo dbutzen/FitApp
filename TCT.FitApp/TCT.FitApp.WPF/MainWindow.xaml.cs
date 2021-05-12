@@ -21,6 +21,15 @@ namespace TCT.FitApp.WPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// 
+
+    
+
+    public enum ButtonPressed
+    {
+        Add, Edit, Delete
+    }
+
     public partial class MainWindow : Window
     {
         List<Item> items;
@@ -28,6 +37,8 @@ namespace TCT.FitApp.WPF
         List<Activity> activities;
         List<User> users;
         List<UserAccessLevel> userAccessLevels;
+
+        ButtonPressed buttonPressed;
 
 
         public MainWindow()
@@ -46,6 +57,11 @@ namespace TCT.FitApp.WPF
 
         private void btnItems_Click(object sender, RoutedEventArgs e)
         {
+            ItemRebind();
+        }
+
+        private void ItemRebind()
+        {
             grdMain.ItemsSource = null;
             grdMain.ItemsSource = items;
 
@@ -56,24 +72,37 @@ namespace TCT.FitApp.WPF
             grdMain.Columns[3].Header = "Item Name";
             grdMain.Columns[4].Header = "Calories";
             grdMain.Columns[5].Header = "Protein";
+
+            btnDelete.Visibility = Visibility.Visible;
+            btnAdd.Visibility = Visibility.Visible;
         }
 
         private void btnItemTypes_Click(object sender, RoutedEventArgs e)
+        {
+            ItemTypeRebind();
+        }
+
+        private void ItemTypeRebind()
         {
             grdMain.ItemsSource = null;
             grdMain.ItemsSource = itemTypes;
 
             grdMain.Columns[0].Visibility = Visibility.Hidden;
+
+            btnDelete.Visibility = Visibility.Visible;
+            btnAdd.Visibility = Visibility.Visible;
         }
 
         private void btnActivities_Click(object sender, RoutedEventArgs e)
         {
             ActivityRebind();
+            
         }
 
         private void btnUsers_Click(object sender, RoutedEventArgs e)
         {
             UserRebind();
+            
         }
 
         private void UserRebind()
@@ -96,6 +125,9 @@ namespace TCT.FitApp.WPF
             grdMain.Columns[1].Header = "Name";
             grdMain.Columns[2].Header = "Username";
             grdMain.Columns[13].Header = "Access Level";
+
+            btnAdd.Visibility = Visibility.Hidden;
+            btnDelete.Visibility = Visibility.Hidden;
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
@@ -116,6 +148,11 @@ namespace TCT.FitApp.WPF
                     window.ShowDialog();
                     UserRebind();
                 }
+                else if (grdMain.ItemsSource == items)
+                {
+                    var item = items[grdMain.SelectedIndex];
+                    var window = new MaintainItems(item);
+                }
             }
         }
 
@@ -130,6 +167,9 @@ namespace TCT.FitApp.WPF
             grdMain.Columns[2].Header = "Easy Cal/Hr";
             grdMain.Columns[3].Header = "Medium Cal/Hr";
             grdMain.Columns[4].Header = "Hard Cal/Hr";
+
+            btnDelete.Visibility = Visibility.Visible;
+            btnAdd.Visibility = Visibility.Visible;
         }
 
         private async void btnDelete_Click(object sender, RoutedEventArgs e)

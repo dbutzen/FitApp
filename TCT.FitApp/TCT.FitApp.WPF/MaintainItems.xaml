@@ -7,6 +7,29 @@
         mc:Ignorable="d"
         Title="MaintainItems" Height="450" Width="800">
     <Grid>
-        
+        <Label HorizontalAlignment="Center" Content="Manage Items" FontSize="36" Margin="0,0,0,369"/>
+        <TextBox x:Name="txtItem" Margin="226,65,202,314" FontSize="18"/>
+        <GroupBox x:Name="grpItemNutrition" Header="Nutrition" Margin="226,204,202,48"/>
+        <Label x:Name="lblCalories" Content="Calories" FontSize="18" Margin="248,231,401,165" Width="151"/>
+        <Label x:Name="lblProtein" Content="Protein" FontSize="18" Margin="248,275,401,126" Width="151"/>
+        <Button x:Name="btnSave" Content="Save" Margin="318,146,404,251" FontSize="22" Click="btnSave_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" Margin="412,146,310,251" FontSize="22" Click="btnCancel_Click"/>
+        <TextBox x:Name="txtCalories" 
+                 Text="150"
+                 TextAlignment="Right" 
+                 Margin="0,237,229,0" 
+                 HorizontalAlignment="Right" 
+                 VerticalAlignment="Top" 
+                 Width="130" 
+                 FontSize="18"/>
+        <TextBox x:Name="txtProtein"
+                 Text="10" 
+                 TextAlignment="Right" 
+                 TextWrapping="Wrap" 
+                 Margin="441,278,229,128" 
+                 FontSize="18" 
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Top"/>
+        <Label Content="g" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="610,278,229,128" />
     </Grid>
 </Window>
