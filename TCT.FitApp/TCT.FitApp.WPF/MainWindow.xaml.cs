@@ -54,7 +54,7 @@ namespace TCT.FitApp.WPF
             items = (List<Item>)await ItemManager.Load();
             itemTypes = (List<ItemType>)await ItemTypeManager.Load();
             activities = (List<Activity>)await ActivityManager.Load();
-            users = LoadUsers();
+            users = LoadUsers(); // api
             userAccessLevels = (List<UserAccessLevel>)await UserAccessLevelManager.Load();
         }
 

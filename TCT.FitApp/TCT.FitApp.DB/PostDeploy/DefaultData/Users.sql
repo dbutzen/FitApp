@@ -8,9 +8,9 @@
 	DECLARE @Password NVARCHAR(50) = 'password1';
 	DECLARE @HashedPassword NVARCHAR(64) = CONVERT(NVARCHAR(MAX), HASHBYTES('SHA2_256', @Password+UPPER(CAST(@UniqueKey AS NVARCHAR(36)))), 2);
 
-	INSERT INTO dbo.tblUser(Id, Name, Username, Password, UniqueKey, SessionKey, CalorieGoal, ProteinGoal, DaysInARowSucceeded, HeightInches, WeightPounds,UserAccessLevelId, Sex)
+	INSERT INTO dbo.tblUser(Id, Name, Username, Password, UniqueKey, CalorieGoal, ProteinGoal, DaysInARowSucceeded, HeightInches, WeightPounds,UserAccessLevelId, Sex)
 	VALUES
-	(NEWID(), 'Jason Ryan', 'jryan', @HashedPassword, @UniqueKey, NEWID(), 2000, 72, 12, 72, 175, @UserAccessLevelId, 'Male')
+	(NEWID(), 'Jason Ryan', 'jryan', @HashedPassword, @UniqueKey, 2000, 72, 12, 72, 175, @UserAccessLevelId, 'Male')
 
 	
 	-- Dan
