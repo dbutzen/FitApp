@@ -2,9 +2,15 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
-    <TargetDatabaseName>butzendb/DTBFitApp</TargetDatabaseName>
+    <TargetDatabaseName>butzendb</TargetDatabaseName>
     <DeployScriptFileName>TCT.FitApp.DB.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=butzendb.database.windows.net;Persist Security Info=True;User ID=butzendb;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
+    <BlockOnPossibleDataLoss>True</BlockOnPossibleDataLoss>
+    <DatabaseEdition>Basic</DatabaseEdition>
+    <DatabaseServiceObjective>Basic</DatabaseServiceObjective>
+    <DatabaseMaximumSize>2</DatabaseMaximumSize>
+    <AllowIncompatiblePlatform>False</AllowIncompatiblePlatform>
+    <CreateNewDatabase>True</CreateNewDatabase>
   </PropertyGroup>
 </Project>
