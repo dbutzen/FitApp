@@ -7,6 +7,12 @@
       "commands": [
         "swagger"
       ]
+    },
+    "dotnet-ef": {
+      "version": "5.0.6",
+      "commands": [
+        "dotnet-ef"
+      ]
     }
   }
 }

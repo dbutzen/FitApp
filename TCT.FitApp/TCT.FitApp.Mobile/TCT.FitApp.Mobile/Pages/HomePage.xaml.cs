@@ -20,7 +20,7 @@ namespace TCT.FitApp.Mobile.Pages
         Day day;
         public HomePage()
         {
-            Title = "Dashboard";
+            Title = "Home Page";
             InitializeComponent();
             Authenticate();
         }
