@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.Mobile", "TCT.Fi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.FitApp.WPF", "TCT.FitApp.WPF\TCT.FitApp.WPF.csproj", "{2F4DF36B-719F-4454-B297-776BEDBBE479}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCT.Utilities.Reporting", "TCT.Utilities.Reporting\TCT.Utilities.Reporting.csproj", "{C8FD67CF-CE11-49B1-A49A-6CCB5BC23F6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCT.Utilities.Reporting", "TCT.Utilities.Reporting\TCT.Utilities.Reporting.csproj", "{C8FD67CF-CE11-49B1-A49A-6CCB5BC23F6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

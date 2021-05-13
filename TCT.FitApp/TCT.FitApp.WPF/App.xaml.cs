@@ -19,7 +19,7 @@ namespace TCT.FitApp.WPF
             get
             {
                 var client = new HttpClient();
-                client.BaseAddress = new Uri("https://313a2ef9e235.ngrok.io/");
+                client.BaseAddress = new Uri("https://tct-fitapp.azurewebsites.net/");
                 return client;
             }
 
