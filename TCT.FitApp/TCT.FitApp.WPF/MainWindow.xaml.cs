@@ -51,11 +51,11 @@ namespace TCT.FitApp.WPF
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            items = (List<Item>)await ItemManager.Load();
-            itemTypes = (List<ItemType>)await ItemTypeManager.Load();
-            activities = (List<Activity>)await ActivityManager.Load();
+            items = LoadItems();
+            itemTypes = LoadItemTypes();
+            activities = LoadActivities();
             users = LoadUsers(); // api
-            userAccessLevels = (List<UserAccessLevel>)await UserAccessLevelManager.Load();
+            userAccessLevels = LoadUserAccessLevels();
         }
 
         private void btnItems_Click(object sender, RoutedEventArgs e)
@@ -211,5 +211,62 @@ namespace TCT.FitApp.WPF
 
             return users;
         }
+
+        private List<Item> LoadItems()
+        {
+            HttpResponseMessage response;
+            string result;
+            dynamic things;
+
+            response = App.Client.GetAsync("Item").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            things = (JArray)JsonConvert.DeserializeObject(result);
+            List<Item> items = things.ToObject<List<User>>();
+
+            return items;
+        }
+
+        private List<Activity> LoadActivities()
+        {
+            HttpResponseMessage response;
+            string result;
+            dynamic things;
+
+            response = App.Client.GetAsync("Activity").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            things = (JArray)JsonConvert.DeserializeObject(result);
+            List<Activity> activities = things.ToObject<List<User>>();
+
+            return activities;
+        }
+
+        private List<ItemType> LoadItemTypes()
+        {
+            HttpResponseMessage response;
+            string result;
+            dynamic items;
+
+            response = App.Client.GetAsync("ItemType").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            items = (JArray)JsonConvert.DeserializeObject(result);
+            List<ItemType> itemTypes = items.ToObject<List<User>>();
+
+            return itemTypes;
+        }
+
+        private List<UserAccessLevel> LoadUserAccessLevels()
+        {
+            HttpResponseMessage response;
+            string result;
+            dynamic items;
+
+            response = App.Client.GetAsync("User").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            items = (JArray)JsonConvert.DeserializeObject(result);
+            List<UserAccessLevel> userAccessLevels = items.ToObject<List<User>>();
+
+            return userAccessLevels;
+        }
+
     }
 }
