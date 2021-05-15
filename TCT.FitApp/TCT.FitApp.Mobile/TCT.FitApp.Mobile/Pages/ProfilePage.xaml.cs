@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using Forms9Patch;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace TCT.FitApp.Mobile.Pages
 {
@@ -30,7 +31,6 @@ namespace TCT.FitApp.Mobile.Pages
 
         private async void btnHome_Clicked(object sender, EventArgs e)
         {
-            //App.ReturnPage = ReturnPage.Home;
             await Navigation.PopAsync();
         }
 
@@ -87,5 +87,40 @@ namespace TCT.FitApp.Mobile.Pages
                 txtSex.IsReadOnly = false;
             }
         }
+
+        private async void btnSettings_Clicked(object sender, EventArgs e)
+        {
+            var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+            var page = new SettingsPage(user) { Title = "Settings" };
+            page.Disappearing += (sender2, e2) =>
+            {
+                waitHandle.Set();
+            };
+            await Navigation.PushAsync(page);
+            await Task.Run(() => waitHandle.WaitOne());
+            //LoadUserData();
+            //Rebind();
+        }
+
+        //private void LoadUserData()
+        //{
+        //    var client = App.Client;
+        //    HttpResponseMessage response;
+        //    string result;
+        //    response = client.GetAsync($"User/{user.Id}/").Result;
+        //    result = response.Content.ReadAsStringAsync().Result;
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        user = JsonConvert.DeserializeObject<User>(result);
+        //    }
+        //}
+
+        //private void Rebind()
+        //{
+        //    txtName.Text = user.Name;
+        //    txtHeight.Text = user.HeightInches.ToString();
+        //    txtWeight.Text = user.WeightPounds.ToString();
+        //    txtSex.Text = user.Sex;
+        //}
     }
 }

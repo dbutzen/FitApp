@@ -5,14 +5,14 @@
              x:Class="TCT.FitApp.Mobile.Pages.ProfilePage">
     <ContentPage.Content>
 
-        <Grid>
+        <Grid HorizontalOptions="Center" Margin="0,50,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -76,6 +76,11 @@
             
             <!--Buttons-->
             <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Button
                         Grid.Column="0"
                         x:Name="btnHome"
@@ -85,13 +90,20 @@
                         Clicked="btnHome_Clicked"/>
                 <Button
                         Grid.Column="1"
+                        x:Name="btnSettings"
+                        Text="Settings"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="btnSettings_Clicked"/>
+                <Button
+                        Grid.Column="2"
                         x:Name="btnEdit"
                         Text="Edit"
                         VerticalOptions="CenterAndExpand"
                         HorizontalOptions="CenterAndExpand"
                         Clicked="btnEdit_Clicked"/>
                 <Button
-                        Grid.Column="1"
+                        Grid.Column="2"
                         x:Name="btnSave"
                         Text="Save"
                         VerticalOptions="CenterAndExpand"

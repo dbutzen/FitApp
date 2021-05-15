@@ -103,7 +103,6 @@ namespace TCT.FitApp.Mobile.Pages
         {
             try
             {
-
                 day = new Day();
                 var client = App.Client;
                 HttpResponseMessage response;

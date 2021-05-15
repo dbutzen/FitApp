@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TCT.FitApp.Mobile.Pages.SettingsPage">
+    <ContentPage.Content>
+
+        <Grid HorizontalOptions="Center" Margin="0,50,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Margin="10">
+                <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" x:Name="lblSettings" Text="Settings" FontSize="20" FontAttributes="Bold"/>
+            </Grid>
+
+            <!--Name-->
+            <Grid Grid.Row="1">
+                <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" >
+                    <Label x:Name="lblProtein" Margin="15,0,0,0" Text="Protein Goal" FontSize="18"/>
+                </StackLayout>
+                <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" >
+                    <Entry x:Name="txtProteinGoal" IsReadOnly="True" Margin="0,5,0,0" FontSize="18"/>
+                </StackLayout>
+            </Grid>
+
+            <!--Height-->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Start" >
+                    <Label x:Name="lblCalorie" Margin="15,0,0,0" Text="Calorie Goal" FontSize="18"/>
+                </StackLayout>
+                <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" >
+                    <Entry x:Name="txtCalorieGoal" IsReadOnly="True" Margin="0,5,0,0" FontSize="18" />
+                </StackLayout>
+            </Grid>
+
+            <!--Buttons-->
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button
+                        Grid.Column="0"
+                        x:Name="btnBack"
+                        Text="Back"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="btnBack_Clicked"/>
+                <Button
+                        Grid.Column="1"
+                        x:Name="btnEdit"
+                        Text="Edit"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="btnEdit_Clicked"/>
+                <Button
+                        Grid.Column="1"
+                        x:Name="btnSave"
+                        Text="Save"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="btnSave_Clicked"
+                        IsEnabled="False"
+                        IsVisible="False"/>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
