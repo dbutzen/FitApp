@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -23,6 +24,18 @@ namespace TCT.FitApp.WPF
                 return client;
             }
 
+        }
+
+        public static HubConnection HubConnection
+        {
+            get
+            {
+                var client = new HubConnectionBuilder()
+                .WithUrl("https://tct-fitapp.azurewebsites.net/notificationHub")
+                .Build();
+
+                return client;
+            }
         }
     }
 }

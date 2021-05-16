@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -27,34 +28,51 @@ namespace TCT.FitApp.WPF
     public partial class MaintainUsers : Window
     {
         User user;
+
+        HubConnection hubConnection;
         List<UserAccessLevel> userAccessLevels;
         public MaintainUsers(User user)
         {
-            this.user = user;
             InitializeComponent();
+            this.user = user;
+            hubConnection = App.HubConnection;
+            StartHubConnection();
             Reload();
         }
+        private async void StartHubConnection()
+        {
+            await hubConnection.StartAsync();
+        }
+        private async Task SendNotification(string message)
+        {
+            await hubConnection.InvokeAsync("SendMessage", user.Id, message);
+        }
+
 
         private async void Reload()
         {
+            lblUsername.Content = user.Username;
+            lblFullName.Content = user.Name;
             cboAccessLevels.ItemsSource = null;
             userAccessLevels = (List<UserAccessLevel>)await UserAccessLevelManager.Load();
             cboAccessLevels.ItemsSource = userAccessLevels;
+            cboAccessLevels.SelectedValuePath = "Id";
+            cboAccessLevels.DisplayMemberPath = "Name";
             dpStartDate.SelectedDate = DateTime.Today;
             dpEndDate.SelectedDate = DateTime.Today;
         }
 
 
 
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        private async void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            Task.Run(async () =>
+            UserAccessLevel userAccessLevel = userAccessLevels[cboAccessLevels.SelectedIndex];
+            user.UserAccessLevelId = userAccessLevel.Id;
+            int results = await UserManager.Update(user);
+            if (results > 0)
             {
-
-                UserAccessLevel userAccessLevel = userAccessLevels[cboAccessLevels.SelectedIndex];
-                user.UserAccessLevelId = userAccessLevel.Id;
-                int results = await UserManager.Update(user);
-            });
+                await SendNotification($"System: Your user access level has been updated to {userAccessLevel.Name}.");
+            }
         }
 
         private void btnCreateReport_Click(object sender, RoutedEventArgs e)
@@ -93,7 +111,6 @@ namespace TCT.FitApp.WPF
 
                 userReport.UserDataList.Add(data);
             }
-
 
             
             var sfd = new Microsoft.Win32.SaveFileDialog();

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,48 @@ namespace TCT.FitApp.Mobile.Pages
     {
         User user;
         Day day;
+        HubConnection hubConnection;
+
         public HomePage()
         {
-            Title = "Home Page";
             InitializeComponent();
+            Title = "Home Page";
+            hubConnection = App.HubConnection;
+            StartHubConnection();
+            ConnectToChannel();
             Authenticate();
         }
 
+        private async void StartHubConnection()
+        {
+            await hubConnection.StartAsync();
+        }
+
+
+        private async Task SendNotification(string message)
+        {
+            try
+            {
+                await hubConnection.InvokeAsync("SendMessage", user.Id, message);
+            }
+            catch (Exception ex)
+            {
+
+                await DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
+        private void ConnectToChannel()
+        {
+
+            hubConnection.On<Guid, string>("ReceiveMessage", (userId, message) => OnSend(userId, message));
+        }
+
+        private void OnSend(Guid userId, string message)
+        {
+            if (userId == user.Id)
+            Notify(message);
+        }
 
         private async void Authenticate()
         {
@@ -67,7 +103,7 @@ namespace TCT.FitApp.Mobile.Pages
             Rebind();
         }
 
-        private void Rebind()
+        private async void Rebind()
         {
             txtDisplayName.Text = user.Name;
             txtDate.Text = $"Today, {DateTime.Today.ToString("MMM d")}";
@@ -82,6 +118,10 @@ namespace TCT.FitApp.Mobile.Pages
             if (cal > user.CalorieGoal)
                 toBurn = cal - user.CalorieGoal;
             lblCalorieToBurn.Text = $"{toBurn}";
+            if (toBurn > 0)
+            {
+                await SendNotification($"You have {toBurn} calories to burn today.");
+            }
             lblProtein.Text = $"{day.ProteinConsumed} g/{user.ProteinGoal} g";
             var proteinRate = 0;
             if (user.ProteinGoal > 0)
@@ -134,7 +174,7 @@ namespace TCT.FitApp.Mobile.Pages
         private async void btnViewProfile_Clicked(object sender, EventArgs e)
         {
             var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-            var page = new ProfilePage(user) { Title = "Profile"};
+            var page = new ProfilePage(user) { Title = "Profile" };
             page.Disappearing += (sender2, e2) =>
             {
                 waitHandle.Set();
@@ -142,6 +182,36 @@ namespace TCT.FitApp.Mobile.Pages
             await Navigation.PushAsync(page);
             await Task.Run(() => waitHandle.WaitOne());
             Rebind();
+        }
+
+        private async void btnSettings_Clicked(object sender, EventArgs e)
+        {
+            var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+            var page = new SettingsPage(user) { Title = "Settings" };
+            page.Disappearing += (sender2, e2) =>
+            {
+                waitHandle.Set();
+            };
+            await Navigation.PushAsync(page);
+            await Task.Run(() => waitHandle.WaitOne());
+            Rebind();
+        }
+
+        private void btnClose_Clicked(object sender, EventArgs e)
+        {
+            CloseNotification();
+        }
+
+        private void Notify(string message)
+        {
+            grdNotification.IsVisible = true;
+            txtMessage.Text = message;
+        }
+
+        private void CloseNotification()
+        {
+            grdNotification.IsVisible = false;
+            txtMessage.Text = string.Empty;
         }
     }
 }

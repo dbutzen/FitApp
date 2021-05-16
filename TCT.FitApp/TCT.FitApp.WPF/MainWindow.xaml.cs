@@ -221,7 +221,7 @@ namespace TCT.FitApp.WPF
             response = App.Client.GetAsync("Item").Result;
             result = response.Content.ReadAsStringAsync().Result;
             things = (JArray)JsonConvert.DeserializeObject(result);
-            List<Item> items = things.ToObject<List<User>>();
+            List<Item> items = things.ToObject<List<Item>>();
 
             return items;
         }
@@ -235,7 +235,7 @@ namespace TCT.FitApp.WPF
             response = App.Client.GetAsync("Activity").Result;
             result = response.Content.ReadAsStringAsync().Result;
             things = (JArray)JsonConvert.DeserializeObject(result);
-            List<Activity> activities = things.ToObject<List<User>>();
+            List<Activity> activities = things.ToObject<List<Activity>>();
 
             return activities;
         }
@@ -249,7 +249,7 @@ namespace TCT.FitApp.WPF
             response = App.Client.GetAsync("ItemType").Result;
             result = response.Content.ReadAsStringAsync().Result;
             items = (JArray)JsonConvert.DeserializeObject(result);
-            List<ItemType> itemTypes = items.ToObject<List<User>>();
+            List<ItemType> itemTypes = items.ToObject<List<ItemType>>();
 
             return itemTypes;
         }
@@ -260,10 +260,10 @@ namespace TCT.FitApp.WPF
             string result;
             dynamic items;
 
-            response = App.Client.GetAsync("User").Result;
+            response = App.Client.GetAsync("UserAccessLevel").Result;
             result = response.Content.ReadAsStringAsync().Result;
             items = (JArray)JsonConvert.DeserializeObject(result);
-            List<UserAccessLevel> userAccessLevels = items.ToObject<List<User>>();
+            List<UserAccessLevel> userAccessLevels = items.ToObject<List<UserAccessLevel>>();
 
             return userAccessLevels;
         }

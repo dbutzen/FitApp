@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using TCT.FitApp.Mobile.Models;
@@ -8,7 +9,7 @@ using Xamarin.Forms.Xaml;
 
 namespace TCT.FitApp.Mobile
 {
-    public enum ReturnPage {Login, Register, Home, Profile, Settings}
+    public enum ReturnPage { Login, Register, Home, Profile, Settings }
     public partial class App : Application
     {
         public static ReturnPage ReturnPage;
@@ -32,6 +33,18 @@ namespace TCT.FitApp.Mobile
 
         }
 
+        public static HubConnection HubConnection
+        {
+            get
+            {
+                var client = new HubConnectionBuilder()
+                .WithUrl("https://tct-fitapp.azurewebsites.net/notificationHub")
+                .Build();
+
+                return client;
+            }
+        }
+
         public static void LoadUser()
         {
             try
@@ -52,7 +65,7 @@ namespace TCT.FitApp.Mobile
 
         protected override void OnStart()
         {
-            
+
 
         }
 
