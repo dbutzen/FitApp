@@ -61,19 +61,38 @@ namespace TCT.FitApp.WPF
             activity.EasyCaloriesPerHour = Convert.ToInt32(txtEasyWorkout.Text);
             activity.MediumCaloriesPerHour = Convert.ToInt32(txtMediumWorkout.Text);
             activity.HardCaloriesPerHour = Convert.ToInt32(txtHardWorkout.Text);
+            
 
             if(isNew == false)
             {
-                await ActivityManager.Update(activity);
+                //await ActivityManager.Update(activity);
+                UpdateActivity(activity);
                 MessageBox.Show("Activity has been updated");
                 this.Close();
             }
             else
             {
-                await ActivityManager.Insert(activity);
+                //await ActivityManager.Insert(activity);
+                CreateActivity(activity);
                 MessageBox.Show("Activity has been added");
                 this.Close();
             }
+        }
+        private void UpdateActivity(Activity activity)
+        {
+            string serializedObject = JsonConvert.SerializeObject(activity);
+            var content = new StringContent(serializedObject);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = App.Client.PutAsync("Activity/" + activity.Id, content).Result;
+
+        }
+
+        private void CreateActivity(Activity activity)
+        {
+            string serializedObject = JsonConvert.SerializeObject(activity);
+            var content = new StringContent(serializedObject);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = App.Client.PostAsync("Activity", content).Result;
         }
 
     }
