@@ -213,5 +213,31 @@ namespace TCT.FitApp.Mobile.Pages
             grdNotification.IsVisible = false;
             txtMessage.Text = string.Empty;
         }
+
+        private async void btnManageActivity_Clicked(object sender, EventArgs e)
+        {
+            var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+            var page = new ActivityPage(user) { Title = "Activities" };
+            page.Disappearing += (sender2, e2) =>
+            {
+                waitHandle.Set();
+            };
+            await Navigation.PushAsync(page);
+            await Task.Run(() => waitHandle.WaitOne());
+            Rebind();
+        }
+
+        private async void btnManageItems_Clicked(object sender, EventArgs e)
+        {
+            var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+            var page = new ItemPage(user) { Title = "Items" };
+            page.Disappearing += (sender2, e2) =>
+            {
+                waitHandle.Set();
+            };
+            await Navigation.PushAsync(page);
+            await Task.Run(() => waitHandle.WaitOne());
+            Rebind();
+        }
     }
 }

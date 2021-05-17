@@ -137,8 +137,15 @@
                     <!--Activities Card-->
                     <Grid Margin="10,-10,10,10" BackgroundColor="White">
                         <Grid Margin="15">
-                            <StackLayout>
-                                <Label Text="Activities" FontSize="15"  FontAttributes="Bold"/>
+                                <Label Text="Activities" Margin="0,10,0,0" HorizontalOptions="Start" FontSize="Large" FontAttributes="Bold"/>
+                                <StackLayout>
+                                <Button
+                                    x:Name="btnManageActivity"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start"
+                                    Text="Manage Activities"
+                                    WidthRequest="120"
+                                    Clicked="btnManageActivity_Clicked"/>
                                 <dg:DataGrid
                                 x:Name="dgvActivities"
                                 SelectionEnabled="True"
@@ -161,8 +168,15 @@
                     <!--Items Card-->
                     <Grid Margin="10,-10,10,10" BackgroundColor="White">
                         <Grid Margin="15">
+                            <Label Text="Items" Margin="0,10,0,0" FontSize="Large" FontAttributes="Bold"/>
                             <StackLayout>
-                                <Label Text="Items" FontSize="15"  FontAttributes="Bold"/>
+                            <Button
+                                    x:Name="btnManageItems"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Start"
+                                    Text="Manage Items"
+                                    WidthRequest="120"
+                                    Clicked="btnManageItems_Clicked"/>
                                 <dg:DataGrid
                                 x:Name="dgvItems"
                                 SelectionEnabled="True"
