@@ -132,11 +132,11 @@ namespace TCT.FitApp.Mobile.Pages
 
         private async void btnDelete_Clicked(object sender, EventArgs e)
         {
-            var isYes = await DisplayAlert("Confirmation", "Are you sure you want to delete?", "Yes", "No");
-            if (isYes)
+            item = (Item)pckItems.SelectedItem;
+            if (item != null)
             {
-                item = (Item)pckItems.SelectedItem;
-                if (item != null)
+                var isYes = await DisplayAlert("Confirmation", "Are you sure you want to delete?", "Yes", "No");
+                if (isYes)
                 {
                     var response = App.Client.DeleteAsync($"Item/{item.Id}").Result;
                     int.Parse(response.Content.ReadAsStringAsync().Result);
@@ -144,7 +144,9 @@ namespace TCT.FitApp.Mobile.Pages
                     Rebind();
                     Clear();
                 }
+
             }
+
         }
 
         private void pckItems_SelectedIndexChanged(object sender, EventArgs e)
@@ -160,25 +162,27 @@ namespace TCT.FitApp.Mobile.Pages
             {
                 try
                 {
+                    pckItems.SelectedIndex = -1;
+                    pckTypes.SelectedIndex = 0;
                     item = new Item();
                     var product = await Manager.GetByUPC(txtUPC.Text);
                     item.Name = product.item_name;
                     item.Protein = (int)product.nf_protein;
                     item.Calories = (int)product.nf_calories;
-
-                    pckItems.SelectedIndex = -1;
-                    pckTypes.SelectedIndex = 0;
-
                     Rebind();
                 }
                 catch
                 {
                     await DisplayAlert("Error", "Product not found", "OK");
+                    Clear();
+                    txtUPC.Focus();
                 }
             }
             else
             {
                 await DisplayAlert("Error", "UPC must not be empty", "OK");
+                Clear();
+                txtUPC.Focus();
             }
 
         }
@@ -190,6 +194,13 @@ namespace TCT.FitApp.Mobile.Pages
             txtProtein.Text = string.Empty;
             txtCalories.Text = string.Empty;
 
+        }
+
+        private void txtUPC_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txtName.Text = string.Empty;
+            txtProtein.Text = string.Empty;
+            txtCalories.Text = string.Empty;
         }
     }
 }

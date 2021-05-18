@@ -59,7 +59,7 @@ namespace TCT.FitApp.Mobile.Pages
         private void OnSend(Guid userId, string message)
         {
             if (userId == user.Id)
-            Notify(message);
+                Notify(message);
         }
 
         private async void Authenticate()
@@ -230,7 +230,7 @@ namespace TCT.FitApp.Mobile.Pages
         private async void btnManageItems_Clicked(object sender, EventArgs e)
         {
             var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-            var page = new ItemPage(day, user) { Title = "Manage User Items"};
+            var page = new ItemPage(day, user) { Title = "Manage User Items" };
             page.Disappearing += (sender2, e2) =>
             {
                 waitHandle.Set();
@@ -257,11 +257,12 @@ namespace TCT.FitApp.Mobile.Pages
 
         private async void btnDeleteItem_Clicked(object sender, EventArgs e)
         {
-            var isYes = await DisplayAlert("Confirmation", "Are you sure you want to delete?", "Yes","No");
-            if (isYes)
+
+            var item = (Item)dgvItems.SelectedItem;
+            if (item != null)
             {
-                var item = (Item)dgvItems.SelectedItem;
-                if (item != null)
+                var isYes = await DisplayAlert("Confirmation", "Are you sure you want to delete?", "Yes", "No");
+                if (isYes)
                 {
                     var response = App.Client.DeleteAsync($"DayItem/{day.Id}/{item.Id}").Result;
                     var result = int.Parse(response.Content.ReadAsStringAsync().Result);
