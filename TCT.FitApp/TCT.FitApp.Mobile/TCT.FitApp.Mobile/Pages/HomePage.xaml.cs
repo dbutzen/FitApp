@@ -59,7 +59,7 @@ namespace TCT.FitApp.Mobile.Pages
         private void OnSend(Guid userId, string message)
         {
             if (userId == user.Id)
-            Notify(message);
+                Notify(message);
         }
 
         private async void Authenticate()
@@ -232,8 +232,7 @@ namespace TCT.FitApp.Mobile.Pages
         private async void btnManageItems_Clicked(object sender, EventArgs e)
         {
             var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-            var item = (Item)dgvItems.SelectedItem;
-            var page = new ItemPage(item, day, user) { Title = "Item"};
+            var page = new ItemPage(day, user) { Title = "Manage User Items" };
             page.Disappearing += (sender2, e2) =>
             {
                 waitHandle.Set();
@@ -247,7 +246,7 @@ namespace TCT.FitApp.Mobile.Pages
         private async void btnAddItem_Clicked(object sender, EventArgs e)
         {
             var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-            var page = new DayItemPage(day, user);
+            var page = new DayItemPage(day, user) { Title = "Add Day Item" };
             page.Disappearing += (sender2, e2) =>
             {
                 waitHandle.Set();
@@ -258,18 +257,22 @@ namespace TCT.FitApp.Mobile.Pages
             Rebind();
         }
 
-        private void btnDeleteItem_Clicked(object sender, EventArgs e)
+        private async void btnDeleteItem_Clicked(object sender, EventArgs e)
         {
+
             var item = (Item)dgvItems.SelectedItem;
             if (item != null)
             {
-                var response = App.Client.DeleteAsync($"DayItem/{day.Id}/{item.Id}").Result;
-                var result = int.Parse(response.Content.ReadAsStringAsync().Result);
-                if (result > 0)
+                var isYes = await DisplayAlert("Confirmation", "Are you sure you want to delete?", "Yes", "No");
+                if (isYes)
                 {
-                    DisplayAlert("Success", "Item has been removed.", "OK");
-                    LoadUserData();
-                    Rebind();
+                    var response = App.Client.DeleteAsync($"DayItem/{day.Id}/{item.Id}").Result;
+                    var result = int.Parse(response.Content.ReadAsStringAsync().Result);
+                    if (result > 0)
+                    {
+                        LoadUserData();
+                        Rebind();
+                    }
                 }
             }
         }
