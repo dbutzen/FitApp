@@ -64,15 +64,20 @@ namespace TCT.FitApp.WPF
 
 
 
-        private async void btnSubmit_Click(object sender, RoutedEventArgs e)
+        private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
             UserAccessLevel userAccessLevel = userAccessLevels[cboAccessLevels.SelectedIndex];
             user.UserAccessLevelId = userAccessLevel.Id;
-            int results = await UserManager.Update(user);
-            if (results > 0)
+            //int results = await UserManager.Update(user);
+            string serializedObject = JsonConvert.SerializeObject(user);
+            var content = new StringContent(serializedObject);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = App.Client.PutAsync("User/" + user.Id, content).Result;
+            if (response != null)
             {
                 await SendNotification($"System: Your user access level has been updated to {userAccessLevel.Name}.");
             }
+            this.Close();
         }
 
         private void btnCreateReport_Click(object sender, RoutedEventArgs e)
