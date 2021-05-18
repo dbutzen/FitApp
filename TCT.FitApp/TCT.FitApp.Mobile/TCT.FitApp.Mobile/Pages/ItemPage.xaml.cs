@@ -77,7 +77,6 @@ namespace TCT.FitApp.Mobile.Pages
             var selectedItem = (Item)pckItems.SelectedItem;
             if (selectedItem != null)
             {
-
                 var dayItem = new DayItem();
 
                 dayItem.DayId = day.Id;

@@ -95,6 +95,7 @@ namespace TCT.FitApp.Mobile.Pages
             //Title = App.LoggedInUser.Name;
             //lblWelcome.Text = $"Welcome {App.LoggedInUser.Name}";
         }
+
         private void Load()
         {
             user = App.LoggedInUser;
@@ -106,7 +107,7 @@ namespace TCT.FitApp.Mobile.Pages
         private async void Rebind()
         {
             txtDisplayName.Text = user.Name;
-            txtDate.Text = $"Today, {DateTime.Today.ToString("MMM d")}";
+            txtDate.Text = $"Today, {DateTime.Today.ToString("MMM d")}"; 
             if (day == null) { day = new Day(); }
             lblCalorieGoal.Text = $"<\t{user.CalorieGoal} cal";
             //var calorieRate = (day.CaloriesBurned * 100) / user.CalorieGoal;
@@ -217,13 +218,14 @@ namespace TCT.FitApp.Mobile.Pages
         private async void btnManageActivity_Clicked(object sender, EventArgs e)
         {
             var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-            var page = new ActivityPage(user) { Title = "Activities" };
+            var page = new ActivityPage(user, day) { Title = "Activities" };
             page.Disappearing += (sender2, e2) =>
             {
                 waitHandle.Set();
             };
             await Navigation.PushAsync(page);
             await Task.Run(() => waitHandle.WaitOne());
+            LoadUserData();
             Rebind();
         }
 
