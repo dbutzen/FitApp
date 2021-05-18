@@ -15,7 +15,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TCT.FitApp.BL;
 using TCT.FitApp.BL.Models;
 using TCT.Utilities.Reporting;
 using TCT.Utilities.Reporting.Models;
@@ -54,7 +53,7 @@ namespace TCT.FitApp.WPF
             lblUsername.Content = user.Username;
             lblFullName.Content = user.Name;
             cboAccessLevels.ItemsSource = null;
-            userAccessLevels = (List<UserAccessLevel>)await UserAccessLevelManager.Load();
+            userAccessLevels = LoadUserAccessLevels();
             cboAccessLevels.ItemsSource = userAccessLevels;
             cboAccessLevels.SelectedValuePath = "Id";
             cboAccessLevels.DisplayMemberPath = "Name";
@@ -129,6 +128,20 @@ namespace TCT.FitApp.WPF
                 System.IO.File.WriteAllBytes(sfd.FileName, stream);
             }
 
+        }
+
+        private List<UserAccessLevel> LoadUserAccessLevels()
+        {
+            HttpResponseMessage response;
+            string result;
+            dynamic items;
+
+            response = App.Client.GetAsync("UserAccessLevel").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            items = (JArray)JsonConvert.DeserializeObject(result);
+            List<UserAccessLevel> userAccessLevels = items.ToObject<List<UserAccessLevel>>();
+
+            return userAccessLevels;
         }
     }
 }
