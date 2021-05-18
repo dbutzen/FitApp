@@ -48,7 +48,7 @@ namespace TCT.FitApp.WPF
         }
 
 
-        private async void Reload()
+        private void Reload()
         {
             lblUsername.Content = user.Username;
             lblFullName.Content = user.Name;
@@ -57,6 +57,8 @@ namespace TCT.FitApp.WPF
             cboAccessLevels.ItemsSource = userAccessLevels;
             cboAccessLevels.SelectedValuePath = "Id";
             cboAccessLevels.DisplayMemberPath = "Name";
+            if (cboAccessLevels.Items.Count > 0)
+                cboAccessLevels.SelectedValue = user.UserAccessLevelId;
             dpStartDate.SelectedDate = DateTime.Today;
             dpEndDate.SelectedDate = DateTime.Today;
         }
