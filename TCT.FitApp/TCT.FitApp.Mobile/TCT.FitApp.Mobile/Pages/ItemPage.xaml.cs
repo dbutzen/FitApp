@@ -67,11 +67,12 @@ namespace TCT.FitApp.Mobile.Pages
 
         private List<ItemType> GetItemTypes()
         {
-            var selectedItem = (Item)pckItems.SelectedItem;
-            if (selectedItem != null)
-            {
+            HttpResponseMessage response;
+            string result;
 
-                var dayItem = new DayItem();
+            response = App.Client.GetAsync("ItemType").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            List<ItemType> itemTypes = JsonConvert.DeserializeObject<List<ItemType>>(result);
 
             return itemTypes;
         }

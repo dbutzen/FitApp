@@ -28,7 +28,7 @@
                             <Entry Grid.Column="0"  x:Name="txtUPC" TextChanged="txtUPC_TextChanged"/>
                             <Button Grid.Column="1" Text="Search" x:Name="btnLookUp" Clicked="btnLookUp_Clicked"/>
                         </Grid>
-                        
+
                     </StackLayout>
                 </Grid>
                 <!--Servings-->
