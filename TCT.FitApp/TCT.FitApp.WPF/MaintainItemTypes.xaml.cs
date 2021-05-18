@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,7 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TCT.FitApp.BL;
 using TCT.FitApp.BL.Models;
 
 namespace TCT.FitApp.WPF
@@ -37,7 +38,7 @@ namespace TCT.FitApp.WPF
         {
             this.itemType = itemType;
             InitializeComponent();
-            txtItemType.Text = txtItemType.Name;
+            txtItemType.Text = itemType.Name;
 
         }
 
@@ -52,16 +53,35 @@ namespace TCT.FitApp.WPF
 
             if (isNew == false)
             {
-                await ItemTypeManager.Update(itemType);
+                //await ItemTypeManager.Update(itemType);
+                UpdateItemType(itemType);
                 MessageBox.Show("Item Type has been updated");
                 this.Close();
             }
             else
             {
-                await ItemTypeManager.Insert(itemType);
+                //await ItemTypeManager.Insert(itemType);
+                CreateItemType(itemType);
                 MessageBox.Show("Item Type has been added");
                 this.Close();
             }
+        }
+
+        private void UpdateItemType(ItemType itemType)
+        {
+            string serializedObject = JsonConvert.SerializeObject(itemType);
+            var content = new StringContent(serializedObject);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = App.Client.PutAsync("ItemType/" + itemType.Id, content).Result;
+
+        }
+
+        private void CreateItemType(ItemType itemType)
+        {
+            string serializedObject = JsonConvert.SerializeObject(itemType);
+            var content = new StringContent(serializedObject);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = App.Client.PostAsync("ItemType", content).Result;
         }
     }
 }

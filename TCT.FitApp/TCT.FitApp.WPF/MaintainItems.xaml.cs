@@ -60,18 +60,18 @@ namespace TCT.FitApp.WPF
 
             if (isNew == false)
             {
-                UpdateItem();
+                UpdateItem(item);
                 MessageBox.Show("Item has been updated");
                 this.Close();
             }
             else
             {
-                InsertItem();
+                InsertItem(item);
                 MessageBox.Show("Item has been added");
                 this.Close();
             }
         }
-        private void UpdateItem()
+        private void UpdateItem(Item item)
         {
             string serializedObject = JsonConvert.SerializeObject(item);
             var content = new StringContent(serializedObject);
@@ -79,7 +79,7 @@ namespace TCT.FitApp.WPF
             HttpResponseMessage response = App.Client.PutAsync("Item/" + item.Id, content).Result;
         }
 
-        private void InsertItem()
+        private void InsertItem(Item item)
         {
             string serializedObject = JsonConvert.SerializeObject(item);
             var content = new StringContent(serializedObject);
