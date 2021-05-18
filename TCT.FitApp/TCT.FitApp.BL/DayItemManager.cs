@@ -71,7 +71,7 @@ namespace TCT.FitApp.BL
             }
         }
 
-        public static async Task<int> Delete(Guid id, bool rollback = false)
+        public static async Task<int> Delete(Guid dayId, Guid itemId, bool rollback = false)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace TCT.FitApp.BL
                     using (FitAppEntities dc = new FitAppEntities())
                     {
                         if (rollback == true) transaction = dc.Database.BeginTransaction();
-                        TblDayItem row = dc.TblDayItems.FirstOrDefault(qa => qa.Id == id);
+                        TblDayItem row = dc.TblDayItems.FirstOrDefault(qa => qa.DayId == dayId && qa.ItemId == itemId);
                         if (row != null)
                         {
                             dc.TblDayItems.Remove(row);

@@ -230,14 +230,46 @@ namespace TCT.FitApp.Mobile.Pages
         private async void btnManageItems_Clicked(object sender, EventArgs e)
         {
             var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-            var page = new ItemPage(user) { Title = "Items" };
+            var item = (Item)dgvItems.SelectedItem;
+            var page = new ItemPage(item, day, user) { Title = "Item"};
             page.Disappearing += (sender2, e2) =>
             {
                 waitHandle.Set();
             };
             await Navigation.PushAsync(page);
             await Task.Run(() => waitHandle.WaitOne());
+            LoadUserData();
             Rebind();
+        }
+
+        private async void btnAddItem_Clicked(object sender, EventArgs e)
+        {
+            var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
+            var page = new DayItemPage(day, user);
+            page.Disappearing += (sender2, e2) =>
+            {
+                waitHandle.Set();
+            };
+            await Navigation.PushAsync(page);
+            await Task.Run(() => waitHandle.WaitOne());
+            LoadUserData();
+            Rebind();
+        }
+
+        private void btnDeleteItem_Clicked(object sender, EventArgs e)
+        {
+            var item = (Item)dgvItems.SelectedItem;
+            if (item != null)
+            {
+                var response = App.Client.DeleteAsync($"DayItem/{day.Id}/{item.Id}").Result;
+                var result = int.Parse(response.Content.ReadAsStringAsync().Result);
+                if (result > 0)
+                {
+                    DisplayAlert("Success", "Item has been removed.", "OK");
+                    LoadUserData();
+                    Rebind();
+                }
+            }
         }
     }
 }

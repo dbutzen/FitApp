@@ -107,9 +107,9 @@ namespace TCT.FitApp.API.Test
         [TestMethod]
         public void DeleteTest()
         {
-            var id = GetDayItems().FirstOrDefault().Id;
+            var dayItem = GetDayItems().FirstOrDefault();
 
-            var response = client.DeleteAsync($"DayItem/{id}?rollback=true").Result;
+            var response = client.DeleteAsync($"DayItem/{dayItem.DayId}/{dayItem.ItemId}?rollback=true").Result;
             var result = int.Parse(response.Content.ReadAsStringAsync().Result);
 
             Assert.IsTrue(result > 0);

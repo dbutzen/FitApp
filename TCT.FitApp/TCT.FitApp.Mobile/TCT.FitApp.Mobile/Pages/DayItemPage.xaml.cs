@@ -13,41 +13,17 @@ using Xamarin.Forms.Xaml;
 namespace TCT.FitApp.Mobile.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ItemPage : ContentPage
+    public partial class DayItemPage : ContentPage
     {
-        Item item;
         User user;
         Day day;
 
-        public ItemPage(Item item, Day day, User user)
+        public DayItemPage(Day day, User user)
         {
             InitializeComponent();
             this.user = user;
             this.day = day;
-            this.item = item;
             LoadItems();
-            Rebind();
-        }
-
-        private void Rebind()
-        {
-            if (item != null)
-            {
-                // Delete Mode
-                pckItems.SelectedItem = ((List<Item>)(pckItems.ItemsSource)).FirstOrDefault(i => i.Name == this.item.Name);
-                txtServings.Text = item.Servings.ToString();
-                btnDelete.IsVisible = true;
-                pckItems.IsEnabled = false;
-            }
-            else
-            {
-                // Add Item Mode
-                txtServings.IsEnabled = true;
-                pckItems.IsEnabled = true;
-                btnAdd.IsVisible = true;
-                btnDelete.IsVisible = false;
-            }
-
         }
 
         private void LoadItems()
@@ -93,29 +69,6 @@ namespace TCT.FitApp.Mobile.Pages
                 if (result > 0)
                 {
                     DisplayAlert("Success", "Selected item has been added.", "OK");
-                }
-            }
-        }
-
-        private void btnUpdate_Clicked(object sender, EventArgs e)
-        {
-            var item = (Item)pckItems.SelectedItem;
-            if (item != null)
-            {
-                // update
-            }
-        }
-
-        private void btnDelete_Clicked(object sender, EventArgs e)
-        {
-            if (item != null)
-            {
-                var response = App.Client.DeleteAsync($"DayItem/{day.Id}/{item.Id}").Result;
-                var result = int.Parse(response.Content.ReadAsStringAsync().Result);
-                if (result > 0)
-                {
-                    DisplayAlert("Success", "Item has been removed.", "OK");
-                    Navigation.PopAsync();
                 }
             }
         }

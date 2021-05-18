@@ -15,6 +15,14 @@ namespace TCT.FitApp.Mobile.Models
 
         public int Servings { get; set; }
 
+        public string DisplayName
+        {
+            get
+            {
+                return $"{Name} - {Calories} cal | {Protein} g";
+            }
+        }
+
 
     }
 }

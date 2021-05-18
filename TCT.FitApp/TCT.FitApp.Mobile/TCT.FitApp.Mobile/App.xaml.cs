@@ -10,10 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace TCT.FitApp.Mobile
 {
     public enum ReturnPage { Login, Register, Home, Profile, Settings }
+    public enum ScreenMode { Add, Edit}
     public partial class App : Application
     {
         public static ReturnPage ReturnPage;
-        public static Guid SessionKey;// = Guid.Parse("D98D63B4-84AD-42EF-8F68-1665A4D2F29C");
+        public static Guid SessionKey;
         public static User LoggedInUser;
         public App()
         {

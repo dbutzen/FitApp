@@ -46,7 +46,7 @@ namespace TCT.FitApp.BL.Test
 
             var dayItem = dayItems.FirstOrDefault(di => di.ItemId == itemId && di.DayId == day.Id);
                         
-            var ditask = DayItemManager.Delete(dayItem.Id, true);
+            var ditask = DayItemManager.Delete(dayItem.DayId, dayItem.ItemId, true);
             ditask.Wait();
             Assert.IsTrue(ditask.Result > 0);
         }

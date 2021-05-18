@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TCT.FitApp.Mobile.Pages.ItemPage">
+             x:Class="TCT.FitApp.Mobile.Pages.DayItemPage">
     <ContentPage.Content>
         <Grid Margin="50">
             <Grid.RowDefinitions>
@@ -26,13 +26,11 @@
                     <Entry x:Name="txtServings" Text="1" HorizontalTextAlignment="Center" Keyboard="Numeric"/>
                 </StackLayout>
             </Grid>
-            
+
             <!--Action Buttons-->
             <Grid Grid.Row="3">
                 <StackLayout Orientation="Horizontal" Margin="20" HorizontalOptions="Center">
                     <Button x:Name="btnAdd" Text="Add" Clicked="btnAdd_Clicked"/>
-                    <!--<Button x:Name="btnUpdate" Text="Update" Clicked="btnUpdate_Clicked"/>-->
-                    <Button x:Name="btnDelete" Text="Delete" Clicked="btnDelete_Clicked"/>
                 </StackLayout>
             </Grid>
         </Grid>

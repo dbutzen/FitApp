@@ -12,5 +12,6 @@ namespace TCT.FitApp.BL.Models
         public Guid DayId { get; set; }
         public Guid ItemId { get; set; }
         public int Servings { get; set; }
+
     }
 }

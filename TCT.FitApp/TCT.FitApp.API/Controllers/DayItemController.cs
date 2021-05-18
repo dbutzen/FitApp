@@ -62,12 +62,12 @@ namespace TCT.FitApp.API.Controllers
         /// <param name="id"></param>
         /// <param name="rollback"></param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id, bool rollback = false)
+        [HttpDelete("{dayId}/{itemId}")]
+        public async Task<IActionResult> Delete(Guid dayId, Guid itemId, bool rollback = false)
         {
             try
             {
-                return Ok(await DayItemManager.Delete(id, rollback));
+                return Ok(await DayItemManager.Delete(dayId, itemId, rollback));
             }
             catch (Exception ex)
             {

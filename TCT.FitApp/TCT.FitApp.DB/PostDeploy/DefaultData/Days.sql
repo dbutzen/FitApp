@@ -5,7 +5,11 @@
 
 	INSERT INTO dbo.tblDay(Id, UserId, Date, Succeeded)
 	VALUES
-	(NEWID(), @UsersId, '2021-03-01', 0)
+	(NEWID(), @UsersId, '2021-03-01', 0),
+	(NEWID(), @UsersId, '2021-5-17', 0),
+	(NEWID(), @UsersId, '2021-5-18', 0),
+	(NEWID(), @UsersId, '2021-5-19', 0),
+	(NEWID(), @UsersId, '2021-5-20', 0)
 
 	SELECT @UsersId = Id from tblUser where Username = 'dbutzen'
 	
@@ -13,7 +17,11 @@
 	VALUES
 	(NEWID(), @UsersId, '2021-02-21', 1),
 	(NEWID(), @UsersId, '2021-02-22', 1),
-	(NEWID(), @UsersId, '2021-02-23', 0)
+	(NEWID(), @UsersId, '2021-02-23', 0),
+	(NEWID(), @UsersId, '2021-5-17', 0),
+	(NEWID(), @UsersId, '2021-5-18', 0),
+	(NEWID(), @UsersId, '2021-5-19', 0),
+	(NEWID(), @UsersId, '2021-5-20', 0)
 
 
 
@@ -30,19 +38,19 @@
 
 	INSERT INTO dbo.tblDay(Id, UserId, Date, Succeeded)
 	VALUES
-	(NEWID(), @UsersId, '2021-5-10', 0)
+	(NEWID(), @UsersId, '2021-5-17', 0)
 
 		INSERT INTO dbo.tblDay(Id, UserId, Date, Succeeded)
 	VALUES
-	(NEWID(), @UsersId, '2021-5-11', 0)
+	(NEWID(), @UsersId, '2021-5-18', 0)
 
 		INSERT INTO dbo.tblDay(Id, UserId, Date, Succeeded)
 	VALUES
-	(NEWID(), @UsersId, '2021-5-12', 0)
+	(NEWID(), @UsersId, '2021-5-19', 0)
 
 		INSERT INTO dbo.tblDay(Id, UserId, Date, Succeeded)
 	VALUES
-	(NEWID(), @UsersId, '2021-5-13', 0)
+	(NEWID(), @UsersId, '2021-5-20', 0)
 
 	-- End
 END
