@@ -3,38 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TCT.FitApp.Mobile.Pages.ItemPage">
     <ContentPage.Content>
-        <Grid Margin="50">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <!--<Label Text="Manage Items" VerticalOptions="Center" FontSize="20" Margin="10" HorizontalOptions="Center"/>-->
-            <!--Item List-->
-            <Grid Grid.Row="1" Margin="15">
-                <StackLayout>
-                    <Label Text="Items"/>
-                    <Picker x:Name="pckItems" ItemDisplayBinding="{Binding DisplayName}"/>
-                </StackLayout>
+        <ScrollView>
+            <Grid Margin="50">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--<Label Text="Manage Items" VerticalOptions="Center" FontSize="20" Margin="10" HorizontalOptions="Center"/>-->
+                <!--Item List-->
+                <Grid Grid.Row="1">
+                    <StackLayout>
+                        <Label Text="Items"/>
+                        <Picker x:Name="pckItems" ItemDisplayBinding="{Binding DisplayName}" SelectedIndexChanged="pckItems_SelectedIndexChanged"/>
+                        <Label Text="or"/>
+                        <Label Text="Enter UPC (Powered by Nutritionix)" VerticalOptions="Center"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Entry Grid.Column="0"  x:Name="txtUPC" />
+                            <Button Grid.Column="1" Text="Search" x:Name="btnLookUp" Clicked="btnLookUp_Clicked"/>
+                        </Grid>
+                        
+                    </StackLayout>
+                </Grid>
+                <!--Servings-->
+                <Grid Grid.Row="2">
+                    <StackLayout>
+                        <Label Text="Item Info:" FontAttributes="Bold"/>
+                        <Label Text="Name"/>
+                        <Entry x:Name="txtName"/>
+                        <Label Text="Type"/>
+                        <Picker x:Name="pckTypes" ItemDisplayBinding="{Binding Name}"/>
+                        <Label Text="Per serving: "/>
+                        <Label Text="Calories"/>
+                        <Entry x:Name="txtCalories" Keyboard="Numeric" />
+                        <Label Text="Protein"/>
+                        <Entry x:Name="txtProtein"  Keyboard="Numeric" />
+                    </StackLayout>
+                </Grid>
+
+                <!--Action Buttons-->
+                <Grid Grid.Row="3">
+                    <StackLayout Orientation="Horizontal" Margin="20" HorizontalOptions="Center">
+                        <Button x:Name="btnAdd" Text="Add" Clicked="btnAdd_Clicked"/>
+                        <Button x:Name="btnUpdate" Text="Update" Clicked="btnUpdate_Clicked"/>
+                        <Button x:Name="btnDelete" Text="Delete" Clicked="btnDelete_Clicked"/>
+                    </StackLayout>
+                </Grid>
             </Grid>
-            <!--Servings-->
-            <Grid Grid.Row="2" Margin="15">
-                <StackLayout>
-                    <Label Text="Servings"/>
-                    <Entry x:Name="txtServings" Text="1" HorizontalTextAlignment="Center" Keyboard="Numeric"/>
-                </StackLayout>
-            </Grid>
-            
-            <!--Action Buttons-->
-            <Grid Grid.Row="3">
-                <StackLayout Orientation="Horizontal" Margin="20" HorizontalOptions="Center">
-                    <Button x:Name="btnAdd" Text="Add" Clicked="btnAdd_Clicked"/>
-                    <!--<Button x:Name="btnUpdate" Text="Update" Clicked="btnUpdate_Clicked"/>-->
-                    <Button x:Name="btnDelete" Text="Delete" Clicked="btnDelete_Clicked"/>
-                </StackLayout>
-            </Grid>
-        </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

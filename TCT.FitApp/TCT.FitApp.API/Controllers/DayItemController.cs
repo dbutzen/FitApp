@@ -59,7 +59,8 @@ namespace TCT.FitApp.API.Controllers
         /// <summary>
         /// Delete an item
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="dayId"></param>
+        /// <param name="itemId"></param>
         /// <param name="rollback"></param>
         /// <returns></returns>
         [HttpDelete("{dayId}/{itemId}")]

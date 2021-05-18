@@ -201,11 +201,9 @@
                             </Grid>
                             <dg:DataGrid Grid.Row="1"
                                 x:Name="dgvItems"
-                                SelectionEnabled="True"
                                 BorderColor="#FFFFFF"
                                 BackgroundColor="#FFFFF"
-                                HeaderBackground="#FFFFFF"
-                                ActiveRowColor="#8899AA">
+                                HeaderBackground="#FFFFFF">
                                 <dg:DataGrid.Columns>
                                     <dg:DataGridColumn Title="Name" PropertyName="Name"/>
                                     <dg:DataGridColumn Title="Servings" PropertyName="Servings"/>
