@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace TCT.FitApp.WPF
     {
         Item item = new Item();
         bool isNew = false;
+        List<ItemType> itemTypes;
+        int index;
 
         //Add activity
         public MaintainItems()
@@ -32,6 +35,11 @@ namespace TCT.FitApp.WPF
             txtItem.Text = string.Empty;
             txtCalories.Text = string.Empty;
             txtProtein.Text = string.Empty;
+            itemTypes = LoadItemTypes();
+            cboItemTypes.ItemsSource = itemTypes;
+            cboItemTypes.SelectedValuePath = "Id";
+            cboItemTypes.DisplayMemberPath = "Name";
+            cboItemTypes.SelectedIndex = -1;
             isNew = true;
         }
 
@@ -43,6 +51,18 @@ namespace TCT.FitApp.WPF
             txtItem.Text = item.Name;
             txtCalories.Text = item.Calories.ToString();
             txtProtein.Text = item.Protein.ToString();
+            itemTypes = LoadItemTypes();
+            cboItemTypes.ItemsSource = itemTypes;
+            cboItemTypes.SelectedValuePath = "Id";
+            cboItemTypes.DisplayMemberPath = "Name";
+            for (int i=0; i < itemTypes.Count(); i++)
+            {
+                if (itemTypes[i].Id == item.TypeId)
+                {
+                    index = i;
+                }
+            }
+            cboItemTypes.SelectedIndex = index;
 
         }
 
@@ -57,6 +77,7 @@ namespace TCT.FitApp.WPF
             item.Calories = Convert.ToInt32(txtCalories.Text);
             item.Protein = Convert.ToInt32(txtProtein.Text);
             item.Servings = 0;
+            item.TypeId = itemTypes[cboItemTypes.SelectedIndex].Id;
 
             if (isNew == false)
             {
@@ -85,6 +106,20 @@ namespace TCT.FitApp.WPF
             var content = new StringContent(serializedObject);
             content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
             HttpResponseMessage response = App.Client.PostAsync("Item", content).Result;
+        }
+
+        private List<ItemType> LoadItemTypes()
+        {
+            HttpResponseMessage response;
+            string result;
+            dynamic items;
+
+            response = App.Client.GetAsync("ItemType").Result;
+            result = response.Content.ReadAsStringAsync().Result;
+            items = (JArray)JsonConvert.DeserializeObject(result);
+            List<ItemType> itemTypes = items.ToObject<List<ItemType>>();
+
+            return itemTypes;
         }
     }
 }

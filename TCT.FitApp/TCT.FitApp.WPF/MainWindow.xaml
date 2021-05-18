@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCT.FitApp.WPF"
         mc:Ignorable="d"
-        Title="FitApp Manager" Height="600" Width="800" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="FitApp Manager" Height="620" Width="815" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

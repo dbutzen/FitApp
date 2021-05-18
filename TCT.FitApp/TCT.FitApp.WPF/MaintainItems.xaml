@@ -33,5 +33,7 @@
                  HorizontalAlignment="Left"
                  VerticalAlignment="Top"/>
         <Label Content="g" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Height="40" FontSize="18" Margin="530,278,0,0" />
+        <ComboBox x:Name="cboItemTypes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Margin="400, 340, 0, 0" FontSize="20" />
+        <Label x:Name="lblItemType" HorizontalAlignment="Left" VerticalAlignment="Top" Content="Type" FontSize="18" Margin="240,340,0,0" Width="100"/>
     </Grid>
 </Window>
