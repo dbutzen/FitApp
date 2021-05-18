@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCT.FitApp.WPF"
         mc:Ignorable="d"
-        Title="MaintainItemTypes" Height="350" Width="400">
+        Title="MaintainItemTypes" Height="350" Width="400" WindowStartupLocation="CenterOwner">
     <Grid>
         <Label Content="Item Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,50,0,0" FontSize="20" />
         <TextBox x:Name="txtItemType" Text="Filler" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="230" Margin="0,53,20,0" TextAlignment="Right" FontSize="20" />

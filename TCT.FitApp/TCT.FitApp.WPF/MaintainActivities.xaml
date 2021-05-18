@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TCT.FitApp.WPF"
         mc:Ignorable="d"
-        Title="Fit App" Height="450" Width="800">
+        Title="Fit App" Height="450" Width="800" WindowStartupLocation="CenterOwner">
     <Grid>
         <Label x:Name="lblManageActivities" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Manage Activities" FontSize="36" Margin="0,10,0,0" Height="60" Width="300"/>
         <TextBox x:Name="txtActivity" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,75,0,0" FontSize="18" Height="50" Width="300"/>
