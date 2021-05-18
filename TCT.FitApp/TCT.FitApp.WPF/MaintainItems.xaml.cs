@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,7 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TCT.FitApp.BL;
 using TCT.FitApp.BL.Models;
 
 namespace TCT.FitApp.WPF
@@ -55,20 +56,35 @@ namespace TCT.FitApp.WPF
             item.Name = txtItem.Text;
             item.Calories = Convert.ToInt32(txtCalories.Text);
             item.Protein = Convert.ToInt32(txtProtein.Text);
-            item.Servings = 1;
+            item.Servings = 0;
 
             if (isNew == false)
             {
-                await ItemManager.Update(item);
+                UpdateItem();
                 MessageBox.Show("Item has been updated");
                 this.Close();
             }
             else
             {
-                await ItemManager.Insert(item);
+                InsertItem();
                 MessageBox.Show("Item has been added");
                 this.Close();
             }
+        }
+        private void UpdateItem()
+        {
+            string serializedObject = JsonConvert.SerializeObject(item);
+            var content = new StringContent(serializedObject);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = App.Client.PutAsync("Item/" + item.Id, content).Result;
+        }
+
+        private void InsertItem()
+        {
+            string serializedObject = JsonConvert.SerializeObject(item);
+            var content = new StringContent(serializedObject);
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = App.Client.PostAsync("Item", content).Result;
         }
     }
 }

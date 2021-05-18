@@ -15,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TCT.FitApp.BL;
 using TCT.FitApp.BL.Models;
 
 
@@ -71,6 +70,7 @@ namespace TCT.FitApp.WPF
             grdMain.Columns[0].Visibility = Visibility.Hidden;
             grdMain.Columns[1].Visibility = Visibility.Hidden;
             grdMain.Columns[2].Visibility = Visibility.Hidden;
+            grdMain.Columns[6].Visibility = Visibility.Hidden;
 
             grdMain.Columns[3].Header = "Item Name";
             grdMain.Columns[4].Header = "Calories";
@@ -140,20 +140,29 @@ namespace TCT.FitApp.WPF
                 {
                     var activity = activities[grdMain.SelectedIndex];
                     new MaintainActivities(activity).ShowDialog();
+                    activities = LoadActivities();
                     ActivityRebind();
                 }
-                else if (grdMain.ItemsSource == users)
+                if (grdMain.ItemsSource == users)
                 {
                     var user = users[grdMain.SelectedIndex];
-                    var window = new MaintainUsers(user);
-                    window.Owner = this;
-                    window.ShowDialog();
+                    new MaintainUsers(user).ShowDialog();
+                    users = LoadUsers();
                     UserRebind();
                 }
-                else if (grdMain.ItemsSource == items)
+                if (grdMain.ItemsSource == items)
                 {
                     var item = items[grdMain.SelectedIndex];
-                    var window = new MaintainItems(item);
+                    new MaintainItems(item).ShowDialog();
+                    items = LoadItems();
+                    ItemRebind();
+                }
+                if (grdMain.ItemsSource == itemTypes)
+                {
+                    var itemType = itemTypes[grdMain.SelectedIndex];
+                    new MaintainItemTypes(itemType).ShowDialog();
+                    itemTypes = LoadItemTypes();
+                    ItemTypeRebind();
                 }
             }
         }
@@ -164,6 +173,9 @@ namespace TCT.FitApp.WPF
             grdMain.ItemsSource = activities;
 
             grdMain.Columns[0].Visibility = Visibility.Hidden;
+            grdMain.Columns[5].Visibility = Visibility.Hidden;
+            grdMain.Columns[6].Visibility = Visibility.Hidden;
+            grdMain.Columns[7].Visibility = Visibility.Hidden;
 
             grdMain.Columns[1].Header = "Activity Name";
             grdMain.Columns[2].Header = "Easy Cal/Hr";
@@ -181,9 +193,35 @@ namespace TCT.FitApp.WPF
                 var activity = activities[grdMain.SelectedIndex];
                 var result = MessageBox.Show("Are you sure you want to delete ", "Confirm Delete", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
-                    await ActivityManager.Delete(activity.Id);
+                {
+                    HttpResponseMessage response = App.Client.DeleteAsync("Activity/" + activity.Id).Result;
+                }
                 activities.Remove(activity);
                 ActivityRebind();
+            }
+
+            if (grdMain.ItemsSource == items)
+            {
+                var item = items[grdMain.SelectedIndex];
+                var result = MessageBox.Show("Are you sure you want to delete ", "Confirm Delete", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {                     
+                    HttpResponseMessage response = App.Client.DeleteAsync("Item/" + item.Id).Result;
+                }
+                items.Remove(item);
+                ItemRebind();
+            }
+
+            if (grdMain.ItemsSource == itemTypes)
+            {
+                var itemType = itemTypes[grdMain.SelectedIndex];
+                var result = MessageBox.Show("Are you sure you want to delete ", "Confirm Delete", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    HttpResponseMessage response = App.Client.DeleteAsync("ItemType/" + itemType.Id).Result;
+                }
+                itemTypes.Remove(itemType);
+                ItemTypeRebind();
             }
         }
 
@@ -192,8 +230,20 @@ namespace TCT.FitApp.WPF
             if (grdMain.ItemsSource == activities)
             {
                 new MaintainActivities().ShowDialog();
-                activities = await ActivityManager.Load();
+                activities = LoadActivities();
                 ActivityRebind();
+            }
+            if (grdMain.ItemsSource == items)
+            {
+                new MaintainItems().ShowDialog();
+                items = LoadItems();
+                ItemRebind();
+            }
+            if(grdMain.ItemsSource == itemTypes)
+            {
+                new MaintainItemTypes().ShowDialog();
+                itemTypes = LoadItemTypes();
+                ItemTypeRebind();
             }
                 
         }
