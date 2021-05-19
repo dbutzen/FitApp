@@ -12,6 +12,7 @@ namespace TCT.FitApp.Mobile.Models
         public int MediumCaloriesPerHour { get; set; }
         public int HardCaloriesPerHour { get; set; }
 
+        public Guid DayActivityId { get; set; }
         public int Duration { get; set; }
         public int DifficultyLevel { get; set; }
 

@@ -110,7 +110,7 @@ namespace TCT.FitApp.Mobile.Pages
             txtDate.Text = $"Today, {DateTime.Today.ToString("MMM d")}"; 
             if (day == null) { day = new Day(); }
             lblCalorieGoal.Text = $"<\t{user.CalorieGoal} cal";
-            //var calorieRate = (day.CaloriesBurned * 100) / user.CalorieGoal;
+
             lblCalorieConsumed.Text = $"+\t{day.CaloriesConsumed} cal";
             lblCalorieBurned.Text = $"-\t{day.CaloriesBurned} cal";
 
@@ -123,6 +123,7 @@ namespace TCT.FitApp.Mobile.Pages
             {
                 await SendNotification($"You have {toBurn} calories to burn today.");
             }
+
             lblProtein.Text = $"{day.ProteinConsumed} g/{user.ProteinGoal} g";
             var proteinRate = 0;
             if (user.ProteinGoal > 0)
@@ -130,6 +131,7 @@ namespace TCT.FitApp.Mobile.Pages
                 var rate = (day.ProteinConsumed * 100) / user.ProteinGoal;
                 proteinRate = rate > 100 ? 100 : rate;
             }
+
             lblProteinRate.Text = $"{proteinRate}%";
             pbProteinRate.Progress = proteinRate;
 
@@ -138,6 +140,11 @@ namespace TCT.FitApp.Mobile.Pages
 
             dgvItems.ItemsSource = null;
             dgvItems.ItemsSource = day.Items;
+
+            if (day.ProteinConsumed >= user.ProteinGoal && toBurn == 0)
+            {
+                await SendNotification($"Congratulations! You have reached your goal for today.");
+            }
         }
 
         private void LoadUserData()

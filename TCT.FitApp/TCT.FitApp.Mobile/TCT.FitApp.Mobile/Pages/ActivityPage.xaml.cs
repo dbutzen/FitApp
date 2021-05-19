@@ -118,12 +118,13 @@ namespace TCT.FitApp.Mobile.Pages
 
         private async void btnDelete_Clicked(object sender, EventArgs e)
         {
+            selectedActivity = (Activity)dgvActivities.SelectedItem;
             if (selectedActivity != null)
             {
                 var isYes = await DisplayAlert("Confirmation", "Are you sure you want to delete?", "Yes", "No");
                 if (isYes)
                 {
-                    var response = App.Client.DeleteAsync($"DayActivity/{selectedDayActivity.Id}").Result;
+                    var response = App.Client.DeleteAsync($"DayActivity/{selectedActivity.DayActivityId}").Result;
                     int.Parse(response.Content.ReadAsStringAsync().Result);
                     LoadUserData();
                     Rebind();

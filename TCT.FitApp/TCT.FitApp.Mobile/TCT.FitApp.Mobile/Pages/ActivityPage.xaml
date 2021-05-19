@@ -92,6 +92,7 @@
                     BorderColor="#FFFFFF"
                     BackgroundColor="#FFFFF"
                     HeaderBackground="#FFFFFF"
+                    
                     ActiveRowColor="#8899AA">
                     <dg:DataGrid.Columns>
                             <dg:DataGridColumn Title="Name" PropertyName="Name"/>
