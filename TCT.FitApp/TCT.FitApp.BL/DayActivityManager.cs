@@ -80,6 +80,40 @@ namespace TCT.FitApp.BL
             }
         }
 
+        public static async Task<int> Delete(Guid dayId, Guid activityId, bool rollback = false)
+        {
+            try
+            {
+                int results = 0;
+                await Task.Run(() =>
+                {
+                    IDbContextTransaction transaction = null;
+                    using (FitAppEntities dc = new FitAppEntities())
+                    {
+                        if (rollback == true) transaction = dc.Database.BeginTransaction();
+                        TblDayActivity row = dc.TblDayActivities.FirstOrDefault(qa => qa.DayId == dayId && qa.ActivityId == activityId);
+                        if (row != null)
+                        {
+                            dc.TblDayActivities.Remove(row);
+                            results = dc.SaveChanges();
+
+                            if (rollback) transaction.Rollback();
+                        }
+                        else
+                        {
+                            throw new Exception("Row was not found.");
+                        }
+                    }
+                });
+                return results;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
         public static async Task<List<DayActivity>> Load()
         {
             try

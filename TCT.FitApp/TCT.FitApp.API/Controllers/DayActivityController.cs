@@ -35,7 +35,7 @@ namespace TCT.FitApp.API.Controllers
         {
             try
             {
-                return Ok(await DayActivityManager.Insert(dayActivity.DayId, dayActivity.ActivityId, 60, 2, rollback));
+                return Ok(await DayActivityManager.Insert(dayActivity.DayId, dayActivity.ActivityId, dayActivity.Duration, dayActivity.DifficultyLevel, rollback));
             }
             catch (Exception ex)
             {
@@ -50,6 +50,20 @@ namespace TCT.FitApp.API.Controllers
             try
             {
                 return Ok(await DayActivityManager.Delete(id, rollback));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+
+        [HttpDelete("{dayId}/{activityId}")]
+        public async Task<IActionResult> Delete(Guid dayId, Guid activityId, bool rollback = false)
+        {
+            try
+            {
+                return Ok(await DayItemManager.Delete(dayId, activityId, rollback));
             }
             catch (Exception ex)
             {

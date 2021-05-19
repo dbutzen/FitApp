@@ -127,5 +127,17 @@ namespace TCT.FitApp.API.Test
             Assert.IsTrue(result > 0);
         }
 
+        [TestMethod]
+        public void DeleteByIdsTest()
+        {
+            var dayActivity = GetDayActivities().FirstOrDefault();
+
+            var response = client.DeleteAsync($"DayActivity/{dayActivity.DayId}/{dayActivity.ActivityId}?rollback=true").Result;
+            var result = int.Parse(response.Content.ReadAsStringAsync().Result);
+
+            Assert.IsTrue(result > 0);
+
+        }
+
     }
 }
