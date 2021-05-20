@@ -6,7 +6,6 @@
              xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid" 
              x:Class="TCT.FitApp.Mobile.Pages.HomePage">
     <ContentPage.Content>
-
         <ScrollView>
             <Grid>
                 <Grid.RowDefinitions>
