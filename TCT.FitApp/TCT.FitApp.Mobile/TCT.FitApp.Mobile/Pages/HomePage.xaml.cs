@@ -273,7 +273,7 @@ namespace TCT.FitApp.Mobile.Pages
                 var isYes = await DisplayAlert("Confirmation", "Are you sure you want to delete?", "Yes", "No");
                 if (isYes)
                 {
-                    var response = App.Client.DeleteAsync($"DayItem/{day.Id}/{item.Id}").Result;
+                    var response = App.Client.DeleteAsync($"DayItem/{item.DayItemId}").Result;
                     var result = int.Parse(response.Content.ReadAsStringAsync().Result);
                     if (result > 0)
                     {

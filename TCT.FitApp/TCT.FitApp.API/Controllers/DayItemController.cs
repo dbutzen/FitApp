@@ -75,5 +75,18 @@ namespace TCT.FitApp.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id, bool rollback = false)
+        {
+            try
+            {
+                return Ok(await DayItemManager.Delete(id, rollback));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }

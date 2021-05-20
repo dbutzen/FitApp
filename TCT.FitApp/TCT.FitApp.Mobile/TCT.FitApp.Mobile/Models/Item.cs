@@ -14,7 +14,7 @@ namespace TCT.FitApp.Mobile.Models
         public int Protein { get; set; }
 
         public int Servings { get; set; }
-
+        public Guid DayItemId { get; set; }
         public string DisplayName
         {
             get

@@ -49,6 +49,7 @@ namespace TCT.FitApp.BL
                                     Id = di.ItemId,
                                     Calories = di.Item.Calories,
                                     Name = di.Item.Name,
+                                    DayItemId = di.Id,
                                     Protein = di.Item.Protein,
                                     TypeId = di.Item.TypeId,
                                     Servings = di.Servings
@@ -116,6 +117,7 @@ namespace TCT.FitApp.BL
                                     Id = di.ItemId,
                                     Calories = di.Item.Calories,
                                     Name = di.Item.Name,
+                                    DayItemId = di.Id,
                                     Protein = di.Item.Protein,
                                     TypeId = di.Item.TypeId,
                                     Servings = di.Servings
@@ -186,6 +188,7 @@ namespace TCT.FitApp.BL
                                     Id = di.ItemId,
                                     Calories = di.Item.Calories,
                                     Name = di.Item.Name,
+                                    DayItemId = di.Id,
                                     Protein = di.Item.Protein,
                                     TypeId = di.Item.TypeId,
                                     Servings = di.Servings
