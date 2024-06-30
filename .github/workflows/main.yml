@@ -1,0 +1,39 @@
+name: full-scan
+on: push
+jobs:
+  snyk-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+      - name: run test
+        uses: snyk/actions/dotnet@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{secrets.SNYK_TOKEN}}
+        with:
+          command: test --sarif
+          args: --sarif-file-output=snyk_test.sarif
+      - name: run code test
+        uses: snyk/actions/dotnet@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{secrets.SNYK_TOKEN}}
+        with:
+          command: test --sarif
+          args: --sarif-file-output=snyk_code_test.sarif
+      - name: monitor
+        uses: snyk/actions/dotnet@master
+        env:
+          SNYK_TOKEN: ${{secrets.SNYK_TOKEN}}
+        with:
+          command: monitor
+      - name: consolidate results
+        run: |
+          mkdir sarif_files &&
+          mv snyk_test.sarif snyk_code_test sarif_files/
+      - name: upload results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif-files: sarif_files
+         
